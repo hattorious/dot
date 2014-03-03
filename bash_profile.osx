@@ -1,0 +1,68 @@
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# bash completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
+if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    . /usr/local/etc/bash_completion.d/git-completion.bash;
+fi
+
+#### ENV 
+export TERM=xterm-color
+export CLICOLOR=1
+export LSCOLORS=gxfxcxdxbxegedabagacad
+export PATH=/usr/local/bin:$PATH:/sbin:/usr/local/git/bin:/opt/local/bin:$HOME/.bin:
+export LANG=en_US.UTF-8
+export NODE_PATH=/usr/local/lib/node
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home
+
+#### EDITOR STUFF
+export EDITOR=vim
+if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]; then
+    if [ ! -L $HOME/.bin/subl ]; then
+        mkdir -p $HOME/.bin
+        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" $HOME/.bin/subl
+    fi
+    #export EDITOR='$HOME/.bin/subl -w'
+fi
+
+#### virtualenvwrapper stuff
+export WORKON_HOME=$HOME/envs
+export PROJECT_HOME=$HOME/projects/python
+source /usr/local/bin/virtualenvwrapper.sh
+
+#### PROMPT
+if [ -f $HOME/src/powerline/powerline/bindings/bash/powerline.sh ]; then
+    . $HOME/src/powerline/powerline/bindings/bash/powerline.sh
+elif [ -f ~/.bash_prompt ]; then
+     . ~/.bash_prompt
+else
+	RESET='\[\e[0m\]'
+	BOLD='\[\e[1m\]'
+	YELLOW='\[\e[33m\]'
+	BLUE='\[\e[34m\]'
+	BLACK='\[\e[30m\]'
+	RED='\[\e[31m\]'
+	PINK='\[\e[35m\]'
+	CYAN='\[\e[36m\]'
+	GREEN='\[\e[32m\]'
+	GRAY='\[\e[37m\]'
+	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
+fi
+
+#### GIT STUFF
+alias g='git'
+complete -o default -o nospace -F _git g
+git config --global color.ui auto
+git config --global core.whitespace trailing-space,space-before-tab
+git config --global diff.renames copies
+git config --global rerere.enabled true
+git config --global merge.stat true
+
+#### CUSTOM STUFF
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

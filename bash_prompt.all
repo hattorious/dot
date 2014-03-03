@@ -21,10 +21,6 @@
 #
 #   https://gist.github.com/31967
 
-# Load powerline if present
-if [ -f ~/src/powerline/powerline/bindings/bash/powerline.sh ]; then
-    source ~/src/powerline/powerline/bindings/bash/powerline.sh && return 0;
-fi
 # The various escape codes that we can use to color our prompt.
         RED="\[\033[0;31m\]"
      YELLOW="\[\033[1;33m\]"
