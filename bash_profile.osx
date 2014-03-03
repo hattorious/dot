@@ -63,6 +63,7 @@ git config --global core.whitespace trailing-space,space-before-tab
 git config --global diff.renames copies
 git config --global rerere.enabled true
 git config --global merge.stat true
+git config --global push.default simple
 
 #### CUSTOM STUFF
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
