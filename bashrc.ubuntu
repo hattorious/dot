@@ -104,7 +104,26 @@ fi
 # ENV Stuff
 #############
 export EDITOR=vim
-[[ -s $HOME/.bash_prompt ]] && source $HOME/.bash_prompt
+
+# setup my prompt
+if [ -f $HOME/src/powerline/powerline/bindings/bash/powerline.sh ]; then
+    . $HOME/src/powerline/powerline/bindings/bash/powerline.sh
+elif [ -f ~/.bash_prompt ]; then
+     . ~/.bash_prompt
+else
+	RESET='\[\e[0m\]'
+	BOLD='\[\e[1m\]'
+	YELLOW='\[\e[33m\]'
+	BLUE='\[\e[34m\]'
+	BLACK='\[\e[30m\]'
+	RED='\[\e[31m\]'
+	PINK='\[\e[35m\]'
+	CYAN='\[\e[36m\]'
+	GREEN='\[\e[32m\]'
+	GRAY='\[\e[37m\]'
+	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
+fi
+
 
 # Change the TERM
 export TERM=xterm-256color
