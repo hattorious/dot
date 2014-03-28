@@ -1,0 +1,36 @@
+[user]
+	name = Ross Hattori
+	email = git@exstasis.net
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+	whitespace = trailing-space,space-before-tab
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[branch]
+	autosetuprebase = always
+[mergetool]
+	keepBackup = true
+[color]
+	ui = auto
+[diff]
+	renames = copies
+[rerere]
+	enabled = true
+[merge]
+	stat = true
+[alias]
+    tree = log --graph --pretty=oneline --abbrev-commit --decorate --color
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[push]
+	default = simple
