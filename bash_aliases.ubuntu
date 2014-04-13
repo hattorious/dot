@@ -1,0 +1,22 @@
+alias ls='ls -l --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias la='ls -A'
+alias l='ls -CF'
+alias vi='vim'
+alias cd..='cd ..'
+alias speed='bwm-ng'
+alias c='clear'
+alias free="free -m"
+alias update="sudo aptitude update"
+alias install="sudo aptitude install"
+alias upgrade="sudo aptitude safe-upgrade"
+alias remove="sudo aptitude remove"
+alias ports="sudo netstat -plantu"
+alias auto='tmux -t torrent -n pywhat "python ~/pywhat/WHATauto.py; exec bash"'
+alias rt='tmux -2u new -n rT-PS -s torrent "~/rtorrent/start; exec bash"'
+alias at='tmux attach -t torrent'
+alias g='git'
