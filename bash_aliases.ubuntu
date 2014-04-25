@@ -20,3 +20,5 @@ alias auto='tmux -t torrent -n pywhat "python ~/pywhat/WHATauto.py; exec bash"'
 alias rt='tmux -2u new -n rT-PS -s torrent "~/rtorrent/start; exec bash"'
 alias at='tmux attach -t torrent'
 alias g='git'
+# delete all merged branches from origin
+alias hedge-trim="git branch -r --merged | grep -v master | sed 's/origin\///' | xargs -n 1 git push --delete origin"
