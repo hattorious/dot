@@ -24,3 +24,10 @@ alias g='git'
 alias hedge-trim="git branch -r --merged | grep -v -e \/master | sed 's/origin\///' | xargs -n 1 git push --delete origin"
 # list all hanging branches with commiter name and last commit date
 alias branch-blame="git for-each-ref --format='%(committername) %09 %(committerdate:short) %09 %(refname:short)' --sort=committerdate --sort=committername | grep -e origin\/ | grep -v -e \/HEAD -e \/master | sed 's/origin\///'"
+
+## npm package maintenance
+alias patch='pre-version && npm version patch && post-version'
+alias minor='pre-version && npm version minor && post-version'
+alias major='pre-version && npm version major && post-version'
+alias pre-version='git diff --exit-code && npm prune && npm install -q && npm test'
+alias post-version='(npm run build; exit 0) && git diff --exit-code && git push && git push --tags && npm publish'
