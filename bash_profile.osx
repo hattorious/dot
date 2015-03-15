@@ -66,3 +66,7 @@ git config --global rerere.enabled true
 git config --global merge.stat true
 git config --global push.default simple
 
+#### NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
