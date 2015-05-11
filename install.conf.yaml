@@ -1,8 +1,12 @@
-- clean: ['~']
+- clean: [
+    '~',
+    '~/Library/Fonts'
+]
 
 - link: 
     ~/.dotfiles: ''
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
+    ~/Library/Fonts/mplus: fonts/mplus-TESTFLIGHT-059
 
 - shell: [git submodule update --init --recursive, Installing submodules]
