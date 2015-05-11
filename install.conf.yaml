@@ -3,10 +3,11 @@
     '~/Library/Fonts'
 ]
 
-- link: 
+- link:
     ~/.dotfiles: ''
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
-    ~/Library/Fonts/mplus: fonts/mplus-TESTFLIGHT-059
 
-- shell: [git submodule update --init --recursive, Installing submodules]
+- shell: 
+    - [source fonts/install_fonts, Installing fonts]
+    - [git submodule update --init --recursive, Installing submodules]

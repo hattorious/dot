@@ -3,7 +3,6 @@ source $DOTFILES/bash/init.sh
 # OSX only, abort otherwise.
 is_osx || return 1
 
-for d in $DOTFILES/fonts/*/; do
-  dir=${d%*/}
-  echo ${d##*/}
-done
+rm -rf $HOME/Library/Fonts/dotbot
+mkdir -p $HOME/Library/Fonts/dotbot
+cp -a $DOTFILES/fonts/mplus-TESTFLIGHT-059 $HOME/Library/Fonts/dotbot/mplus
