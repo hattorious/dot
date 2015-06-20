@@ -5,6 +5,8 @@
 
 - link:
     ~/.dotfiles: ''
+    ~/.bashrc: bash/rc
+    ~/.bash_profile: bash/profile
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
     ~/.tmux.conf: tmux/tmux.conf
