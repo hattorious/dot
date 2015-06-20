@@ -7,6 +7,7 @@
     ~/.dotfiles: ''
     ~/.bashrc: bash/rc
     ~/.bash_profile: bash/profile
+    ~/.bash_prompt: bash/prompt
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
     ~/.tmux.conf: tmux/tmux.conf
