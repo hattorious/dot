@@ -42,9 +42,8 @@ if [ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]; then
 fi
 
 #### PROMPT
-if [ -f $HOME/src/powerline/powerline/bindings/bash/powerline.sh ]; then
-    powerline-daemon -q
-    . $HOME/src/powerline/powerline/bindings/bash/powerline.sh
+if [ -f $DOTFILES/bash/liquidprompt/liquidprompt ]; then
+    . $DOTFILES/bash/liquidprompt/liquidprompt
 elif [ -f ~/.bash_prompt ]; then
     . ~/.bash_prompt
 else
