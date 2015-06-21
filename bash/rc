@@ -43,7 +43,7 @@ fi
 
 #### PROMPT
 if [ -f $DOTFILES/bash/liquidprompt/liquidprompt ]; then
-    . $DOTFILES/bash/liquidprompt/liquidprompt
+    [[ $- = *i* ]] && source $DOTFILES/bash/liquidprompt/liquidprompt
 elif [ -f ~/.bash_prompt ]; then
     . ~/.bash_prompt
 else
