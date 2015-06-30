@@ -5,9 +5,9 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.bashrc: bash/rc
-    ~/.bash_profile: bash/profile
-    ~/.bash_prompt: bash/prompt
+    ~/.bashrc: bash/runcom.bash
+    ~/.bash_profile: bash/profile.bash
+    ~/.bash_prompt: bash/prompt.bash
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
     ~/.tmux.conf: tmux/tmux.conf
