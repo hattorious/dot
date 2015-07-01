@@ -34,3 +34,7 @@
     dump = cat-file -p
 [push]
 	default = simple
+
+# Allow local customizations in the .gitconfig.local file
+[include]
+    path = ~/.gitconfig.local
