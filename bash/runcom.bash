@@ -45,7 +45,7 @@ if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
     . /usr/local/etc/bash_completion.d/git-completion.bash;
 fi
 
-export PATH=/usr/local/bin:$PATH:/sbin:/usr/local/git/bin:/usr/X11/bin:/opt/local/bin:/Users/rossh/android-sdk/platform-tools:$HOME/.bin:
+export PATH=/usr/local/bin:$PATH/sbin:/usr/local/git/bin:/opt/local/bin:$HOME/.bin:
 export NODE_PATH=/usr/local/lib/node
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/r18
