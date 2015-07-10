@@ -5,7 +5,6 @@ fi
 
 #### TERMINAL
 export LANG=en_US.UTF-8
-export TERM=xterm-color
 export CLICOLOR=1
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
