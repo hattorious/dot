@@ -76,5 +76,7 @@ git config --global merge.stat true
 git config --global push.default simple
 
 #### NVM
-export NVM_DIR=~/.nvm
-. $(brew --prefix nvm)/nvm.sh
+if [[ -f $(brew --prefix nvm)/nvm.sh ]]; then
+    export NVM_DIR=~/.nvm
+    . $(brew --prefix nvm)/nvm.sh
+fi
