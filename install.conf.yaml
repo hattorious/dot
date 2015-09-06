@@ -11,7 +11,8 @@
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
     ~/.tmux.conf: tmux/tmux.conf
+    ~/.vimrc: vim/runcom.vim
 
-- shell: 
+- shell:
     - [source fonts/install_fonts, Installing fonts]
     - [git submodule update --init --recursive, Installing submodules]
