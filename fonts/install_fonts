@@ -1,4 +1,4 @@
-source $DOTFILES/bash/init.sh
+source $DOTFILES/bash/init.bash
 
 # OSX only, abort otherwise.
 is_osx || return 1
