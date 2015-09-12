@@ -1,8 +1,0 @@
-source $DOTFILES/bash/init.bash
-
-# OSX only, abort otherwise.
-is_osx || return 1
-
-rm -rf $HOME/Library/Fonts/dotbot
-mkdir -p $HOME/Library/Fonts/dotbot
-cp -a $DOTFILES/fonts/mplus-TESTFLIGHT-060 $HOME/Library/Fonts/dotbot/mplus

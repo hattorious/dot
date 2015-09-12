@@ -13,5 +13,5 @@
     ~/.vimrc: vim/runcom.vim
 
 - shell:
-    - [source fonts/install_fonts, Installing fonts]
+    - [source fonts/install_fonts.bash, Installing fonts]
     - [git submodule update --init --recursive, Installing submodules]
