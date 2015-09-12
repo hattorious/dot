@@ -12,6 +12,6 @@ function is_ubuntu() {
 }
 function get_os() {
     for os in osx ubuntu; do
-        is_$os; [[ $? == ${1:-0} ]] && echo $os
+        is_$os; [[ $? == "${1:-0}" ]] && echo $os
     done
 }

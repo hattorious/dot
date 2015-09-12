@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # First we source the basic functions and settings
 if [[ -f ~/.dotfiles/bash/init.bash ]]; then
     . ~/.dotfiles/bash/init.bash
@@ -13,21 +15,21 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 if [[ -f $DOTFILES/bash/liquidprompt/liquidprompt ]]; then
     # Only load liquidprompt in interactive sessions
     if [[ $- = *i* ]]; then
-        . $DOTFILES/bash/liquidprompt/liquidprompt
+        . "$DOTFILES/bash/liquidprompt/liquidprompt"
     fi
 elif [[ -f ~/.bash_prompt ]]; then
     . ~/.bash_prompt
 else
 	RESET='\[\e[0m\]'
 	BOLD='\[\e[1m\]'
-	YELLOW='\[\e[33m\]'
+	#YELLOW='\[\e[33m\]'
 	BLUE='\[\e[34m\]'
-	BLACK='\[\e[30m\]'
-	RED='\[\e[31m\]'
-	PINK='\[\e[35m\]'
-	CYAN='\[\e[36m\]'
+	#BLACK='\[\e[30m\]'
+	#RED='\[\e[31m\]'
+	#PINK='\[\e[35m\]'
+	#CYAN='\[\e[36m\]'
 	GREEN='\[\e[32m\]'
-	GRAY='\[\e[37m\]'
+	#GRAY='\[\e[37m\]'
 	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
 fi
 
@@ -37,8 +39,8 @@ if [[ -f ~/.bash_aliases ]]; then
 fi
 
 # bash completion
-if [[ -f `brew --prefix`/etc/bash_completion ]]; then
-    . `brew --prefix`/etc/bash_completion
+if [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
+    . "$(brew --prefix)/etc/bash_completion"
 fi
 
 if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
@@ -60,8 +62,8 @@ export PROJECT_HOME=$HOME/projects/python
 export EDITOR=vim
 if [[ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
     if [[ ! -L $HOME/.bin/subl ]]; then
-        mkdir -p $HOME/.bin
-        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" $HOME/.bin/subl
+        mkdir -p "$HOME/.bin"
+        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/.bin/subl"
     fi
 fi
 
@@ -78,5 +80,5 @@ git config --global push.default simple
 #### NVM
 if [[ -f $(brew --prefix nvm)/nvm.sh ]]; then
     export NVM_DIR=~/.nvm
-    . $(brew --prefix nvm)/nvm.sh
+    . "$(brew --prefix nvm)/nvm.sh"
 fi
