@@ -1,0 +1,7 @@
+bash
+httpie
+lftp
+python
+shellcheck
+tree
+vim
