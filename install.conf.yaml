@@ -11,6 +11,7 @@
     ~/.gitignore_global: git/ignore_global
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/runcom.vim
+    ~/.vim_runtime: vim/vim_runtime/
 
 - shell:
     - [source fonts/install_fonts.bash, Installing fonts]
