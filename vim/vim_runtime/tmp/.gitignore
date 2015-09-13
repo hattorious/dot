@@ -1,0 +1,3 @@
+# This tree of directories is needed as temporary storage for plugin
+*/*
+!*/.keep
