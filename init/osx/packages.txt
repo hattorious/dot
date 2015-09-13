@@ -1,7 +1,12 @@
 bash
+git
+go
 httpie
 lftp
+node
 python
 shellcheck
+the_silver_searcher
+tmux
 tree
 vim
