@@ -1,0 +1,3 @@
+# vim-plug will download plugins and packages into this directory
+*
+!.gitignore
