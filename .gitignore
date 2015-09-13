@@ -1,0 +1,5 @@
+.DS_Store
+
+# vim related
+vim/vim_runtime/temp/undodir*
+vim/vim_runtime/temp/buffers*
