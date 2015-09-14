@@ -273,6 +273,9 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
+" Unmap esc in insert mode, use <jk>
+inoremap <ESC> <nop>
+inoremap jk <ESC>`^
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ack searching and cope displaying
