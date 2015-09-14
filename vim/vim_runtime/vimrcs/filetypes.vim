@@ -53,6 +53,7 @@ endfunction
 " => Git section
 """"""""""""""""""""""""""""""
 au FileType gitcommit set tw=72
+au FileType gitcommit setlocal spell
 
 
 """"""""""""""""""""""""""""""
