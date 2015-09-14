@@ -25,7 +25,7 @@ Plug 'itchyny/lightline.vim' " status bar
 " => Navigation
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree' "| Plug 'Xuyuanp/nerdtree-git-plugin'  file browser
-
+Plug 'jlanzarotta/bufexplorer' " quick switching between buffers
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -161,9 +161,12 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
 
-""""""""""""""""""""""""""""""
-" => bufExplorer plugin
-""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => bufExplorer
+" BufExplorer Plugin for Vim
+" https://github.com/jlanzarotta/bufexplorer
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
