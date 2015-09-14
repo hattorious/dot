@@ -161,7 +161,7 @@ let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "right"
 let NERDTreeIgnore = ['\.pyc$']
 let g:NERDTreeWinSize=30
-let g:NERDTreeBookmarksFile="~/.vim_runtime/tmp/nerdtree/NERDTreeBookmarks"
+let g:NERDTreeBookmarksFile=expand("$HOME/.vim_runtime/tmp/nerdtree/NERDTreeBookmarks")
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <leader>nn :NERDTreeToggle<cr>
