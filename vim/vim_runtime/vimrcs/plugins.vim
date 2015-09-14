@@ -36,6 +36,10 @@ call plug#end()
 " precision colorscheme for the vim text editor
 " http://ethanschoonover.com/solarized
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+try
+    colorscheme solarized
+catch
+endtry
 hi! link txtBold Identifier
 hi! link MatchParen DiffText
 

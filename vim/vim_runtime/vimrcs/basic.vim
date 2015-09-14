@@ -130,7 +130,7 @@ set foldcolumn=1
 syntax enable
 
 try
-    colorscheme desert
+    colorscheme desert " sensible default, overriden later
 catch
 endtry
 
