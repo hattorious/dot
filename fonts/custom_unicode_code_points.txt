@@ -1,0 +1,20 @@
+This has been driving me nuts finding any good documentation on the PUA code points that powerlines uses so I'm gathering what I've found on the net.
+
+U+E0A0     Version control branch
+U+E0A1     LN (line) symbol
+U+E0A2     Closed padlock
+U+E0B0     Rightwards black arrowhead
+U+E0B1     Rightwards arrowhead
+U+E0B2     Leftwards black arrowhead
+U+E0B3     Leftwards arrowhead
+
+Some additonal interesting code points:
+U+F8FF     Apple Inc. symbol (PUA)
+U+00B1  ±   plus-minus sign
+U+27A6  ➦   heavy black curved upwards and rightwards arrow
+U+1368  ፨   ethiopic paragraph separator
+U+2764  ❤   heavy black heart
+
+
+To enter these into vim either yank from this file or off the web (http://graphemica.com) or:
+ctrl + v + u + f 8 f f
