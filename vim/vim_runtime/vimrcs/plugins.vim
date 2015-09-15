@@ -166,7 +166,7 @@ let g:NERDTreeBookmarksFile=expand("$HOME/.vim_runtime/tmp/nerdtree/NERDTreeBook
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark
+map <leader>nb :NERDTreeFromBookmark<space>
 map <leader>nf :NERDTreeFind<cr>
 
 
