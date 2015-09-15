@@ -26,6 +26,7 @@ Plug 'itchyny/lightline.vim' " status bar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdtree' "| Plug 'Xuyuanp/nerdtree-git-plugin'  file browser
 Plug 'jlanzarotta/bufexplorer' " quick switching between buffers
+Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

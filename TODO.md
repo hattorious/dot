@@ -9,6 +9,3 @@ http://mplus-fonts.osdn.jp/mplus-outline-fonts/download/index-en.html
 
 4. Start expanding the vim plugins I use
 http://code.tutsplus.com/series/vim-essential-plugins--net-19224
-
-5. Fix the tmux pane-switching bug for vim
-https://github.com/christoomey/vim-tmux-navigator
