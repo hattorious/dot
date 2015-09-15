@@ -19,6 +19,7 @@ call plug#begin('~/.vim_runtime/plugins/plugged')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'altercation/vim-colors-solarized' " solarized color scheme
 Plug 'itchyny/lightline.vim' " status bar
+Plug 'junegunn/goyo.vim' " distraction-free writing
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,6 +154,17 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Goyo
+" :tulip: Distraction-free writing in Vim
+" https://github.com/junegunn/goyo.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+nnoremap <silent> <leader>z :Goyo<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 " A tree explorer plugin for vim
 " https://github.com/scrooloose/nerdtree
@@ -269,15 +281,6 @@ let g:multi_cursor_next_key="\<C-s>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Vimroom
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
