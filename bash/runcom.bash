@@ -82,3 +82,8 @@ if [[ -f $(brew --prefix nvm)/nvm.sh ]]; then
     export NVM_DIR=~/.nvm
     . "$(brew --prefix nvm)/nvm.sh"
 fi
+
+#### LOCAL SETTINGS
+if [[ -f $HOME/.bashrc.local ]]; then
+    . "$HOME/.bashrc.local"
+fi
