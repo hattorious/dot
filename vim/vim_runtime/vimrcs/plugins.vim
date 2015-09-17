@@ -19,7 +19,7 @@ call plug#begin('~/.vim_runtime/plugins/plugged')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'altercation/vim-colors-solarized' " solarized color scheme
 Plug 'itchyny/lightline.vim' " status bar
-Plug 'junegunn/goyo.vim' " distraction-free writing
+Plug 'junegunn/goyo.vim' | Plug 'amix/vim-zenroom2' " distraction-free writing
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
