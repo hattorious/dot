@@ -47,6 +47,14 @@ call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-plug
+" :hibiscus: Minimalist Vim Plugin Manager
+" https://github.com/junegunn/vim-plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:plug_window = 'new'
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Solarized
 " precision colorscheme for the vim text editor
 " http://ethanschoonover.com/solarized
