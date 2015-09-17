@@ -31,6 +31,12 @@ Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Languages and syntax
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'scrooloose/syntastic' " external syntax checking
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => External tools
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'tpope/vim-fugitive' " git integration
@@ -195,6 +201,21 @@ map <leader>o :BufExplorer<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntastic
+" Syntax checking hacks for vim
+" https://github.com/scrooloose/syntastic
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fugitive.vim
 " a Git wrapper so awesome, it should be illegal
 " https://github.com/tpope/vim-fugitive
@@ -283,8 +304,3 @@ vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Syntastic (syntax checker)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_python_checkers=['pyflakes']
-let g:syntastic_javascript_checkers = ['standard']
