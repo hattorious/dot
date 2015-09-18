@@ -1,13 +1,13 @@
 
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim section
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufWrite *.vim :call DeleteTrailingWS()
 
 
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_python_checkers=['pyflakes']
 let python_highlight_all = 1
 au FileType python syn keyword pythonDecorator True None False self
@@ -25,9 +25,9 @@ au FileType python map <buffer> <leader>D ?def
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
 
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => JavaScript section
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_javascript_checkers = ['standard']
 au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
@@ -51,16 +51,22 @@ function! JavaScriptFold()
 endfunction
 
 
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git section
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType gitcommit set tw=72
 au FileType gitcommit setlocal spell
 
 
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Chef, Vagrant, etc section
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile {Vagrantfile,Berksfile} set ft=ruby
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
-""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save
 func! DeleteTrailingWS()
   exe "normal mz"
