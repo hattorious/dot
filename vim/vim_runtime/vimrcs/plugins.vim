@@ -40,7 +40,7 @@ Plug 'scrooloose/syntastic' " external syntax checking
 " => External tools
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'tpope/vim-fugitive' " git integration
-Plug 'markcornick/vim-terraform' " terraform integration
+Plug 'markcornick/vim-terraform', {'for': 'terraform' } " terraform integration
 
 
 " Add plugins to &runtimepath
