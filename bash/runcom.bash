@@ -6,6 +6,7 @@ if [[ -f ~/.dotfiles/bash/init.bash ]]; then
 fi
 
 #### TERMINAL
+export LC_ALL=en_US.UTF-8 
 export LANG=en_US.UTF-8
 export CLICOLOR=1
 export LSCOLORS=gxfxcxdxbxegedabagacad
