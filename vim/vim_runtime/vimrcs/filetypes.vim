@@ -6,6 +6,12 @@ autocmd BufWrite *.vim :call DeleteTrailingWS()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Bash section
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_sh_checkers=['shellcheck']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_python_checkers=['pyflakes']
