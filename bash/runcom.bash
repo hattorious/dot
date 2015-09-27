@@ -16,6 +16,7 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 if [[ -f $DOTFILES/bash/liquidprompt/liquidprompt ]]; then
     # Only load liquidprompt in interactive sessions
     if [[ $- = *i* ]]; then
+        # shellcheck source=liquidprompt/liquidprompt
         . "$DOTFILES/bash/liquidprompt/liquidprompt"
     fi
 elif [[ -f ~/.bash_prompt ]]; then
@@ -48,23 +49,20 @@ if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
     . /usr/local/etc/bash_completion.d/git-completion.bash;
 fi
 
-export PATH=/usr/local/bin:$PATH/sbin:/usr/local/git/bin:/opt/local/bin:$HOME/.bin:
+export PATH=/usr/local/bin:$PATH/sbin:/usr/local/git/bin:/opt/local/bin:~/.bin:
 export NODE_PATH=/usr/local/lib/node
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages
-export ANDROID_SDK_ROOT=/usr/local/Cellar/android-sdk/r18
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home
 
 # virtualenvwrapper stuff
-export WORKON_HOME=$HOME/envs
-export PROJECT_HOME=$HOME/projects/python
+export WORKON_HOME=~/envs
 . /usr/local/bin/virtualenvwrapper.sh
 
 #### EDITOR STUFF
 export EDITOR=vim
 if [[ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
-    if [[ ! -L $HOME/.bin/subl ]]; then
-        mkdir -p "$HOME/.bin"
-        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/.bin/subl"
+    if [[ ! -L ~/.bin/subl ]]; then
+        mkdir -p ~/.bin
+        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/.bin/subl
     fi
 fi
 
@@ -78,13 +76,14 @@ git config --global rerere.enabled true
 git config --global merge.stat true
 git config --global push.default simple
 
-#### NVM
-if [[ -f $(brew --prefix nvm)/nvm.sh ]]; then
-    export NVM_DIR=~/.nvm
-    . "$(brew --prefix nvm)/nvm.sh"
-fi
+#### DEFAULTS
+# make less always render color codes
+export LESS='-r'
+# turn off overzealous shellcheck warnings
+export SHELLCHECK_OPTS='-e SC1091'
+
 
 #### LOCAL SETTINGS
-if [[ -f $HOME/.bashrc.local ]]; then
-    . "$HOME/.bashrc.local"
+if [[ -f ~/.bashrc.local ]]; then
+    . ~/.bashrc.local
 fi
