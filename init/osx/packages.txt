@@ -1,5 +1,4 @@
 bash
-cask
 git
 go
 httpie
@@ -11,3 +10,4 @@ the_silver_searcher
 tmux
 tree
 vim
+caskroom/cask/brew-cask
