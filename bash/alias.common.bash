@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+alias vi='vim'
+alias cd..='cd ..'
+alias c='clear'
+
+
 # An overly obvious reference for most commonly requested bash
 # timestamps
 function dates() {
@@ -19,3 +24,14 @@ ISO8601 UTC timestamp         | date -u +%FT%TZ            | $(date -u +%FT%TZ)
 ISO8601 Local TZ timestamp    | date +%FT%T%Z              | $(date +%FT%T%Z)
 EOD
 }
+
+
+## npm package maintenance
+alias patch='pre-version && npm version patch && post-version'
+alias minor='pre-version && npm version minor && post-version'
+alias major='pre-version && npm version major && post-version'
+alias pre-version='git diff --exit-code && npm prune && npm install -q && npm test'
+alias post-version='(npm run build; exit 0) && git diff --exit-code && git push && git push --tags && npm publish'
+
+
+alias serve='python -m SimpleHTTPServer 8888'

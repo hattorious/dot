@@ -35,11 +35,6 @@ else
 	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
 fi
 
-
-if [[ -f ~/.bash_aliases ]]; then
-    . ~/.bash_aliases
-fi
-
 # bash completion
 if [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
     . "$(brew --prefix)/etc/bash_completion"
@@ -50,8 +45,6 @@ if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
 fi
 
 export PATH=/usr/local/bin:$PATH/sbin:/usr/local/git/bin:/opt/local/bin:~/.bin:
-export NODE_PATH=/usr/local/lib/node
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages
 
 # virtualenvwrapper stuff
 export WORKON_HOME=~/envs
@@ -59,12 +52,7 @@ export WORKON_HOME=~/envs
 
 #### EDITOR STUFF
 export EDITOR=vim
-if [[ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
-    if [[ ! -L ~/.bin/subl ]]; then
-        mkdir -p ~/.bin
-        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/.bin/subl
-    fi
-fi
+export VISUAL="$EDITOR"
 
 #### GIT STUFF
 alias g='git'
@@ -82,8 +70,19 @@ export LESS='-r'
 # turn off overzealous shellcheck warnings
 export SHELLCHECK_OPTS='-e SC1091'
 
+#### OS-SPECIFIC FILES
+for os in common osx ubuntu; do
+    for source in runcom alias; do
+        path="$DOTFILES/bash/$source.$os.bash"
+        [[ -f "$path" ]] && . "$path"
+    done
+done
 
 #### LOCAL SETTINGS
 if [[ -f ~/.bashrc.local ]]; then
     . ~/.bashrc.local
+fi
+
+if [[ -f ~/.bash_aliases.local ]]; then
+    . ~/.bash_aliases.local
 fi
