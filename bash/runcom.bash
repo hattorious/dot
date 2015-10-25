@@ -39,6 +39,22 @@ else
 	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
 fi
 
+#### HISTORY
+# Allow use to re-edit a faild history substitution.
+shopt -s histreedit
+# History expansions will be verified before execution.
+shopt -s histverify
+
+# Entries beginning with space aren't added into history, and duplicate
+# entries will be erased (leaving the most recent entry).
+export HISTCONTROL="ignorespace:erasedups"
+# Give history timestamps.
+export HISTTIMEFORMAT="[%F %T] "
+# Lots o' history.
+export HISTSIZE=10000
+export HISTFILESIZE=10000
+
+
 # bash completion
 if [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
     . "$(brew --prefix)/etc/bash_completion"
