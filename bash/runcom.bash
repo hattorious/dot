@@ -16,7 +16,6 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 if [[ -f $DOTFILES/bash/liquidprompt/liquidprompt ]]; then
     # Only load liquidprompt in interactive sessions
     if [[ $- = *i* ]]; then
-        # shellcheck source=liquidprompt/liquidprompt
         . "$DOTFILES/bash/liquidprompt/liquidprompt"
     fi
 elif [[ -f ~/.bash_prompt ]]; then
@@ -68,7 +67,7 @@ git config --global push.default simple
 # make less always render color codes
 export LESS='-r'
 # turn off overzealous shellcheck warnings
-export SHELLCHECK_OPTS='-e SC1091'
+export SHELLCHECK_OPTS='-e SC1090,SC1091'
 
 #### OS-SPECIFIC FILES
 for os in common osx ubuntu; do

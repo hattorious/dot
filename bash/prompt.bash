@@ -22,14 +22,14 @@
 #   https://gist.github.com/31967
 
 # The various escape codes that we can use to color our prompt.
-        RED="\[\033[0;31m\]"
+#        RED="\[\033[0;31m\]"
      YELLOW="\[\033[1;33m\]"
       GREEN="\[\033[0;32m\]"
        BLUE="\[\033[1;34m\]"
   LIGHT_RED="\[\033[1;31m\]"
-LIGHT_GREEN="\[\033[1;32m\]"
-      WHITE="\[\033[1;37m\]"
- LIGHT_GRAY="\[\033[0;37m\]"
+#LIGHT_GREEN="\[\033[1;32m\]"
+#      WHITE="\[\033[1;37m\]"
+# LIGHT_GRAY="\[\033[0;37m\]"
  COLOR_NONE="\[\e[0m\]"
 
 # Detect whether the current directory is a git repository.
@@ -43,7 +43,7 @@ function set_git_branch {
   git_status="$(git status 2> /dev/null)"
 
   # Set color based on clean/staged/dirty.
-  if [[ ${git_status} =~ "working directory clean" ]]; then
+  if [[ ${git_status} =~ 'working directory clean' ]]; then
     state="${GREEN}"
   elif [[ ${git_status} =~ "Changes to be committed" ]]; then
     state="${YELLOW}"
@@ -80,7 +80,7 @@ function set_git_branch {
 # Return the prompt symbol to use, colorized based on the return value of the
 # previous command.
 function set_prompt_symbol () {
-  if test $1 -eq 0 ; then
+  if test "$1" -eq 0 ; then
       PROMPT_SYMBOL="\$"
   else
       PROMPT_SYMBOL="${LIGHT_RED}\$${COLOR_NONE}"
@@ -92,7 +92,7 @@ function set_virtualenv () {
   if test -z "$VIRTUAL_ENV" ; then
       PYTHON_VIRTUALENV=""
   else
-      PYTHON_VIRTUALENV="${BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+      PYTHON_VIRTUALENV="${BLUE}[$(basename \"$VIRTUAL_ENV\")]${COLOR_NONE} "
   fi
 }
 
