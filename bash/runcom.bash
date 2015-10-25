@@ -11,6 +11,11 @@ export LANG=en_US.UTF-8
 export CLICOLOR=1
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
+#### FILES
+# files 644 -rw-r--r-- (666 minus 022)
+# dirs  755 drwxr-xr-x (777 minus 022)
+umask 022
+
 #### PROMPT
 # Use liquidprompt, then fallback to .bash_prompt, finally use the inline settings
 if [[ -f $DOTFILES/bash/liquidprompt/liquidprompt ]]; then
