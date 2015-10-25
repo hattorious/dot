@@ -68,6 +68,10 @@ git config --global rerere.enabled true
 git config --global merge.stat true
 git config --global push.default simple
 
+#### Z
+export _Z_DATA=$DOTFILES/tmp/z/z
+. "$DOTFILES/bash/z/z.sh"
+
 #### DEFAULTS
 # make less always render color codes
 export LESS='-r'
