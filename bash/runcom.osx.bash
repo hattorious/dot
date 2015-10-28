@@ -11,3 +11,6 @@ if [[ -f "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; th
         ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ~/.bin/subl
     fi
 fi
+
+# Make 'less' more
+[[ "$(type -P lesspipe.sh)" ]] && eval "$(lesspipe.sh)"

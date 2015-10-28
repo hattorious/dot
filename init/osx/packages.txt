@@ -2,6 +2,7 @@ bash
 git
 go
 httpie
+lesspipe
 lftp
 node
 python

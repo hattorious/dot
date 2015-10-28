@@ -90,7 +90,7 @@ export _Z_DATA=$DOTFILES/tmp/z/z
 
 #### DEFAULTS
 # make less always render color codes
-export LESS='-r'
+export LESS='-R'
 # turn off overzealous shellcheck warnings
 export SHELLCHECK_OPTS='-e SC1090,SC1091'
 
