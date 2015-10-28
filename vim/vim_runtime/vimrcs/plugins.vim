@@ -41,6 +41,7 @@ Plug 'scrooloose/syntastic' " external syntax checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'tpope/vim-fugitive' " git integration
 Plug 'markcornick/vim-terraform', {'for': 'terraform' } " terraform integration
+Plug 'rking/ag.vim' " the_silver_searcher
 
 
 " Add plugins to &runtimepath
@@ -249,6 +250,17 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " For fugitive.vim, dp means :diffput. Define dg to mean :diffget
 nnoremap <silent> ,dg :diffget<CR>
 nnoremap <silent> ,dp :diffput<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ag.vim
+" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl
+" module / CLI script 'ack'
+" https://github.com/rking/ag.vim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Open the Ag command and place the cursor into the quotes
+nmap <leader>ag :Ag ""<left>
+nmap <leader>af :AgFile ""<left>
 
 
 """"""""""""""""""""""""""""""
