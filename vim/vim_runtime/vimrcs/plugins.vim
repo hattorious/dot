@@ -34,6 +34,7 @@ Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 " => Languages and syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/syntastic' " external syntax checking
+Plug 'smerrill/vcl-vim-plugin' " varnish configuration highlighting
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
