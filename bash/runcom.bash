@@ -56,10 +56,6 @@ export HISTFILESIZE=10000
 
 
 # bash completion
-if [[ -f "$(brew --prefix)/etc/bash_completion" ]]; then
-    . "$(brew --prefix)/etc/bash_completion"
-fi
-
 if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
     . /usr/local/etc/bash_completion.d/git-completion.bash;
 fi
@@ -68,7 +64,9 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH/sbin:/usr/local/git/bin:/opt/lo
 
 # virtualenvwrapper stuff
 export WORKON_HOME=~/envs
-. /usr/local/bin/virtualenvwrapper.sh
+if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+    . /usr/local/bin/virtualenvwrapper.sh;
+fi
 
 #### EDITOR STUFF
 export EDITOR=vim
@@ -82,7 +80,6 @@ git config --global core.whitespace trailing-space,space-before-tab
 git config --global diff.renames copies
 git config --global rerere.enabled true
 git config --global merge.stat true
-git config --global push.default simple
 
 #### Z
 export _Z_DATA=$DOTFILES/tmp/z/z
