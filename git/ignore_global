@@ -39,3 +39,7 @@ Thumbs.db
 # IDE files #
 #############
 *.idea
+
+# terraform plan files #
+########################
+tfplan
