@@ -75,11 +75,6 @@ export VISUAL="$EDITOR"
 #### GIT STUFF
 alias g='git'
 complete -o default -o nospace -F _git g
-git config --global color.ui auto
-git config --global core.whitespace trailing-space,space-before-tab
-git config --global diff.renames copies
-git config --global rerere.enabled true
-git config --global merge.stat true
 
 #### Z
 export _Z_DATA=$DOTFILES/tmp/z/z
