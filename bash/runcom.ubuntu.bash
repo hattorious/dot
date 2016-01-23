@@ -1,4 +1,7 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+#!/usr/bin/env bash
+
+# only load on ubuntu
+is_ubuntu || return 1
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
