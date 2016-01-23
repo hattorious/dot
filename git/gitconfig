@@ -16,20 +16,32 @@
 [mergetool]
 	keepBackup = true
 [color]
-	ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+[gc]
+    auto = 1
 [diff]
 	renames = copies
 [rerere]
 	enabled = true
 [merge]
-	stat = true
+    summary = true
+    stat = true
 [alias]
     tree = log --graph --pretty=oneline --abbrev-commit --decorate --color
+    cp = cherry-pick -x
+    b = branch -v
+    r = remote -v
+    t = tag -l
+    unstage = reset HEAD
+    uncommit = reset --soft HEAD^
     co = checkout
     ci = commit
     st = status
-    br = branch
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --abbrev-commit --decorate --color
     type = cat-file -t
     dump = cat-file -p
 [push]
