@@ -35,6 +35,7 @@ alias post-version='(npm run build; exit 0) && git diff --exit-code && git push 
 
 
 alias serve='python -m SimpleHTTPServer 8888'
+alias ppjson='python -m json.tool | less; clear'
 
 
 # delete all merged branches
