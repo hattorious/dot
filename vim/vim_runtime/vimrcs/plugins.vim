@@ -37,7 +37,7 @@ Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 Plug 'scrooloose/syntastic' " external syntax checking
 Plug 'smerrill/vcl-vim-plugin' " varnish configuration highlighting
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
-Plug 'faith/vim-go', {'for': 'go'} " Go development plugin for Vim
+Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
