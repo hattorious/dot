@@ -44,3 +44,5 @@ alias gdmb='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gdmbo="git branch -r --merged | grep -v -e \/master | sed 's/origin\///' | xargs -n 1 git push --delete origin"
 # list all hanging branches with commiter name and last commit date
 alias branch-blame="git for-each-ref --format='%(committername) %09 %(committerdate:short) %09 %(refname:short)' --sort=committerdate --sort=committername | grep -e origin\/ | grep -v -e \/HEAD -e \/master | sed 's/origin\///'"
+# cd to root of current git repo
+alias gcd='git rev-parse && cd "$(git rev-parse --show-cdup)"'
