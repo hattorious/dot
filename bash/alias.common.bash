@@ -46,3 +46,7 @@ alias gdmbo="git branch -r --merged | grep -v -e \/master | sed 's/origin\///' |
 alias branch-blame="git for-each-ref --format='%(committername) %09 %(committerdate:short) %09 %(refname:short)' --sort=committerdate --sort=committername | grep -e origin\/ | grep -v -e \/HEAD -e \/master | sed 's/origin\///'"
 # cd to root of current git repo
 alias gcd='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+# various git
+alias gsp='git stash pop'
+alias gs='git stash'
+alias grps='git rev-parse --short'
