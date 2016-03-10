@@ -9,6 +9,7 @@
     ~/.bash_prompt: bash/prompt.bash
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
+    ~/.gitcommittemplate: git/commit_template.txt
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/runcom.vim
     ~/.vim_runtime: vim/vim_runtime/
