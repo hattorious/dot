@@ -11,8 +11,11 @@ function is_osx() {
 function is_ubuntu() {
     [[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
 }
+function is_freebsd() {
+    [[ "$OSTYPE" =~ ^freebsd ]] || return 1
+}
 function get_os() {
-    for os in osx ubuntu; do
+    for os in osx ubuntu freebsd; do
         is_$os; [[ $? == "${1:-0}" ]] && echo $os
     done
 }

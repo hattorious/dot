@@ -87,7 +87,7 @@ export LESS='-R'
 export SHELLCHECK_OPTS='-e SC1090,SC1091'
 
 #### OS-SPECIFIC FILES
-for os in common osx ubuntu; do
+for os in common osx ubuntu freebsd; do
     for source in runcom alias; do
         path="$DOTFILES/bash/$source.$os.bash"
         [[ -f "$path" ]] && . "$path"
