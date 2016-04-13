@@ -60,7 +60,7 @@ if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
     . /usr/local/etc/bash_completion.d/git-completion.bash;
 fi
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH/sbin:/usr/local/git/bin:/opt/local/bin:~/.bin:
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/local/git/bin:/opt/local/bin:
 
 # virtualenvwrapper stuff
 export WORKON_HOME=~/envs
