@@ -30,6 +30,7 @@ Plug 'scrooloose/nerdtree' "| Plug 'Xuyuanp/nerdtree-git-plugin'  file browser
 Plug 'jlanzarotta/bufexplorer' " quick switching between buffers
 Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 Plug 'majutsushi/tagbar', {'for': 'go'} " Vim plugin that displays tags in a window, ordered by scope
+Plug 'yegappan/mru' " Most Recently Used (MRU) Vim Plugin
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
