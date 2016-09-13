@@ -23,3 +23,11 @@ function kill_nsurlsessiond() {
     sudo launchctl unload /System/Library/LaunchDaemons/com.apple.nsurlsessiond.plist
     sudo launchctl unload /System/Library/LaunchDaemons/com.apple.nsurlstoraged.plist
 }
+
+function dns_over_vpn() {
+    # sometimes you need to resolve a record pointing to a private ip
+    for ip in 8.8.8.8 8.8.4.4; do
+        sudo route -n add -net $ip -interface utun0;
+        route get $ip;
+    done
+}
