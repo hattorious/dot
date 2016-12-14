@@ -73,6 +73,13 @@ au BufRead,BufNewFile {Vagrantfile,Berksfile} set ft=ruby
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => HTML section
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType html setl shiftwidth=2
+au FileType html setl tabstop=2
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save
