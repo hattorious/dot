@@ -104,48 +104,9 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# ENV Stuff
-#############
-export EDITOR=vim
-
-# setup my prompt
-if [ -f $HOME/src/powerline/powerline/bindings/bash/powerline.sh ]; then
-    . $HOME/src/powerline/powerline/bindings/bash/powerline.sh
-elif [ -f ~/.bash_prompt ]; then
-     . ~/.bash_prompt
-else
-	RESET='\[\e[0m\]'
-	BOLD='\[\e[1m\]'
-	YELLOW='\[\e[33m\]'
-	BLUE='\[\e[34m\]'
-	BLACK='\[\e[30m\]'
-	RED='\[\e[31m\]'
-	PINK='\[\e[35m\]'
-	CYAN='\[\e[36m\]'
-	GREEN='\[\e[32m\]'
-	GRAY='\[\e[37m\]'
-	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
-fi
-
-
 # Change the TERM
 export TERM=xterm-256color
  
-# For virtualenvwrapper
-export WORKON_HOME=$HOME/envs
-export PROJECT_HOME=$HOME/projects/python
-source /usr/local/bin/virtualenvwrapper.sh
-
-# git stuff
-alias g='git'
-complete -o default -o nospace -F _git g
-git config --global color.ui auto
-git config --global core.whitespace trailing-space,space-before-tab
-git config --global diff.renames copies
-git config --global rerere.enabled true
-git config --global merge.stat true
-git config --global push.default simple
-
 # Add PyroScope variable
 export RT_HOME=$HOME/rtorrent
 
