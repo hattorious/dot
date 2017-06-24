@@ -21,6 +21,7 @@ Plug 'altercation/vim-colors-solarized' " solarized color scheme
 Plug 'itchyny/lightline.vim' " status bar
 Plug 'junegunn/goyo.vim' | Plug 'amix/vim-zenroom2' " distraction-free writing
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim
+Plug 'airblade/vim-gitgutter' " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
