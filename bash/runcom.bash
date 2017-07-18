@@ -62,11 +62,6 @@ fi
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/local/git/bin:/opt/local/bin:
 
-# virtualenvwrapper stuff
-export WORKON_HOME=~/envs
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-    . /usr/local/bin/virtualenvwrapper.sh;
-fi
 
 #### EDITOR STUFF
 export EDITOR=vim
@@ -93,6 +88,11 @@ for os in common osx ubuntu freebsd; do
         [[ -f "$path" ]] && . "$path"
     done
 done
+
+#### POST-OS SETTINGS
+if [[ -f ~/.bashrc.post ]]; then
+    . ~/.bashrc.post
+fi
 
 #### LOCAL SETTINGS
 if [[ -f ~/.bashrc.local ]]; then
