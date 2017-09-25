@@ -223,6 +223,8 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>5D814766-68B9-42BA-8017-D39382AEF6CD</string>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
@@ -270,9 +272,13 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 168 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>155 80 650 627 0 0 1440 877 </string>
+	<string>155 179 730 527 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>176 273 650 627 0 0 1440 900 </string>
+	<string>176 348 730 527 0 0 1440 900 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>197 373 730 527 0 0 1440 900 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>218 373 745 527 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -922,6 +928,8 @@
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>4BD8AC90-6FF7-46B2-BCFC-A19BA48F1A7E</string>
+	<key>NoSyncNeverAskAboutSettingAlternateMouseScroll</key>
+	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -967,6 +975,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/rhattori/dot/iterm</string>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -976,13 +986,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-03-23T22:35:26Z</date>
+	<date>2017-09-21T14:45:19Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.0.14</string>
+	<string>3.1.1</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
