@@ -8,6 +8,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Solarized Dark</key>
@@ -276,7 +278,7 @@
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>176 348 730 527 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>197 373 730 527 0 0 1440 900 </string>
+	<string>197 373 745 527 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>218 373 745 527 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
@@ -986,13 +988,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-09-21T14:45:19Z</date>
+	<date>2017-10-03T17:22:17Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.1.1</string>
+	<string>3.1.2</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
