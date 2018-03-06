@@ -15,6 +15,7 @@ let g:syntastic_sh_checkers=['shellcheck']
 " => Python section
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_python_checkers=['flake8']
+"let g:syntastic_python_flake8_args='--ignore=E402,E711,E128,E302,E261,E266,E124,E123,E126,E127,E122,E265,E121,E125,E401,E129,E712,E241,E713,W391'
 let python_highlight_all = 1
 au FileType python syn keyword pythonDecorator True None False self
 
