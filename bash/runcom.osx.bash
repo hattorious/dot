@@ -15,7 +15,7 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export VIRTUALENVWRAPPER_PYTHON="/usr/local/opt/python/libexec/bin/python"
 
 # Make 'less' more
-[[ "$(type -P lesspipe.sh)" ]] && eval "$(lesspipe.sh)"
+export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
 
 # git stuff
 git config --global push.default simple
