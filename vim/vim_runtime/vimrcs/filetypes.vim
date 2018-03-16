@@ -71,6 +71,8 @@ au FileType gitcommit setlocal spell
 " => Chef, Vagrant, etc section
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufRead,BufNewFile {Vagrantfile,Berksfile} set ft=ruby
+au FileType ruby setl shiftwidth=2
+au FileType ruby setl tabstop=2
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
