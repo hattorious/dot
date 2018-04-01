@@ -81,6 +81,11 @@ au FileType ruby setl tabstop=2
 au FileType html setl shiftwidth=2
 au FileType html setl tabstop=2
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YAML section
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType yaml setl shiftwidth=2
+au FileType yaml setl tabstop=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
