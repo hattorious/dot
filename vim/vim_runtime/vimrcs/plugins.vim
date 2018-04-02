@@ -48,7 +48,7 @@ Plug 'tomlion/vim-solidity' " Vim syntax file for solidity
 " => External tools
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'tpope/vim-fugitive' " git integration
-Plug 'markcornick/vim-terraform', {'for': 'terraform' } " terraform integration
+Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
 Plug 'rking/ag.vim' " the_silver_searcher
 
 
