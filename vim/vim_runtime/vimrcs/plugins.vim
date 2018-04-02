@@ -272,6 +272,23 @@ nmap <leader>ag :Ag ""<left>
 nmap <leader>af :AgFile ""<left>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-terraform
+" basic vim/terraform integration
+" https://github.com/hashivim/vim-terraform
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Allow vim-terraform to override your .vimrc indentation syntax for matching file
+let g:terraform_align=1
+
+" Allow vim-terraform to automatically fold (hide until unfolded) sections of terraform code
+let g:terraform_fold_sections=1
+
+" Allow vim-terraform to re-map the spacebar to fold/unfold
+let g:terraform_remap_spacebar=1
+
+" Run `terraform fmt` against the current buffer on save
+let g:terraform_fmt_on_save=1
+
 """"""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""
