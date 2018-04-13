@@ -42,6 +42,8 @@ Plug 'smerrill/vcl-vim-plugin' " varnish configuration highlighting
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 Plug 'tomlion/vim-solidity' " Vim syntax file for solidity
+Plug 'b4b4r07/vim-hcl' " Vim syntax for HCL
+Plug 'fatih/vim-hclfmt' " Vim plugin for hclfmt
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -287,7 +289,17 @@ let g:terraform_fold_sections=1
 let g:terraform_remap_spacebar=1
 
 " Run `terraform fmt` against the current buffer on save
-let g:terraform_fmt_on_save=1
+"let g:terraform_fmt_on_save=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-hclfmt
+" Vim plugin for hclfmt
+" https://github.com/fatih/vim-hclfmt
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:hcl_fmt_autosave=1
+let g:tf_fmt_autosave=1
+let g:nomad_fmt_autosave=0
 
 """"""""""""""""""""""""""""""
 " => MRU plugin

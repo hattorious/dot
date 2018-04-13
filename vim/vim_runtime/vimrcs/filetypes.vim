@@ -88,6 +88,13 @@ au FileType yaml setl shiftwidth=2
 au FileType yaml setl tabstop=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => HCL section
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"au BufRead,BufNewFile *.hcl set ft=hcl
+au FileType hcl set tw=80
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delete trailing white space on save
