@@ -36,7 +36,7 @@ else
 	#CYAN='\[\e[36m\]'
 	GREEN='\[\e[32m\]'
 	#GRAY='\[\e[37m\]'
-	export PS1="$BOLD$GREEN<\u> $BLUE\w\n$RESET$BLUE\$$RESET "
+	export PS1="$BOLD$GREEN<\\u> $BLUE\\w\\n$RESET$BLUE\$$RESET "
 fi
 
 #### HISTORY
