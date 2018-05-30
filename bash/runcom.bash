@@ -80,6 +80,8 @@ export _Z_DATA=$DOTFILES/tmp/z/z
 export LESS='-R'
 # turn off overzealous shellcheck warnings
 export SHELLCHECK_OPTS='-e SC1090,SC1091'
+# Make liquidprompt stop adding previous job runtime (bug)
+export LP_ENABLE_RUNTIME=0
 
 #### OS-SPECIFIC FILES
 for os in common osx ubuntu freebsd; do
