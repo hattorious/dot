@@ -44,6 +44,7 @@ Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 Plug 'tomlion/vim-solidity' " Vim syntax file for solidity
 Plug 'b4b4r07/vim-hcl' " Vim syntax for HCL
 Plug 'fatih/vim-hclfmt' " Vim plugin for hclfmt
+Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'} " A light Vim plugin for previewing markdown files in a browser - without leaving Vim.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -300,6 +301,20 @@ let g:terraform_remap_spacebar=1
 let g:hcl_fmt_autosave=1
 let g:tf_fmt_autosave=1
 let g:nomad_fmt_autosave=0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-markdown-preview
+" A light Vim plugin for previewing markdown files in a browser - without leaving Vim.
+" https://github.com/JamshedVesuna/vim-markdown-preview
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" To disregard images and still automatically preview on buffer write.
+let vim_markdown_preview_toggle=3
+
+" Use GitHub flavoured markdown.
+let vim_markdown_preview_github=1
+
+" Using Google Chrome.
+let vim_markdown_preview_browser='Google Chrome'
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
