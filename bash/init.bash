@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-IFS=$'\n\t'
+#IFS=$'\n\t'
 
 # Let's get started.
 export DOTFILES=~/.dotfiles
