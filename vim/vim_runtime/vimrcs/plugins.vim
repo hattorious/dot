@@ -45,7 +45,7 @@ Plug 'tomlion/vim-solidity' " Vim syntax file for solidity
 Plug 'b4b4r07/vim-hcl' " Vim syntax for HCL
 Plug 'fatih/vim-hclfmt' " Vim plugin for hclfmt
 Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'} " A light Vim plugin for previewing markdown files in a browser - without leaving Vim.
-
+Plug 'ambv/black', " The uncompromising Python code formatter
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => External tools
@@ -315,6 +315,19 @@ let vim_markdown_preview_github=1
 
 " Using Google Chrome.
 let vim_markdown_preview_browser='Google Chrome'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => black.vim
+" Black is the uncompromising Python code formatter.
+" https://github.com/ambv/black
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Black will check that the reformatted code still produces a valid AST that is equivalent to the original
+let g:black_fast=0
+
+let g:black_linelength=88
+let g:black_skip_string_normalization=0
+let g:black_virtualenv="~/.vim_runtime/tmp/black_venv"
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
