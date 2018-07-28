@@ -22,7 +22,7 @@ Plug 'itchyny/lightline.vim' " status bar
 Plug 'junegunn/goyo.vim' | Plug 'amix/vim-zenroom2' " distraction-free writing
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim
 Plug 'airblade/vim-gitgutter' " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
-
+Plug 'Yggdroot/indentLine' " A vim plugin to display the indention levels with thin vertical lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Navigation
@@ -44,8 +44,7 @@ Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 Plug 'tomlion/vim-solidity' " Vim syntax file for solidity
 Plug 'b4b4r07/vim-hcl' " Vim syntax for HCL
 Plug 'fatih/vim-hclfmt' " Vim plugin for hclfmt
-Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'} " A light Vim plugin for previewing markdown files in a browser - without leaving Vim.
-Plug 'ambv/black', " The uncompromising Python code formatter
+Plug 'ambv/black', {'for': 'python'} " The uncompromising Python code formatter
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => External tools
@@ -302,19 +301,6 @@ let g:hcl_fmt_autosave=1
 let g:tf_fmt_autosave=1
 let g:nomad_fmt_autosave=0
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-markdown-preview
-" A light Vim plugin for previewing markdown files in a browser - without leaving Vim.
-" https://github.com/JamshedVesuna/vim-markdown-preview
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" To disregard images and still automatically preview on buffer write.
-let vim_markdown_preview_toggle=3
-
-" Use GitHub flavoured markdown.
-let vim_markdown_preview_github=1
-
-" Using Google Chrome.
-let vim_markdown_preview_browser='Google Chrome'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => black.vim
@@ -334,4 +320,3 @@ let g:black_virtualenv="~/.vim_runtime/tmp/black_venv"
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
-
