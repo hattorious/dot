@@ -22,3 +22,6 @@ git config --global push.default simple
 
 # nodenv
 [[ "$(which nodenv)" ]] && export NODENV_ROOT=/usr/local/var/nodenv && eval "$(nodenv init -)"
+
+# liquidprompt
+export LP_LOAD_THRESHOLD=120
