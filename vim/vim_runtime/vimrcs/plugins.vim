@@ -315,6 +315,15 @@ let g:black_linelength=88
 let g:black_skip_string_normalization=0
 let g:black_virtualenv="~/.vim_runtime/tmp/black_venv"
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => indentLine
+" A vim plugin to display the indention levels with thin vertical lines
+" https://github.com/Yggdroot/indentLine
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_char = '┆'
+
+
 """"""""""""""""""""""""""""""
 " => MRU plugin
 """"""""""""""""""""""""""""""
