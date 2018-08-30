@@ -14,6 +14,8 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/runcom.vim
     ~/.vim_runtime: vim/vim_runtime/
+    ~/.gnupg/gpg.conf: gpg/gpg.conf
+    ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
 
 - shell:
     - [source fonts/install_fonts.bash, Installing fonts]

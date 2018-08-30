@@ -1,6 +1,7 @@
 [user]
 	name = Ross Hattori
 	email = git@exstasis.net
+       signingkey = BCC1D18521BC0B11
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = vim
@@ -23,6 +24,7 @@
     ui = auto
 [commit]
     template = ~/.gitcommittemplate
+    gpgsign = true
 [gc]
     auto = 1
 [diff]
