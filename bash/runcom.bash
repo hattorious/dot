@@ -85,6 +85,8 @@ export LP_ENABLE_RUNTIME=0
 # Set TTY for gpg-agent
 GPG_TTY=$(tty)
 export GPG_TTY
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK
 
 #### OS-SPECIFIC FILES
 for os in common osx ubuntu freebsd; do
