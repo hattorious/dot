@@ -31,3 +31,7 @@ function dns_over_vpn() {
         route get $ip;
     done
 }
+
+alias ping="$(command -v prettyping) --nolegend"
+alias cat="$(command -v bat)"
+alias preview="fzf --preview 'bat --color \"always\" {}'"
