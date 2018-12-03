@@ -352,16 +352,6 @@ endtry
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Scratch buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Quickly open a buffer scratch
-map <leader>q :e ~/.vim_runtime/tmp/buffer/temp<cr>
-
-" Quickly open a markdown buffer scratch
-map <leader>x :e ~/.vim_runtime/tmp/buffer/temp.md<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! CmdLine(str)
