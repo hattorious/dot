@@ -25,3 +25,6 @@ git config --global push.default simple
 
 # liquidprompt
 export LP_LOAD_THRESHOLD=120
+
+# gpg-agent
+[[ "$(command -v gpg-agent)" ]] && gpg-connect-agent /bye
