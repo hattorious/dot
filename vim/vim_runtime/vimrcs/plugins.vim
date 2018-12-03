@@ -52,7 +52,7 @@ Plug 'ambv/black', {'for': 'python'} " The uncompromising Python code formatter
 Plug 'tpope/vim-fugitive' " git integration
 Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
 Plug 'rking/ag.vim' " the_silver_searcher
-
+Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
 
 " Add plugins to &runtimepath
 call plug#end()
