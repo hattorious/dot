@@ -51,3 +51,9 @@ alias gsp='git stash pop'
 alias gs='git stash'
 alias grps='git rev-parse --short'
 alias gfp='git fetch --prune'
+
+function read_file() {
+    if [[ -f $1 ]]; then
+        while IFS= read -r line || [ -n "$line" ]; do echo "$line"; done <"$1"
+    fi
+}
