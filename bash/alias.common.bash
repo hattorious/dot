@@ -57,3 +57,5 @@ function read_file() {
         while IFS= read -r line || [ -n "$line" ]; do echo "$line"; done <"$1"
     fi
 }
+
+alias killgpg='gpgconf --kill gpg-agent'
