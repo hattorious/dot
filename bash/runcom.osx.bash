@@ -4,9 +4,7 @@
 is_osx || return 1
 
 # bash completion
-if [ -f /usr/local/share/bash-completion/bash_completion ]; then
-    . /usr/local/share/bash-completion/bash_completion
-fi
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # use Homebrew python instead of the system default
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
