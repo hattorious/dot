@@ -1,7 +1,7 @@
 [user]
-	name = Ross Hattori
-	email = git@exstasis.net
-       signingkey = BCC1D18521BC0B11
+    name = Ross Hattori
+    email = git@hattori.me
+    signingkey = BCC1D18521BC0B11
 [core]
 	excludesfile = ~/.gitignore_global
 	editor = vim
