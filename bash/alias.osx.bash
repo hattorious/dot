@@ -34,4 +34,4 @@ function dns_over_vpn() {
 
 alias ping="$(command -v prettyping) --nolegend"
 alias cat="$(command -v bat)"
-alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias preview="fzf --preview 'bat --color \"always\" --wrap auto {}'"
