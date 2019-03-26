@@ -21,6 +21,10 @@ git config --global push.default simple
 # nodenv
 [[ "$(command -v nodenv)" ]] && export NODENV_ROOT=/usr/local/var/nodenv && eval "$(nodenv init -)"
 
+# pyenv
+[[ "$(command -v pyenv)" ]] && eval "$(pyenv init -)"
+[[ "$(command -v pyenv-virtualenv-init)" ]] && eval "$(pyenv virtualenv-init -)"
+
 # liquidprompt
 export LP_LOAD_THRESHOLD=120
 
