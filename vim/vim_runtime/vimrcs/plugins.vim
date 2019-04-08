@@ -43,6 +43,7 @@ Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 Plug 'tomlion/vim-solidity' " Vim syntax file for solidity
 Plug 'ambv/black', {'for': 'python'} " The uncompromising Python code formatter
+Plug 'Glench/Vim-Jinja2-Syntax' | Plug 'saltstack/salt-vim' " Vim files for editing Salt files
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => External tools
