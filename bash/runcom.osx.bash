@@ -15,9 +15,6 @@ export VIRTUALENVWRAPPER_PYTHON="/usr/local/opt/python/libexec/bin/python"
 # Make 'less' more
 export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
 
-# git stuff
-git config --global push.default simple
-
 # nodenv
 [[ "$(command -v nodenv)" ]] && export NODENV_ROOT=/usr/local/var/nodenv && eval "$(nodenv init -)"
 
