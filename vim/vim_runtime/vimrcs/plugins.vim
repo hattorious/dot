@@ -49,6 +49,7 @@ Plug 'Glench/Vim-Jinja2-Syntax' | Plug 'saltstack/salt-vim' " Vim files for edit
 " => External tools
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'tpope/vim-fugitive' " git integration
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
 Plug 'rking/ag.vim' " the_silver_searcher
 Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
