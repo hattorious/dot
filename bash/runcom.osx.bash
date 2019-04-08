@@ -25,6 +25,9 @@ git config --global push.default simple
 [[ "$(command -v pyenv)" ]] && eval "$(pyenv init -)"
 [[ "$(command -v pyenv-virtualenv-init)" ]] && eval "$(pyenv virtualenv-init -)"
 
+# rbenv
+[[ "$(command -v rbenv)" ]] && eval "$(rbenv init -)"
+
 # liquidprompt
 export LP_LOAD_THRESHOLD=120
 
