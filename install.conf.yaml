@@ -18,5 +18,4 @@
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
 
 - shell:
-    - [source fonts/install_fonts.bash, Installing fonts]
     - [git submodule update --init --recursive, Installing submodules]
