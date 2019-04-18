@@ -53,6 +53,10 @@ Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
 Plug 'rking/ag.vim' " the_silver_searcher
 Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
 
+
+" This should always be last
+Plug 'ryanoasis/vim-devicons'
+
 " Add plugins to &runtimepath
 call plug#end()
 
