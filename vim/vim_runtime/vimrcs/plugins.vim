@@ -204,6 +204,8 @@ endfunction
 " use powerline separators in between buffers and tabs in the tabline
 let g:buffet_powerline_separators = 1
 
+let g:buffet_modified_icon = " +"
+
 let g:buffet_tab_icon = "\uf00a"
 let g:buffet_left_trunc_icon = "\uf0a8"
 let g:buffet_right_trunc_icon = "\uf0a9"
