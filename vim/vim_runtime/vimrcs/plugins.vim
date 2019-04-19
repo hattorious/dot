@@ -33,12 +33,11 @@ Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 Plug 'majutsushi/tagbar', {'for': 'go'} " Vim plugin that displays tags in a window, ordered by scope
 Plug 'yegappan/mru' " Most Recently Used (MRU) Vim Plugin
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages and syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/syntastic' " external syntax checking
-Plug 'smerrill/vcl-vim-plugin' " varnish configuration highlighting
+Plug 'sheerun/vim-polyglot' " A solid language pack for Vim.
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 Plug 'ambv/black', {'for': 'python'} " The uncompromising Python code formatter
