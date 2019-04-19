@@ -14,6 +14,7 @@
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vimrc: vim/runcom.vim
     ~/.vim_runtime: vim/vim_runtime/
+    ~/.ctags.d: ctags/
     ~/.gnupg/gpg.conf: gpg/gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
 
