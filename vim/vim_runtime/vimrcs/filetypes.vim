@@ -3,6 +3,8 @@
 " => Vim section
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufWrite *.vim :call DeleteTrailingWS()
+au FileType vim setl shiftwidth=2
+au FileType vim setl tabstop=2
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
