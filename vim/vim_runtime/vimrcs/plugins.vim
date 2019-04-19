@@ -18,7 +18,8 @@ call plug#begin('~/.vim_runtime/plugins/plugged')
 " => Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'altercation/vim-colors-solarized' " solarized color scheme
-Plug 'itchyny/lightline.vim' " status bar
+Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim
+Plug 'bagrat/vim-buffet' " IDE-like Vim tabline
 Plug 'junegunn/goyo.vim' | Plug 'amix/vim-zenroom2' " distraction-free writing
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim
 Plug 'airblade/vim-gitgutter' " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
@@ -53,7 +54,7 @@ Plug 'rking/ag.vim' " the_silver_searcher
 Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
 
 
-" This should always be last
+" This devicons is always last
 Plug 'ryanoasis/vim-devicons'
 
 " Add plugins to &runtimepath
@@ -150,9 +151,15 @@ let g:lightline = {
       \   'fugitive': 'MyFugitive',
       \   'readonly': 'MyReadonly',
       \   'filename': 'MyFilename',
+      \   'filetype': 'MyFiletype',
       \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
+
+let g:lightline.enable = {
+      \ 'tabline': 0
       \ }
 
 " Display a lock symbol if the current buffer is read-only
@@ -180,6 +187,29 @@ function! MyFilename()
        \ ('' != expand('%') ? expand('%') : '[NoName]')
 endfunction
 
+" Display the devicon before the fiyle type if available
+function! MyFiletype()
+  if winwidth(0) > 70
+    let _ = (exists('*WebDevIconsGetFileTypeSymbol') ? WebDevIconsGetFileTypeSymbol() . ' ' : '')
+    return (strlen(&filetype) ? _. &filetype : 'no ft')
+  endif
+  return ''
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Buffet
+" IDE-like Vim tabline
+" https://github.com/bagrat/vim-buffet
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" use powerline separators in between buffers and tabs in the tabline
+let g:buffet_powerline_separators = 1
+
+let g:buffet_tab_icon = "\uf00a"
+let g:buffet_left_trunc_icon = "\uf0a8"
+let g:buffet_right_trunc_icon = "\uf0a9"
+
+noremap <Tab> :bn<CR>
+noremap <S-Tab> :bp<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Goyo
@@ -197,7 +227,6 @@ nnoremap <silent> <leader>z :Goyo<cr>
 " A tree explorer plugin for vim
 " https://github.com/scrooloose/nerdtree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinPos = "right"
 let NERDTreeIgnore = ['\.pyc$']
@@ -209,6 +238,7 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<space>
 map <leader>nf :NERDTreeFind<cr>
 
+let NERDTreeHijackNetrw=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => bufExplorer
