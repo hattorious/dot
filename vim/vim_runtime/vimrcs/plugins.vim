@@ -167,7 +167,7 @@ function! MyReadonly()
   if &filetype == "help"
     return ""
   elseif &readonly
-    return " "
+    return " " " \uf456
   else
     return ""
   endif
@@ -177,7 +177,7 @@ endfunction
 function! MyFugitive()
   if exists("*fugitive#head")
     let _ = fugitive#head()
-    return strlen(_) ? ' '._ : ''
+    return strlen(_) ? " "._ : '' " \uf418
   endif
   return ''
 endfunction
@@ -204,11 +204,13 @@ endfunction
 " use powerline separators in between buffers and tabs in the tabline
 let g:buffet_powerline_separators = 1
 
-let g:buffet_modified_icon = " +"
+let g:buffet_modified_icon = " " " \uf44d
 
-let g:buffet_tab_icon = "\uf00a"
-let g:buffet_left_trunc_icon = "\uf0a8"
-let g:buffet_right_trunc_icon = "\uf0a9"
+let g:buffet_new_buffer_name = "ﰟ" " \ufc1f
+
+let g:buffet_tab_icon = "﬿" " \ufb3f
+let g:buffet_left_trunc_icon = "" " \uf0a8
+let g:buffet_right_trunc_icon = "" " \uf0a9
 
 noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
@@ -336,7 +338,7 @@ let g:black_virtualenv="~/.vim_runtime/tmp/black_venv"
 " A vim plugin to display the indention levels with thin vertical lines
 " https://github.com/Yggdroot/indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_char = '┆'
+let g:indentLine_char = '' " \ue621
 
 
 """"""""""""""""""""""""""""""
