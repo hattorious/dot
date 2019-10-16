@@ -47,3 +47,11 @@ tfplan
 # tags files #
 ##############
 tags
+
+# pyenv settings #
+##################
+.python-version
+
+# the_silver_searcher settings #
+################################
+.ignore
