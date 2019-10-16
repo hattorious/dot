@@ -61,8 +61,6 @@ set so=7
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
 set langmenu=en
-"source $VIMRUNTIME/delmenu.vim
-"source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
@@ -199,7 +197,7 @@ onoremap <space> <C-C>za
 vnoremap <space> zf
 
 " Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+map <silent> <leader><cr> :nohlsearch<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -254,8 +252,8 @@ set viminfo^=%
 " Always show the status line
 set laststatus=2
 
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+" Hide the mode information; it's shown in the status line
+set noshowmode
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
