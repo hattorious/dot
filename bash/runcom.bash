@@ -40,9 +40,11 @@ else
 fi
 
 #### HISTORY
-# Allow use to re-edit a faild history substitution.
+# Append to history
+shopt -s histappend
+# Allow users to re-edit a failed history substitution
 shopt -s histreedit
-# History expansions will be verified before execution.
+# History expansions will be verified before execution
 shopt -s histverify
 
 # Entries beginning with space aren't added into history, and duplicate
