@@ -3,7 +3,7 @@
     email = git@hattori.me
     signingkey = BCC1D18521BC0B11
 [core]
-	excludesfile = $HOME/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	editor = vim
 	whitespace = trailing-space,space-before-tab
 [diff]
