@@ -33,6 +33,7 @@ Plug 'jlanzarotta/bufexplorer' " quick switching between buffers
 Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 Plug 'majutsushi/tagbar', {'for': 'go'} " Vim plugin that displays tags in a window, ordered by scope
 Plug 'yegappan/mru' " Most Recently Used (MRU) Vim Plugin
+Plug 'takac/vim-hardtime' " Plugin to help you stop repeating the basic movement keys
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages and syntax
@@ -256,6 +257,22 @@ let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 map <leader>o :BufExplorer<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Hardtime
+" Plugin to help you stop repeating the basic movement keys
+" https://github.com/takac/vim-hardtime
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:hardtime_default_on = 1
+
+" tweak the timeout allowed between keypresses in milliseconds
+let g:hardtime_timeout = 2000
+
+" enable the notification about HardTime being enabled set
+let g:hardtime_showmsg = 1
+
+" enable hardtime to ignore certain buffer patterns set
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
+let g:hardtime_ignore_quickfix = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
