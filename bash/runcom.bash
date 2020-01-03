@@ -16,11 +16,18 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # dirs  755 drwxr-xr-x (777 minus 022)
 umask 022
 
+
+#### SENSIBLE
+if [[ -f $DOTFILES/bash/sensible/sensible.bash ]]; then
+    . "$DOTFILES/bash/sensible/sensible.bash"
+fi
+
+
 #### PROMPT
 # Use liquidprompt, then fallback to .bash_prompt, finally use the inline settings
 if [[ -f $DOTFILES/bash/liquidprompt/liquidprompt ]]; then
     # Only load liquidprompt in interactive sessions
-    if [[ $- = *i* ]]; then
+    if is_interactive_shell; then
         . "$DOTFILES/bash/liquidprompt/liquidprompt"
     fi
 elif [[ -f ~/.bash_prompt ]]; then
@@ -39,31 +46,7 @@ else
 	export PS1="$BOLD$GREEN<\\u> $BLUE\\w\\n$RESET$BLUE\$$RESET "
 fi
 
-#### HISTORY
-# Append to history
-shopt -s histappend
-# Allow users to re-edit a failed history substitution
-shopt -s histreedit
-# History expansions will be verified before execution
-shopt -s histverify
-
-# Entries beginning with space aren't added into history, and duplicate
-# entries will be erased (leaving the most recent entry).
-export HISTCONTROL="ignorespace:erasedups"
-# Give history timestamps.
-export HISTTIMEFORMAT="[%F %T] "
-# Lots o' history.
-export HISTSIZE=10000
-export HISTFILESIZE=10000
-
-
-# bash completion
-if [[ -f /usr/local/etc/bash_completion.d/git-completion.bash ]]; then
-    . /usr/local/etc/bash_completion.d/git-completion.bash;
-fi
-
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/local/git/bin:/opt/local/bin:
-
 
 #### EDITOR STUFF
 export EDITOR=vim
