@@ -265,13 +265,13 @@ map <leader>o :BufExplorer<cr>
 let g:hardtime_default_on = 1
 
 " tweak the timeout allowed between keypresses in milliseconds
-let g:hardtime_timeout = 2000
+let g:hardtime_timeout = 1000
 
 " enable the notification about HardTime being enabled set
 let g:hardtime_showmsg = 1
 
 " enable hardtime to ignore certain buffer patterns set
-let g:hardtime_ignore_buffer_patterns = [ "NERD.*" ]
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*", ".*.git/index", "BufExplorer" ]
 let g:hardtime_ignore_quickfix = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
