@@ -22,8 +22,9 @@ function read_os() {
   # first find which file to source
   if [[ -f /etc/os-release ]]; then
     osrelease="/etc/os-release"
-  else
+  elif [[ -f /usr/lib/os-release ]]; then
     osrelease="/usr/lib/os-release"
+  else return 1
   fi
 
   # now source the file in a subshell to prevent polluting the shell variables of the 
