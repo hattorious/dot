@@ -329,7 +329,7 @@ let g:terraform_align=1
 let g:terraform_fold_sections=1
 
 " Allow vim-terraform to re-map the spacebar to fold/unfold
-let g:terraform_remap_spacebar=1
+let g:terraform_remap_spacebar=0
 
 " Run `terraform fmt` against the current buffer on save
 let g:terraform_fmt_on_save=1
