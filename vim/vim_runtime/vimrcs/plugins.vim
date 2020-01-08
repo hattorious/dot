@@ -54,6 +54,7 @@ Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'whiteinge/diffconflicts' " A better Vimdiff Git mergetool
 Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
 Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
+Plug 'mhinz/vim-grepper' " 👾 Helps you win at grep.
 
 
 " This devicons is always last
@@ -354,6 +355,28 @@ let g:black_virtualenv="~/.vim_runtime/tmp/black_venv"
 " https://github.com/Yggdroot/indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:indentLine_char = '' " \ue621
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Grepper
+" 👾 Helps you win at grep.
+" https://github.com/mhinz/vim-grepper
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>g :Grepper<cr>
+nnoremap <leader>gg :Grepper -tool git<cr>
+nnoremap <leader>ga :Grepper -tool ag<cr>
+nnoremap <leader>gs :Grepper -tool ag -side<cr>
+nnoremap <leader>vg :Grepper -tool git -cword -noprompt<cr>
+nnoremap <leader>va :Grepper -tool ag -cword -noprompt<cr>
+
+let g:grepper = {}
+let g:grepper.tools = ['git', 'ag', 'grep']
+let g:grepper.open = 1
+let g:grepper.switch = 1
+let g:grepper.quickfix = 1
+
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
 
 
 """"""""""""""""""""""""""""""
