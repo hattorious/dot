@@ -271,7 +271,7 @@ let g:hardtime_timeout = 1000
 let g:hardtime_showmsg = 1
 
 " enable hardtime to ignore certain buffer patterns set
-let g:hardtime_ignore_buffer_patterns = [ "NERD.*", ".*.git/index", "BufExplorer" ]
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*", ".*.git/index", "BufExplorer", "__MRU*" ]
 let g:hardtime_ignore_quickfix = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
