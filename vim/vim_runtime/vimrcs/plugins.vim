@@ -53,7 +53,6 @@ Plug 'tpope/vim-fugitive' " git integration
 Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'whiteinge/diffconflicts' " A better Vimdiff Git mergetool
 Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
-Plug 'rking/ag.vim' " the_silver_searcher
 Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
 
 
@@ -315,17 +314,6 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " For fugitive.vim, dp means :diffput. Define dg to mean :diffget
 nnoremap <silent> ,dg :diffget<CR>
 nnoremap <silent> ,dp :diffput<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => ag.vim
-" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl
-" module / CLI script 'ack'
-" https://github.com/rking/ag.vim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Open the Ag command and place the cursor into the quotes
-nmap <leader>ag :Ag ""<left>
-nmap <leader>af :AgFile ""<left>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
