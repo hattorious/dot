@@ -34,6 +34,7 @@ Plug 'christoomey/vim-tmux-navigator' " better tmux and vim navigation
 Plug 'majutsushi/tagbar', {'for': 'go'} " Vim plugin that displays tags in a window, ordered by scope
 Plug 'yegappan/mru' " Most Recently Used (MRU) Vim Plugin
 Plug 'takac/vim-hardtime' " Plugin to help you stop repeating the basic movement keys
+Plug 'unblevable/quick-scope' " Lightning fast left-right movement in Vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Languages and syntax
@@ -273,6 +274,14 @@ let g:hardtime_showmsg = 1
 " enable hardtime to ignore certain buffer patterns set
 let g:hardtime_ignore_buffer_patterns = [ "NERD.*", ".*.git/index", "BufExplorer" ]
 let g:hardtime_ignore_quickfix = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => quick-scope
+" Lightning fast left-right movement in Vim
+" https://github.com/unblevable/quick-scope
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
