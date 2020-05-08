@@ -43,7 +43,7 @@ Plug 'scrooloose/syntastic' " external syntax checking
 Plug 'sheerun/vim-polyglot' " A solid language pack for Vim.
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
-Plug 'python/black', {'for': 'python'} " The uncompromising Python code formatter
+Plug 'psf/black', {'for': 'python'} " The uncompromising Python code formatter
 Plug 'Glench/Vim-Jinja2-Syntax' | Plug 'saltstack/salt-vim' " Vim files for editing Salt files
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -338,7 +338,7 @@ let g:terraform_fmt_on_save=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => black.vim
 " Black is the uncompromising Python code formatter.
-" https://github.com/ambv/black
+" https://github.com/psf/black
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Black will check that the reformatted code still produces a valid AST that is equivalent to the original
