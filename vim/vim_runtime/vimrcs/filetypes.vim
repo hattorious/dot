@@ -87,8 +87,13 @@ au FileType html setl tabstop=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YAML section
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.{yaml,yml} set ft=yaml
 au FileType yaml setl shiftwidth=2
 au FileType yaml setl tabstop=2
+au FileType yaml setl softtabstop=2
+au FileType yaml setl expandtab
+au FileType yaml setl foldmethod=indent
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => HCL section
