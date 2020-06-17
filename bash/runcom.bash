@@ -72,6 +72,8 @@ GPG_TTY=$(tty)
 export GPG_TTY
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
+# Turn off Hashicorp checkpointing
+export CHECKPOINT_DISABLE=yes
 
 #### OS-SPECIFIC FILES
 for os in common osx ubuntu freebsd; do
@@ -94,3 +96,5 @@ fi
 if [[ -f ~/.bash_aliases.local ]]; then
     . ~/.bash_aliases.local
 fi
+
+complete -C /usr/local/bin/packer packer
