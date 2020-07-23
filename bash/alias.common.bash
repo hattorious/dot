@@ -122,6 +122,6 @@ function read_file() {
 function killgpg() {
   if [[ "$(command -v gpg-agent)" ]]; then
       gpgconf --kill gpg-agent;
-      gpg-connect-agent /bye;
+      gpg-connect-agent --verbose /bye;
   fi
 }
