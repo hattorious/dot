@@ -43,3 +43,16 @@ export LP_LOAD_THRESHOLD=120
 
 # gpg-agent
 [[ "$(command -v gpg-agent)" ]] && gpg-connect-agent /bye
+
+# Hashicorp tools
+# Terraform
+[[ "$(command -v terraform)" ]] && complete -C "$(command -v terraform)" terraform
+
+# Consul
+[[ "$(command -v consul)" ]] && complete -C "$(command -v consul)" consul
+
+# Vault
+[[ "$(command -v vault)" ]] && complete -C "$(command -v vault)" vault
+
+# Packer
+[[ "$(command -v packer)" ]] && complete -C "$(command -v packer)" packer
