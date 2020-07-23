@@ -96,5 +96,3 @@ fi
 if [[ -f ~/.bash_aliases.local ]]; then
     . ~/.bash_aliases.local
 fi
-
-complete -C /usr/local/bin/packer packer
