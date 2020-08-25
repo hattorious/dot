@@ -38,9 +38,6 @@ export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
 # rbenv
 [[ "$(command -v rbenv)" ]] && eval "$(rbenv init -)"
 
-# liquidprompt
-export LP_LOAD_THRESHOLD=120
-
 # gpg-agent
 [[ "$(command -v gpg-agent)" ]] && gpg-connect-agent /bye
 
