@@ -45,6 +45,7 @@ Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
 Plug 'psf/black', {'tag': '*', 'for': 'python'} " The uncompromising Python code formatter
 Plug 'Glench/Vim-Jinja2-Syntax' | Plug 'saltstack/salt-vim' " Vim files for editing Salt files
+Plug 'fatih/vim-hclfmt', {'for': 'hcl'} " Vim plugin for hclfmt
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => External tools
@@ -384,3 +385,12 @@ xmap gs  <plug>(GrepperOperator)
 """"""""""""""""""""""""""""""
 let MRU_Max_Entries = 400
 map <leader>f :MRU<space>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-hclfmt
+" Vim plugin for hclfmt
+" https://github.com/fatih/vim-hclfmt
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:hcl_fmt_autosave = 1
+let g:nomad_fmt_autosave = 1
