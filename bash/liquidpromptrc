@@ -22,7 +22,7 @@ LP_BATTERY_THRESHOLD=75
 # * 1.22 on a dual-core machine, or
 # * 2.44 on a quad-core machine, and so on.
 # Recommended value is 60
-LP_LOAD_THRESHOLD=60
+LP_LOAD_THRESHOLD=120
 
 # Display the temperature when the temperate is above this threshold (in
 # degrees Celsius).
