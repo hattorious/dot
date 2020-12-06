@@ -68,8 +68,11 @@ export SHELLCHECK_OPTS='-e SC1090,SC1091'
 # Set TTY for gpg-agent
 GPG_TTY=$(tty)
 export GPG_TTY
-SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-export SSH_AUTH_SOCK
+# point ssh-agent at GPG if not already set
+if [[ -z "$SSH_AUTH_SOCK" ]]; then
+    SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    export SSH_AUTH_SOCK
+fi
 # Turn off Hashicorp checkpointing
 export CHECKPOINT_DISABLE=yes
 
