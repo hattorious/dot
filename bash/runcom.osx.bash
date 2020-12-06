@@ -3,22 +3,6 @@
 # only load on OSX
 is_osx || return 1
 
-# bash completion
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
-# homebrew bash completion
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
-    done
-  fi
-fi
-
 # use Homebrew python instead of the system default
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
