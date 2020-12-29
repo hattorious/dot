@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-liquidprompt-version := v1.12.0
+liquidprompt-version := v1.12.1
 
 update: update-liquidprompt
 
