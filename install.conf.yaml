@@ -8,6 +8,7 @@
     ~/.bashrc.post: bash/runcom.post.bash
     ~/.bash_profile: bash/profile.bash
     ~/.bash_prompt: bash/prompt.bash
+    ~/.bash_completion: bash/complete.bash
     ~/.config/liquidpromptrc: bash/liquidpromptrc
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
