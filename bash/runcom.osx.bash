@@ -3,6 +3,12 @@
 # only load on OSX
 is_osx || return 1
 
+# point ssh-agent at GPG
+# disabling ssh-agent in Catalina is prohibited by System Integrity Protection (SIP)
+# so we need to force ssh-agent to the GPG socket
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK
+
 # use Homebrew python instead of the system default
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
