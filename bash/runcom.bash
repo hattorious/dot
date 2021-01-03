@@ -16,24 +16,6 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # dirs  755 drwxr-xr-x (777 minus 022)
 umask 022
 
-# bash completion macOS
-[[ -r /usr/local/etc/bash_completion ]] && . /usr/local/etc/bash_completion
-# bash completion linux
-[[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
-
-# homebrew bash completion
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
-    done
-  fi
-fi
-
 #### SENSIBLE
 if [[ -f $DOTFILES/bash/sensible/sensible.bash ]]; then
     . "$DOTFILES/bash/sensible/sensible.bash"
@@ -76,6 +58,25 @@ complete -o default -o nospace -F _git g
 #### Z
 export _Z_DATA=$DOTFILES/tmp/z/z
 . "$DOTFILES/bash/z/z.sh"
+
+### HOMEBREW
+# shellcheck disable=SC2086
+is_ubuntu && test -d "${HOME}/.linuxbrew" && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
+is_osx && test -x /usr/local/bin/brew && eval "$(/usr/local/bin/brew shellenv)"
+
+# linux bash completion
+[[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
+
+# homebrew bash completion
+if type brew &>/dev/null; then
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi
 
 #### DEFAULTS
 # make less always render color codes
