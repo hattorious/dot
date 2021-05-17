@@ -87,6 +87,7 @@ au FileType html setl tabstop=2
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YAML section
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_yaml_checkers = ['yamllint']
 au BufRead,BufNewFile *.{yaml,yml} set ft=yaml
 au FileType yaml setl shiftwidth=2
 au FileType yaml setl tabstop=2

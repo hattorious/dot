@@ -25,6 +25,9 @@
     ~/.gnupg/gpg.conf: gpg/gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
     ~/.config/liquidpromptrc: config/liquidprompt/liquidpromptrc
+    ~/.config/yamllint/config:
+      path: config/yamllint/config
+      create: true
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
