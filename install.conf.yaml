@@ -4,7 +4,8 @@
       relink: true
 
 - clean: [
-    '~'
+  '~',
+  '~/.config/',
 ]
 
 - link:
@@ -14,7 +15,6 @@
     ~/.bash_profile: bash/profile.bash
     ~/.bash_prompt: bash/prompt.bash
     ~/.bash_completion: bash/complete.bash
-    ~/.config/liquidpromptrc: bash/liquidpromptrc
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
     ~/.gitcommittemplate: git/commit_template.txt
@@ -24,6 +24,7 @@
     ~/.ctags.d: ctags/
     ~/.gnupg/gpg.conf: gpg/gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
+    ~/.config/liquidpromptrc: config/liquidprompt/liquidpromptrc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
