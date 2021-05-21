@@ -32,6 +32,13 @@ function dns_over_vpn() {
     done
 }
 
+function brewdepsinstalled() {
+    # `brew rm` can't resolve all deps
+    local formula=$1
+
+    join <(brew leaves) <(brew deps "$formula")
+}
+
 alias ping="$(command -v prettyping) --nolegend"
 alias cat="$(command -v bat)"
 alias preview="fzf --preview 'bat --color \"always\" --wrap auto {}'"
