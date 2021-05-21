@@ -18,6 +18,8 @@
 [mergetool "diffconflicts"]
 	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
 	trustExitCode = true
+[init]
+	defaultBranch = main
 [branch]
 	autosetuprebase = always
 [color]
