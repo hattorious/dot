@@ -125,3 +125,13 @@ function killgpg() {
       gpg-connect-agent --verbose /bye;
   fi
 }
+
+function getdrive() {
+    local file_id="$1"
+    local filename="${2:-$file_id}"
+    local cookiejar
+    cookiejar=$(mktemp)
+
+    curl --silent --cookie-jar "$cookiejar" --location "https://drive.google.com/uc?export=download&id=${file_id}" > /dev/null
+    curl --cookie "$cookiejar" --location "https://drive.google.com/uc?export=download&confirm=$(awk '/download/ {print $NF}' "$cookiejar")&id=${file_id}" --output "./${filename}"
+}
