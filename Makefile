@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 liquidprompt-version := v2.0.3
-bash-complete-alias-version := 1.10.0
+bash-complete-alias-version := 1.18.0
 
 update: update-liquidprompt update-complete-alias
 
