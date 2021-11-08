@@ -39,6 +39,12 @@ function brewdepsinstalled() {
     join <(brew leaves) <(brew deps "$formula")
 }
 
-alias ping="$(command -v prettyping) --nolegend"
-alias cat="$(command -v bat)"
-alias preview="fzf --preview 'bat --color \"always\" --wrap auto {}'"
+if type prettyping &>/dev/null; then
+    alias ping="prettyping --nolegend"
+fi
+if type bat &>/dev/null; then
+    alias cat="bat"
+fi
+if type fzf &>/dev/null; then
+    alias preview="fzf --preview 'bat --color \"always\" --wrap auto {}'"
+fi
