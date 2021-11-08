@@ -65,6 +65,20 @@ to complete alias `sctl` aliased to `systemctl`:
     condreload
     ...
 
+## config
+
+to config `complete-alias`, set these envars *before* sourcing the main script:
+
+-   `COMPAL_AUTO_UNMASK`
+
+    this is a bool; default is `0`; when set to `1`, enables auto unmask; when
+    set to `0`, uses manual unmask;
+
+    auto unmask automatically manages non-alias command completions, but incurs
+    a small overhead on source; manual unmask is the traditional way of setting
+    non-alias command completions, which is static and faster but requires user
+    intervention if the preset is not satisfying;
+
 ## compat
 
 -   support for gnu bash(>=4.4) on linux is aimed;
@@ -129,22 +143,84 @@ to complete alias `sctl` aliased to `systemctl`:
 
 -   how to complete *all* my aliases?
 
-    use this one-liner:
+    run this one-liner *after* all aliases have been defined:
 
-        complete -F _complete_alias $( alias | perl -lne 'print "$1" if /^alias ([^=]*)=/' )
+        complete -F _complete_alias "${!BASH_ALIASES[@]}"
 
     it works like this:
 
         complete -F _complete_alias foo
         complete -F _complete_alias bar
         complete -F _complete_alias baz
-        complete -F _complete_alias ...
+        ...
+
+    note that if you simply put this one-liner in `complete_alias` code, things
+    may not work, depending on the order of file sourcing, which in turn varies
+    across user configurations; the correct way to use this one-liner is to put
+    it in the same file where aliases are defined; for example, if your aliases
+    are defined in `~/.bashrc`, then that file should look like this:
+
+        alias foo='...'
+        alias bar='...'
+        alias baz='...'
+        ...
+        complete -F _complete_alias "${!BASH_ALIASES[@]}"
+
+-   `sudo` completion is not working correctly?
+
+    there is a known case with `sudo` that can go wrong; for example:
+
+        $ unalias sudo
+        $ complete -r sudo
+        $ alias ls='ping'
+        $ complete -F _complete_alias ls
+        $ sudo ls <tab>
+        {ip}
+        {ip}
+        {ip}
+        ...
+
+    here we are expecting a list of files, but the completion reply is a list of
+    ip addrs; the reason is, the completion function for `sudo` is almost always
+    `_sudo`, which is provided by `bash-completion`; this function strips `sudo`
+    then meta-completes the remaining command line; in our case, this is `ls` to
+    be completed by `_complete_alias`; but there is no way for `_complete_alias`
+    to see the original command line, and so it cannot tell `ls` from `sudo ls`;
+    as a result, `ls` and `sudo ls` are always completed the same even when they
+    should not; unfortunately, there is nothing `_complete_alias` can do here;
+
+    the easiest solution is to make `sudo` a self-alias:
+
+        $ alias sudo='sudo'
+        $ complete -F _complete_alias sudo
+        $ alias ls='ping'
+        $ complete -F _complete_alias ls
+        $ sudo ls <tab>
+        {file}
+        {file}
+        {file}
+        ...
+
+    this gives `_complete_alias` a chance to see the original command line, then
+    decide what is the right thing to do; you may add a trailing space to `sudo`
+    alias body if you like it that way, and things still work correctly (listing
+    ip addrs is correct in this case):
+
+        $ alias sudo='sudo '
+        $ complete -F _complete_alias sudo
+        $ alias ls='ping'
+        $ complete -F _complete_alias ls
+        $ sudo ls <tab>
+        {ip}
+        {ip}
+        {ip}
+        ...
 
 ## license
 
 The source code is licensed under the [GNU General Public License v3.0][GPLv3].
 
-Copyright (C) 2016-2018 Cyker Way
+Copyright (C) 2016-2021 Cyker Way
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
