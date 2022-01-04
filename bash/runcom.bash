@@ -61,7 +61,10 @@ export _Z_DATA=$DOTFILES/tmp/z/z
 
 ### HOMEBREW
 # shellcheck disable=SC2086
-is_ubuntu && test -d "${HOME}/.linuxbrew" && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
+if is_ubuntu; then
+  [[ -d "${HOME}/.linuxbrew" ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
+  [[ -d "/home/linuxbrew/.linuxbrew" ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 is_osx && test -x /usr/local/bin/brew && eval "$(/usr/local/bin/brew shellenv)"
 
 # prefer homebrew binaries
