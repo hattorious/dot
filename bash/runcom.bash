@@ -45,7 +45,7 @@ else
 	export PS1="$BOLD$GREEN<\\u> $BLUE\\w\\n$RESET$BLUE\$$RESET "
 fi
 
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH:/sbin:/usr/local/git/bin:/opt/local/bin:
+export PATH=$PATH:/sbin:/usr/local/git/bin:/opt/local/bin
 
 #### EDITOR STUFF
 export EDITOR=vim
@@ -63,6 +63,10 @@ export _Z_DATA=$DOTFILES/tmp/z/z
 # shellcheck disable=SC2086
 is_ubuntu && test -d "${HOME}/.linuxbrew" && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
 is_osx && test -x /usr/local/bin/brew && eval "$(/usr/local/bin/brew shellenv)"
+
+# prefer homebrew binaries
+# NOTE: this PATH change *must* come after the `brew shellenv` set up
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # linux bash completion
 [[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion
