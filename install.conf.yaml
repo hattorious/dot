@@ -22,6 +22,7 @@
     ~/.vimrc: vim/runcom.vim
     ~/.vim_runtime: vim/vim_runtime/
     ~/.ctags.d: ctags/
+    ~/.ssh: ssh/
     ~/.gnupg/gpg.conf: gpg/gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
     ~/.config/liquidpromptrc: config/liquidprompt/liquidpromptrc
