@@ -1,0 +1,4 @@
+# Used for local SSH multiplexing sockets
+# https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Multiplexing
+*
+!*.keep

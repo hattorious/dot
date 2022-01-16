@@ -1,0 +1,10 @@
+# vi: ft=sshconfig
+#
+# Include the secure overrides
+Include globals.sshconfig
+
+# Include local configs
+Include config.d/*.sshconfig
+
+# Include the defaults
+Include defaults.sshconfig
