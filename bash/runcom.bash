@@ -55,10 +55,6 @@ export VISUAL="$EDITOR"
 alias g='git'
 complete -o default -o nospace -F _git g
 
-#### Z
-export _Z_DATA=$DOTFILES/tmp/z/z
-. "$DOTFILES/bash/z/z.sh"
-
 ### HOMEBREW
 # shellcheck disable=SC2086
 if is_ubuntu; then
@@ -83,6 +79,17 @@ if type brew &>/dev/null; then
       [[ -r "$COMPLETION" ]] && source "$COMPLETION"
     done
   fi
+fi
+
+#### Z(OXIDE)
+# if zoxide is installed then use it
+if [[ "$(command -v zoxide)" ]]; then
+  export _ZO_DATA_DIR="${DOTFILES}/tmp/zoxide"
+  eval "$(zoxide init bash)"
+  # to import from z: zoxide import --from z path/to/db
+else # use bundled z
+  export _Z_DATA="${DOTFILES}/tmp/z/z"
+  source "$DOTFILES/bash/z/z.sh"
 fi
 
 #### DEFAULTS
