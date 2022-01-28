@@ -1,2 +1,4 @@
 # don't track known_hosts
 known_hosts
+# don't track authorized_keys
+authorized_keys
