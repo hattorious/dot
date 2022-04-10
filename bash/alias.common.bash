@@ -126,6 +126,11 @@ function killgpg() {
   fi
 }
 
+function yubistub() {
+    # regenerate gpg key stubs for yubikeys
+    gpg-connect-agent "scd serialno" "learn --force" /bye
+}
+
 function getdrive() {
     local file_id="$1"
     local filename="${2:-$file_id}"
