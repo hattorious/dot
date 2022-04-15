@@ -2,61 +2,102 @@
 	name = Ross Hattori
     email = git@hattori.me
     signingkey = BCC1D18521BC0B11
+
 [core]
-	excludesfile = ~/.gitignore_global
 	editor = vim
+	excludesfile = ~/.gitignore_global
 	whitespace = trailing-space,space-before-tab
+	pager = delta
+	log = delta
+	reflog = delta
+	show = delta
+
+[delta]
+	navigate = true
+	;syntax-theme = OneHalfLight
+
+[interactive]
+	diffFilter = delta --color-only
+
+[alias]
+	co = checkout
+	cm = commit
+	st = status
+	br = branch
+	cl = clone
+	cp = cherry-pick
+	hist = log --graph --oneline --no-merges
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	fl = log -u
+	dl = "!git ll -1"
+	dlc = diff --cached HEAD^
+	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+	la = "!git config -l | grep alias | cut -c 7-"
+	ours = "!f() { git co --ours $@ && git add $@; }; f"
+	theirs = "!f() { git co --theirs $@ && git add $@; }; f"
+	type = cat-file -t
+	dump = cat-file -p
+	g = grep --break --heading --line-number
+	code-changes = "!git log --format=format: --name-only | egrep -v '^$' | sort | uniq -c | sort -rg | grep -v package | head -10"
+	po = "!git push origin $(git rev-parse --abbrev-ref HEAD)"
+	ph = "!git push github $(git rev-parse --abbrev-ref HEAD)"
+	up = pull --rebase --autostash --all
+	cb = "!git rev-parse --abbrev-ref HEAD"
+	envar = "!echo \"$REVIEW_BASE\""
+	files = "!git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")"
+	stat = "!git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")"
+	tree = log --graph --pretty=oneline --abbrev-commit --decorate --color
+	cp = cherry-pick -x
+	b = branch -v
+	r = remote -v
+	t = tag -l
+	unstage = reset HEAD
+	uncommit = reset --soft HEAD^
+	copr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --abbrev-commit --decorate --color
+
 [diff]
 	renames = copies
-	tool = vimdiff
+
 [merge]
-    summary = true
-    stat = true
-	tool = diffconflicts
+	summary = true
+	stat = true
+	conflictstyle = diff3
+
 [mergetool]
 	keepBackup = false
-[mergetool "diffconflicts"]
-	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
-	trustExitCode = true
+
 [init]
 	defaultBranch = main
+ 
 [branch]
 	autosetuprebase = always
+
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = auto
-    ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = auto
+
 [commit]
 	template = ~/.gitcommittemplate
-    gpgsign = true
+	gpgsign = true
+
 [gc]
-    auto = 1
+	auto = 1
+
 [rerere]
 	enabled = true
-[alias]
-    tree = log --graph --pretty=oneline --abbrev-commit --decorate --color
-    cp = cherry-pick -x
-    b = branch -v
-    r = remote -v
-    t = tag -l
-    unstage = reset HEAD
-    uncommit = reset --soft HEAD^
-    co = checkout
-    ci = commit
-    st = status
-    copr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --abbrev-commit --decorate --color
-    type = cat-file -t
-    dump = cat-file -p
 
 [push]
-    default = current
+	default = current
 
 [pull]
 	ff = only
 
 # Allow local customizations in the .gitconfig.local file
 [include]
-    path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
