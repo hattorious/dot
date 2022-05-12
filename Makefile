@@ -12,3 +12,10 @@ update-liquidprompt:
 
 update-complete-alias:
 	git subtree pull --prefix bash/complete-alias https://github.com/cykerway/complete-alias.git $(bash-complete-alias-version) --squash
+
+.PHONY: update update-liquidprompt update-complete-alias
+
+brewfile:
+	brew bundle dump --all --force --describe
+
+.PHONY: brewfile
