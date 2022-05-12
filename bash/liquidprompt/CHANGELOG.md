@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.5] - 2022-04-24
+### Fixed
+- **temp**: High temp values would stick ([#686], [df5b88a])
+
+## [2.0.4] - 2022-02-07
+### Changed
+- **hg**: `_lp_hg_commits_off_remote()` returns `2` instead of `3` ([#696])
+- **vcs**: Unsupported VCS functions defined as empty functions ([#696])
+
 ## [2.0.3] - 2021-05-30
 ### Fixed
 - **hg**: Stash count erroring with no function defined ([#671])
@@ -489,7 +498,9 @@ for help.
 
 ## [1.0] - 2012-08-10 - nojhan
 
-[Unreleased]: https://github.com/nojhan/liquidprompt/compare/v2.0.2...master
+[Unreleased]: https://github.com/nojhan/liquidprompt/compare/v2.0.4...master
+[2.0.4]: https://github.com/nojhan/liquidprompt/releases/tag/v2.0.4
+[2.0.3]: https://github.com/nojhan/liquidprompt/releases/tag/v2.0.3
 [2.0.2]: https://github.com/nojhan/liquidprompt/releases/tag/v2.0.2
 [2.0.1]: https://github.com/nojhan/liquidprompt/releases/tag/v2.0.1
 [2.0.0]: https://github.com/nojhan/liquidprompt/releases/tag/v2.0.0
@@ -640,6 +651,8 @@ for help.
 [#658]: https://github.com/nojhan/liquidprompt/issues/658
 [#670]: https://github.com/nojhan/liquidprompt/issues/670
 [#671]: https://github.com/nojhan/liquidprompt/pull/671
+[#686]: https://github.com/nojhan/liquidprompt/issues/686
+[#696]: https://github.com/nojhan/liquidprompt/issues/696
 
 [0200b99]: https://github.com/nojhan/liquidprompt/commit/0200b99ebd8485ba8ba2c91da7703e87c40ec15d
 [0234a58]: https://github.com/nojhan/liquidprompt/commit/0234a581d023fb6c40e5339f6dcbd619a33b4553
@@ -785,6 +798,7 @@ for help.
 [dd9a024]: https://github.com/nojhan/liquidprompt/commit/dd9a024b485d9c017aa935809bd20e7436dff46c
 [debb794]: https://github.com/nojhan/liquidprompt/commit/debb794bf2f99ab53d539e5080f0b28579333cb8
 [decaece]: https://github.com/nojhan/liquidprompt/commit/decaece03b9bfe826d7f33a3fb56dfb33916884a
+[df5b88a]: https://github.com/nojhan/liquidprompt/commit/df5b88a93d51ae6da220fb23c8737b53b07a8e7c
 [e058b61]: https://github.com/nojhan/liquidprompt/commit/e058b619ce80918d3cdf924e07220a7028a8bb1b
 [e121179]: https://github.com/nojhan/liquidprompt/commit/e121179d1bb943ec3673e451deac2a0577adbb75
 [e122d21]: https://github.com/nojhan/liquidprompt/commit/e122d21ba14f2bdfe5fa88b70083249456c67b5b
