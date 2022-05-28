@@ -178,8 +178,8 @@ endfunction
 
 " Display the current branch if in a git repository
 function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
+  if exists("*FugitiveHead")
+    let _ = FugitiveHead()
     return strlen(_) ? " "._ : '' " \uf418
   endif
   return ''
