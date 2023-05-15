@@ -61,11 +61,9 @@ if is_ubuntu; then
   [[ -d "${HOME}/.linuxbrew" ]] && eval "$(${HOME}/.linuxbrew/bin/brew shellenv)"
   [[ -d "/home/linuxbrew/.linuxbrew" ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-is_osx && test -x /usr/local/bin/brew && eval "$(/usr/local/bin/brew shellenv)"
 
-# prefer homebrew binaries
-# NOTE: this PATH change *must* come after the `brew shellenv` set up
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+is_macos_intel && test -x /usr/local/bin/brew && eval "$(/usr/local/bin/brew shellenv)"
+is_macos_apple_si && test -x /opt/homebrew/bin/brew && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # linux bash completion
 [[ -r /usr/share/bash-completion/bash_completion ]] && . /usr/share/bash-completion/bash_completion

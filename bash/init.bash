@@ -48,3 +48,16 @@ function get_os() {
         is_$os; [[ $? == "${1:-0}" ]] && echo $os
     done
 }
+
+## macOS Arch
+function is_macos_apple_si() {
+  is_osx && [[ "$(sysctl -n machdep.cpu.brand_string)" =~ ^Apple ]] || return 1
+}
+function is_macos_intel() {
+  is_osx && [[ "$(sysctl -n machdep.cpu.brand_string)" =~ ^Intel ]] || return 1
+}
+function get_macos_arch() {
+    for arch in apple_si intel; do
+      is_macos_$arch; [[ $? == "${1:-0}" ]] && echo $arch
+    done
+}
