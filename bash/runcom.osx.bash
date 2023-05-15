@@ -10,13 +10,13 @@ SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
 
 # use Homebrew python instead of the system default
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="${HOMEBREW_PREFIX}/opt/python/libexec/bin:$PATH"
 
 # Make virtualenvwrapper aware of which python
-export VIRTUALENVWRAPPER_PYTHON="/usr/local/opt/python/libexec/bin/python"
+export VIRTUALENVWRAPPER_PYTHON="${HOMEBREW_PREFIX}/opt/python/libexec/bin/python"
 
 # Make 'less' more
-export LESSOPEN="|/usr/local/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
+export LESSOPEN="|${HOMEBREW_PREFIX}/bin/lesspipe.sh %s" LESS_ADVANCED_PREPROCESSOR=1
 
 # nodenv
 [[ "$(command -v nodenv)" ]] && export NODENV_ROOT=/usr/local/var/nodenv && eval "$(nodenv init -)"
