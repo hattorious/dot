@@ -29,6 +29,10 @@
     ~/.config/yamllint/config:
       path: config/yamllint/config.yaml
       create: true
+    ~/.terraformrc: terraform/runcom
+    ~/.terraform.d/plugin-cache:
+      path: terraform/plugin-cache/
+      create: true
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
