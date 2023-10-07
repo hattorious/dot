@@ -209,9 +209,9 @@ let g:buffet_powerline_separators = 1
 
 let g:buffet_modified_icon = " " " \uf44d
 
-let g:buffet_new_buffer_name = "ﰟ" " \ufc1f
+let g:buffet_new_buffer_name = "󰜡" " \uf0721
 
-let g:buffet_tab_icon = "﬿" " \ufb3f
+let g:buffet_tab_icon = "󰓩" " \uf04e9
 let g:buffet_left_trunc_icon = "" " \uf0a8
 let g:buffet_right_trunc_icon = "" " \uf0a9
 
