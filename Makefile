@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-liquidprompt-version := v2.0.5
+liquidprompt-version := v2.1.2
 bash-complete-alias-version := 1.18.0
 
 update: update-liquidprompt update-complete-alias
