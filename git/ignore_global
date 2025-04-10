@@ -48,10 +48,10 @@ tfplan
 ##############
 tags
 
-# pyenv settings #
-##################
-.python-version
-
 # the_silver_searcher settings #
 ################################
 .ignore
+
+# kustomize directories #
+#########################
+kustom

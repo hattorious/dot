@@ -101,7 +101,7 @@ alias ppjson='python -m json.tool | less; clear'
 # delete all merged branches
 alias gdmb='git fetch --prune; git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 # delete all merged branches from origin
-alias gdmbo="git fetch --prune; git branch -r --merged | grep -v -e \/master -e \/main | sed 's/origin\///' | xargs -n 1 git push --delete origin"
+alias gdmbo="git fetch --prune; git branch -r --merged | grep -v -e \/master -e \/main -e \/develop | sed 's/origin\///' | xargs -n 1 git push --delete origin"
 # list all hanging branches with commiter name and last commit date
 alias branch-blame="git fetch --prune; git for-each-ref --format='%(committername) %09 %(committerdate:short) %09 %(refname:short)' --sort=committerdate --sort=committername | grep -e origin\/ | grep -v -e \/HEAD -e \/master | sed 's/origin\///'"
 # cd to root of current git repo

@@ -43,7 +43,7 @@ Plug 'scrooloose/syntastic' " external syntax checking
 Plug 'sheerun/vim-polyglot' " A solid language pack for Vim.
 Plug 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plug 'fatih/vim-go', {'for': 'go'} " Go development plugin for Vim
-Plug 'psf/black', {'tag': '21.12b0'} " The uncompromising Python code formatter
+Plug 'psf/black', {'tag': '24.4.2'} " The uncompromising Python code formatter
 Plug 'fatih/vim-hclfmt', {'for': 'hcl'} " Vim plugin for hclfmt
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
