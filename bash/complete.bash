@@ -7,3 +7,4 @@ complete -F _complete_alias g
 if [[ -f $DOTFILES/bash/complete-alias/complete_alias ]]; then
     . "$DOTFILES/bash/complete-alias/complete_alias"
 fi
+

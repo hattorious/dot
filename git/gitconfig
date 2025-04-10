@@ -1,7 +1,7 @@
 [user]
 	name = Ross Hattori
     email = git@hattori.me
-    signingkey = BCC1D18521BC0B11
+    ;signingkey = BCC1D18521BC0B11
 
 [core]
 	editor = vim
@@ -57,6 +57,7 @@
 	uncommit = reset --soft HEAD^
 	copr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --abbrev-commit --decorate --color
+	br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 [diff]
 	renames = copies
@@ -84,7 +85,7 @@
 
 [commit]
 	template = ~/.gitcommittemplate
-	gpgsign = true
+	;gpgsign = true
 
 [gc]
 	auto = 1
