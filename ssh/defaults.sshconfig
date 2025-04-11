@@ -23,5 +23,5 @@ Host *
 
 # Multiplex the SSH connection over a local socket or create one if not present
     ControlMaster auto
-    ControlPath ~/.ssh/sockets/master-%r@%h:%p.socket
+    ControlPath ~/.ssh/sockets/master-%C.socket
     ControlPersist 6h

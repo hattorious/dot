@@ -33,6 +33,7 @@
     ~/.terraform.d/plugin-cache:
       path: terraform/plugin-cache/
       create: true
+    ~/.tmuxp: tmuxp
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
