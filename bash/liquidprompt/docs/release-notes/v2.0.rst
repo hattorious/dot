@@ -10,8 +10,9 @@ release is full of new features and improvements.
 Speed Improvements
 ==================
 
-By removing subshells, ``exec``, and other ``fork`` ing calls, the whole project
-has seen incredible speed improvements, anywhere from 1.5 to 10 times as fast.
+By removing subshells, ``exec``, and other ``fork``\ :spelling:word:`ing` calls,
+the whole project has seen incredible speed improvements, anywhere from 1.5 to
+10 times as fast.
 
 Theme Engine
 ============
@@ -24,7 +25,7 @@ See :doc:`../theme`.
 Example Themes
 ==============
 
-Liquidprompt now ships with some example themes showcasing how the new theme
+Liquid Prompt now ships with some example themes showcasing how the new theme
 engine works. They are also fulling working themes that you can use as your
 daily drivers.
 See :doc:`../theme/included`.
@@ -32,7 +33,7 @@ See :doc:`../theme/included`.
 Data Sources
 ============
 
-To power the themes, all of the data sources in Liquidprompt have been broken
+To power the themes, all of the data sources in Liquid Prompt have been broken
 out into individual data functions that can be called by themes. They are also
 documented in detail in :doc:`../functions/data`.
 
@@ -61,9 +62,9 @@ See :doc:`../functions/theme`.
 Version Control Tracking updates without directory change
 =========================================================
 
-Before, if ``git init`` or similar was run in a directory, Liquidprompt would
+Before, if ``git init`` or similar was run in a directory, Liquid Prompt would
 not display any repository information until the current directory was changed.
-Thanks to the speed improvements, Liquidprompt now checks for a repository at
+Thanks to the speed improvements, Liquid Prompt now checks for a repository at
 each prompt, while still being faster than version 1.12.
 
 Activate Function
@@ -85,12 +86,12 @@ this much improved documentation source.
 Unit Tests
 ==========
 
-A whole suite of unit tests has been added to test the data and untility
+A whole suite of unit tests has been added to test the data and utility
 functions. A handful of bugs were caught using the tests, so the investment has
 already paid off!
 
-Dirstack Feature
-================
+Directory Stack Feature
+=======================
 
 Shell directory stack display is now in the prompt! If there are directories on
 the stack (from ``pushd``), the number of directories in the stack is shown next

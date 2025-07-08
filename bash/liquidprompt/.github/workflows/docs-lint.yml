@@ -9,16 +9,15 @@ jobs:
     name: Lint Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 1
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
       - name: Lint
         run: |
           cd docs/
           python3 -m pip install -r requirements.txt
-          make dummy
-          make linkcheck
+          ./docs-lint.sh

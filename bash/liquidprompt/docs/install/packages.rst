@@ -4,14 +4,14 @@ Packages
 .. contents::
    :local:
 
-Liquidprompt is packaged for many operating systems, though the latest version
+Liquid Prompt is packaged for many operating systems, though the latest version
 in those repositories is not always up to date.
 
 Latest Versions
 ===============
 
 .. image:: https://repology.org/badge/vertical-allrepos/liquidprompt.svg
-   :alt: Liquidprompt packaging status
+   :alt: Liquid Prompt packaging status
 
 Source: `repology.org <https://repology.org/project/liquidprompt/versions>`_.
 
@@ -21,13 +21,18 @@ Install commands
 Archlinux
 ---------
 
+Liquid Prompt is not available in the official repositories. However someone
+provides a ``PKGBUILD`` on AUR. Liquid Prompt is not responsible for this
+recipe, thus use it at your own risk.
+
 .. image:: https://repology.org/badge/version-for-repo/aur/liquidprompt.svg
-   :alt: Archlinux package
+   :alt: Archlinux User package
    :target: https://aur.archlinux.org/packages/liquidprompt
 
-.. code-block::
+Please refer to the `Archlinux documentation`_ to know how to use it, if you
+are unsure.
 
-   pacman -S liquidprompt
+.. _Archlinux documentation: https://wiki.archlinux.org/title/Arch_User_Repository
 
 Debian
 ------
@@ -56,11 +61,11 @@ used instead of the :ref:`shell-installation` instructions.
 
 This will set the required environment:
 
-* The files ``~/.bashrc`` and/or ``~/.zshrc`` are modified to load Liquidprompt
+* The files ``~/.bashrc`` and/or ``~/.zshrc`` are modified to load Liquid Prompt
   at startup.
 * If no previous ``~/.config/liquidpromptrc`` file exists, it will be created.
 
-So, to get Liquidprompt working simply run:
+So, to get Liquid Prompt working simply run:
 
 .. code-block::
 
@@ -84,9 +89,9 @@ Homebrew
 Nix
 ---
 
-.. image:: https://repology.org/badge/version-for-repo/nix_stable/liquidprompt.svg
-   :alt: nixpkgs stable package
-   :target: https://github.com/NixOS/nixpkgs/blob/master/pkgs/shells/liquidprompt/default.nix
+.. image:: https://repology.org/badge/version-for-repo/nix_unstable/liquidprompt.svg
+   :alt: nixpkgs unstable package
+   :target: https://search.nixos.org/packages?query=liquidprompt
 
 .. code-block::
 

@@ -1,6 +1,11 @@
 # Error on unset variables
 set -u
 
+if [ -n "${ZSH_VERSION-}" ]; then
+  SHUNIT_PARENT="$0"
+  setopt shwordsplit ksh_arrays
+fi
+
 # Load Linux version of _lp_battery()
 uname() { printf 'Linux'; }
 
@@ -60,7 +65,7 @@ test_sysfs_battery() {
   _LP_LINUX_POWERSUPPLY_PATH="$SHUNIT_TMPDIR"
 
   for (( index=0; index < ${#battery_values[@]}; index++ )); do
-    local power_supply="${_LP_LINUX_POWERSUPPLY_PATH}/${index}"
+    typeset power_supply="${_LP_LINUX_POWERSUPPLY_PATH}/${index}"
     mkdir "$power_supply"
 
     if [[ -n ${battery_types[index]-} ]]; then
@@ -104,7 +109,7 @@ test_sysfs_temperature() {
     "${SHUNIT_TMPDIR}/hwmon2_temp1_input"
     "${SHUNIT_TMPDIR}/thermal_zone0_temp"
   )
-  local -i i=0
+  typeset -i i=0
   printf '%s\n' 27000 > "${_LP_LINUX_TEMPERATURE_FILES[i++]}"
   printf '%s\n' 12000 > "${_LP_LINUX_TEMPERATURE_FILES[i++]}"
   printf '%s\n' 17000 > "${_LP_LINUX_TEMPERATURE_FILES[i++]}"
@@ -121,10 +126,5 @@ test_sysfs_temperature() {
   assertEquals "sysfs temperature above returns at index" 0 "$?"
   assertEquals "sysfs temperature value" 27 "${lp_temperature-}"
 }
-
-if [ -n "${ZSH_VERSION-}" ]; then
-  SHUNIT_PARENT="$0"
-  setopt shwordsplit ksh_arrays
-fi
 
 . ./shunit2

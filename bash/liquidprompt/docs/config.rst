@@ -4,15 +4,15 @@ Config Options
 .. contents::
    :local:
 
-Almost every feature in Liquidprompt can be turned on or off using these config
-options. They can either be set before sourcing Liquidprompt (in ``.bashrc`` or
-``.zshrc``), or set in a Liquidprompt config file.
+Almost every feature in Liquid Prompt can be turned on or off using these config
+options. They can either be set before sourcing Liquid Prompt (in ``.bashrc`` or
+``.zshrc``, or sourcing a preset), or set in a Liquid Prompt config file.
 
 .. note::
-   Config variables set in a config file take precedence over variables set in the
-   environment or on the command line. Setting a config option on the command
-   line, then running :func:`lp_activate` will overwrite that option with the
-   value from the config file, if it is set there.
+   Config variables set in a config file take precedence over variables set in
+   the environment or on the command line. Setting a config option on the
+   command line, then running :func:`lp_activate` will overwrite that option
+   with the value from the config file, if it is set there.
 
 The config file is searched for in the following locations:
 
@@ -26,10 +26,13 @@ The config file is searched for in the following locations:
 
 The first file found is sourced.
 
-Liquidprompt ships with an example config file, ``liquidpromptrc-dist``. You can
-start from this file for your config::
+To get your own configuration, you may want to generate a default configuration
+by calling the following script::
 
-    cp ~/liquidprompt/liquidpromptrc-dist ~/.config/liquidpromptrc
+    ./tools/config-from-doc.sh > my_liquidpromptrc
+
+Then edit the ``my_liquidpromptrc`` file to suits your needs
+and copy/link it where you want.
 
 In the event that you synchronize your configuration file across multiple
 computers, or if you have an ``/etc/liquidpromptrc`` system-wide from which
@@ -45,6 +48,10 @@ as these::
    comments describing the options are less verbose than the descriptions on
    this page.
 
+Several example of configurations are given in the ``contrib/presets``
+directory. Some of these presets can be combined, for instance for changing
+the icons, along with the colors.
+
 Each config option is documented with its default value.
 Options of type ``bool`` accept values of ``1`` for true and ``0`` for false.
 
@@ -58,7 +65,9 @@ General
    String added directly before :attr:`LP_MARK_DEFAULT`, after all other
    parts of the prompt. Can be used to tag the prompt in a way that is less
    intrusive than :attr:`LP_PS1_PREFIX`, or add a newline before the prompt
-   mark. For example::
+   mark.
+
+   For example::
 
       LP_MARK_PREFIX=$'\n'
 
@@ -74,9 +83,10 @@ General
 
 .. attribute:: LP_PATH_DEFAULT
    :type: string
+   :value: ""
 
    .. deprecated:: 2.0
-      Use :attr:`LP_PATH_METHOD` set to "truncate_to_last_dir" instead.
+      Use :attr:`LP_PATH_METHOD` set to `truncate_to_last_dir` instead.
 
    Used to define the string used for the path. Could be used to make use of
    shell path shortening features, like ``%2~`` in Zsh to keep the last two
@@ -91,8 +101,8 @@ General
    The number of directories (counting '/') to display at the beginning of a
    shortened path.
 
-   Set to ``1``, will display only root. Set to ``0``, will keep nothing from the
-   beginning of the path.
+   Set to ``1``, will display only root. Set to ``0``, will keep nothing from
+   the beginning of the path.
 
    :attr:`LP_ENABLE_SHORTEN_PATH` must be enabled to have any effect.
 
@@ -127,17 +137,17 @@ General
 
    * **truncate_chars_from_path_left**: Truncates characters from the start of
      the path, showing consecutive directories as one shortened section. E.g. in
-     a directory named ``~/MyProjects/Liquidprompt/tests``, it will be shortened
+     a directory named ``~/MyProjects/liquidprompt/tests``, it will be shortened
      to ``...prompt/tests``. The shortened mark is :attr:`LP_MARK_SHORTEN_PATH`.
    * **truncate_chars_from_dir_right**: Leaves the beginning of a directory name
      untouched. E.g. directories will be shortened like so: ``~/Doc.../Office``.
      How many characters will be untouched is set by
      :attr:`LP_PATH_CHARACTER_KEEP`. The shortened mark is
      :attr:`LP_MARK_SHORTEN_PATH`.
-   * **truncate_chars_from_dir_middle**:  Leaves the beginning and end of a
+   * **truncate_chars_from_dir_middle**: Leaves the beginning and end of a
      directory name untouched. E.g. in a directory named
      ``~/MyProjects/Office``, then it will be shortened to
-     ``~/MyS...cts/Office``. How many characters will be untouched is set by
+     ``~/MyP...cts/Office``. How many characters will be untouched is set by
      :attr:`LP_PATH_CHARACTER_KEEP`. The shortened mark is
      :attr:`LP_MARK_SHORTEN_PATH`.
    * **truncate_chars_to_unique_dir**: Truncate each directory to the shortest
@@ -147,7 +157,7 @@ General
    * **truncate_to_last_dir**: Only display the last directory in the path. In
      other words, the current directory name.
 
-   All methods (other than 'truncate_to_last_dir') start at the far left of the
+   All methods (other than `truncate_to_last_dir`) start at the far left of the
    path (limited by :attr:`LP_PATH_KEEP`). Only the minimum number of
    directories needed to fit inside :attr:`LP_PATH_LENGTH` will be shortened.
 
@@ -193,6 +203,19 @@ General
 
 Features
 --------
+
+.. attribute:: LP_ALWAYS_DISPLAY_VALUES
+   :type: bool
+   :value: 1
+
+   Display the actual values of load, batteries, and wifi signal strength along
+   with their corresponding marks. Disable to only print the colored marks.
+
+   See also: :attr:`LP_ENABLE_LOAD`, :attr:`LP_ENABLE_BATT`,
+   :attr:`LP_ENABLE_DISK`, and :attr:`LP_ENABLE_WIFI_STRENGTH`.
+
+   .. versionadded: 2.2
+
 .. attribute:: LP_DELIMITER_KUBECONTEXT_PREFIX
    :type: string
    :value: ""
@@ -201,13 +224,13 @@ Features
 
    Usage example:
 
-   * if your context names are cluster-dev and cluster-test,
-     then set this to "-" in order to output "dev" and "test" in prompt.
-   * if using AWS EKS then set this to '/' to show only the cluster name,
+   * if your context names are `cluster-dev` and `cluster-test`,
+     then set this to "-" in order to output `dev` and `test` in prompt.
+   * if using AWS EKS then set this to "/" to show only the cluster name,
      without the rest of the ARN
-     (arn:aws:eks:$AWS_REGION:$ACCOUNT_ID:cluster/$CLUSTER_NAME)
-   * alternatively, if using AWS EKS, set this to ':' to show only
-     "cluster/$CLUSTER_NAME".  (Note: the prefix removed is a greedy match - it
+     (``arn:aws:eks:$AWS_REGION:$ACCOUNT_ID:cluster/$CLUSTER_NAME``)
+   * alternatively, if using AWS EKS, set this to ":" to show only
+     `cluster/$CLUSTER_NAME`. (Note: the prefix removed is a greedy match - it
      contains all the ":"s in the input.)
 
    If set to the empty string no truncating will occur (this is the default).
@@ -226,10 +249,10 @@ Features
 
    Usage example:
 
-   * if your context names are dev-cluster and test-cluster,
-     then set this to "-" in order to output "dev" and "test" in prompt.
-   * if your context names are dev.k8s.example.com and test.k8s.example.com,
-     then set this to "." in order to output "dev" and "test" in prompt. (Note:
+   * if your context names are `dev-cluster` and `test-cluster`,
+     then set this to "-" in order to output `dev` and `test` in prompt.
+   * if your context names are `dev.k8s.example.com` and `test.k8s.example.com`,
+     then set this to "." in order to output `dev` and `test` in prompt. (Note:
      the suffix removed is a greedy match - it contains all the "."s in the
      input.)
    * if using OpenShift then set this to "/" to show only the project name
@@ -263,8 +286,8 @@ Features
    generating VCS information for the prompt would impact prompt responsiveness.
 
    Any subdirectory under the input directory is also disabled, so setting
-   "/repos" would disable VCS display when the current directory is
-   "/repos/a-repo". Setting ``("/")`` would disable VCS display completely.
+   `/repos` would disable VCS display when the current directory is
+   `/repos/a-repo`. Setting ``("/")`` would disable VCS display completely.
 
    An example value would be::
 
@@ -273,6 +296,17 @@ Features
    See also: :attr:`LP_MARK_DISABLED`.
 
    .. versionadded:: 2.0
+
+.. attribute:: LP_DISPLAY_VALUES_AS_PERCENTS
+   :type: bool
+   :value: 0
+
+   When displaying a value, show it as a percentage if possible.
+
+   Used in sensors for capacities, see :attr:`LP_ENABLE_DISK`,
+   :attr:`LP_ENABLE_BATT`.
+
+   .. versionadded: 2.2
 
 .. attribute:: LP_ENABLE_AWS_PROFILE
    :type: bool
@@ -297,7 +331,7 @@ Features
 
    Display the status of the battery, if there is one, using color and marks.
    Add battery percentage colored with :attr:`LP_COLORMAP` if
-   :attr:`LP_PERCENTS_ALWAYS` is enabled.
+   :attr:`LP_ALWAYS_DISPLAY_VALUES` is enabled.
 
    Will be disabled if ``acpi`` is not found on Linux, fails to read the Linux
    sysfs system, or ``pmset`` is not found on MacOS.
@@ -311,12 +345,48 @@ Features
    :type: bool
    :value: 1
 
-   Display VCS information inside `Bazaar <https://bazaar.canonical.com/>`_
-   repositories.
+   Display VCS information inside
+   `Bazaar <https://wikipedia.org/wiki/GNU_Bazaar>`_ repositories.
 
    Will be disabled if ``bzr`` is not found.
 
    See also: :attr:`LP_MARK_BZR`.
+
+.. attribute:: LP_ENABLE_CHROOT
+   :type: bool
+   :value: 1
+
+   Display whether a *chroot* environment is active.
+
+   .. versionadded: 2.2
+
+.. attribute:: LP_ENABLE_CMAKE
+   :type: bool
+   :value: 0
+
+   Displays the current configuration of CMake,
+   if the directory contains a `CMakecache.txt`.
+   Displays the compiler, the generator and the build type,
+   separated by :attr:`LP_MARK_CMAKE`.
+
+   Will be disabled if ``cmake`` is not found.
+
+   The compiler is displayed without its path.
+   The generator is displayed without space,
+   and some names are shortened (`Makefiles` as `Make`
+   and `Visual Studio` as `VS`), so that, for instance:
+   `Unix Makefiles` will be displayed as `UnixMake`.
+   Both fields are randomly colored according to their hash.
+
+   The common build type colors can be configured:
+
+   - *Debug*, colored with :attr:`LP_COLOR_CMAKE_DEBUG` (magenta, by default),
+   - *RelWithDebInfo*, colored with :attr:`LP_COLOR_CMAKE_RWDI` (blue, by
+     default),
+   - *Release*, colored with :attr:`LP_COLOR_CMAKE_RELEASE` (cyan, by default),
+   - any other value would be colored according to its hash.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_ENABLE_COLOR
    :type: bool
@@ -336,15 +406,15 @@ Features
    :value: 0
 
    Indicate if the shell is running in a container environment (e.g. Docker,
-   Podman, LXC, Singularity, systemd-nspawn).
+   Podman, LXC, Singularity, systemd-:spelling:word:`nspawn`).
 
    .. note::
       Containers may inherit some or even no variables from their parent shell,
-      so this may behave inconsisently with different container software.  For
-      example, Docker doesn't inherit anything unless explicitly told to.
+      so this may behave inconsistently with different container software. For
+      example, Docker does not inherit anything unless explicitly told to.
       Singularity in many configurations inherits most variables but shell
-      functions and zsh hooks might not make it in.  For full functionality,
-      liquidprompt may need to be sourced inside the child container.
+      functions and zsh hooks might not make it in. For full functionality,
+      ``liquidprompt`` may need to be sourced inside the child container.
 
    See also: :attr:`LP_COLOR_CONTAINER`.
 
@@ -376,6 +446,45 @@ Features
 
    .. versionadded:: 2.0
 
+.. attribute:: LP_ENABLE_DISPLAY
+   :type: bool
+   :value: 1
+
+   Detect if the connection has X11 support.
+
+   In the default theme, display a green ``@`` if it does; a yellow one if not.
+
+   See also :attr:`LP_COLOR_X11_ON` and :attr:`LP_COLOR_X11_OFF`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_DISK
+   :type: bool
+   :value: 1
+
+   Display :attr:`LP_MARK_DISK` if the free space on the hard drive hosting the
+   current directory goes below a threshold.
+
+   Thresholds can be stated either:
+
+   * as a percentage with :attr:`LP_DISK_THRESHOLD_PERC`,
+   * or an absolute number *of kilobytes* with :attr:`LP_DISK_THRESHOLD`.
+
+   Display will occur if one of the thresholds is met.
+
+   If :attr:`LP_ALWAYS_DISPLAY_VALUES` is enabled, the prompt will show the
+   available space along with :attr:`LP_MARK_DISK`, if disabled, it will show
+   only the mark.
+
+   The precision of the available space can be configured with
+   :attr:`LP_DISK_PRECISION`.
+
+   If :attr:`LP_DISPLAY_VALUES_AS_PERCENTS` is enabled, it will show the
+   percentage, if it is disabled, it will show the absolute value in a
+   human-readable form (i.e. with metric prefixed units).
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_ENABLE_ERROR
    :type: bool
    :value: 1
@@ -385,6 +494,57 @@ Features
    See also: :attr:`LP_COLOR_ERR`.
 
    .. versionadded:: 2.0
+
+.. attribute:: LP_ENABLE_ERROR_MEANING
+   :type: bool
+   :value: 0
+
+   Display a guess on the last error meaning.
+
+   .. note:: This only enable a limited subset of error codes,
+             that are very probably in use on several systems.
+             To enable more codes (and probably more false positives)
+             see :attr:`LP_ENABLE_ERROR_MEANING_EXTENDED`.
+
+   See also: :attr:`LP_COLOR_ERR`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_ERROR_MEANING_EXTENDED
+   :type: bool
+   :value: 0
+
+   Extends the set of interpreted error codes to a larger set of (POSIX) codes.
+
+   .. note:: This use a reasonable set of error codes
+             that are common on POSIX systems on x86 or ARM architectures
+             (most notably from ``sysexit.h`` and ``signal.h``).
+             But any software may use its own set of codes,
+             and thus the guess may be wrong.
+
+   This has no effect if :attr:`LP_ENABLE_ERROR_MEANING` is disabled.
+   See also: :attr:`LP_COLOR_ERR`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_ENV_VARS
+   :type: bool
+   :value: 1
+
+   Display a user-defined set of environment variables.
+   May show if the variables are unset, set, or their actual content.
+
+   Watched variables should be added to the :attr:`LP_ENV_VARS` array.
+
+   The resulting prompt section is configured by:
+
+   - :attr:`LP_MARK_ENV_VARS_OPEN`
+   - :attr:`LP_MARK_ENV_VARS_SEP`
+   - :attr:`LP_MARK_ENV_VARS_CLOSE`
+   - :attr:`LP_COLOR_ENV_VARS_SET`
+   - :attr:`LP_COLOR_ENV_VARS_UNSET`
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_ENABLE_FOSSIL
    :type: bool
@@ -410,7 +570,7 @@ Features
    .. note::
       This never functioned as intended, and would only show the FQDN if
       ``/etc/hostname`` contained the full domain name. For a more portable and
-      reliable version, set :attr:`LP_HOSTNAME_METHOD` to "fqdn".
+      reliable version, set :attr:`LP_HOSTNAME_METHOD` to `fqdn`.
 
    See also: :attr:`LP_HOSTNAME_ALWAYS`.
 
@@ -434,6 +594,49 @@ Features
    Will be disabled if ``hg`` is not found.
 
    See also: :attr:`LP_MARK_HG` and :attr:`LP_HG_COMMAND`.
+
+.. attribute:: LP_ENABLE_HYPERLINKS
+   :type: bool
+   :value: 0
+
+   Adds clickable links to some elements of the prompt:
+
+   - If locally connected, adds a link to
+     each displayed elements of the path, using the ``file://`` scheme.
+   - Within remote SSH connections, adds a link to
+     each element of the path, but using the ``sftp://`` protocol,
+     configured with the *current* username and hostname.
+   - If the hostname is displayed within an SSH connection,
+     adds a ``ssh://`` URL to it.
+
+   The links take the form of a OSC-8 escape sequences
+   containing an Uniform Resource Locator,
+   which should be interpreted by the terminal emulator.
+   If your terminal emulator does not support OSC-8,
+   it may display escapement garbage.
+   As not all terminal emulator support links,
+   this feature is disabled by default.
+
+   .. warning:: Your system should be configured to handle
+                the aforementioned link schemes.
+                If nothing happen when you click on the link,
+                or if the wrong application is used,
+                there is a configuration problem on your system
+                or with your terminal emulator
+                (not with Liquid Prompt).
+
+   .. note:: Liquid Prompt cannot possibly follow complex remote connections.
+             Remote links are thus configured with the *current* username,
+             and the *current* fully qualified domain name,
+             as ``sftp://<username>@<hostname>/<path>``.
+             It is possible that this URL does not work the same way
+             than a manual connection.
+             For instance, if you proxy jumped
+             (i.e. if you jumped from one connection to the other),
+             and/or you logged in with another user, and/or used SSH aliases,
+             then the links probably won't work the way you may expect.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_ENABLE_JOBS
    :type: bool
@@ -483,7 +686,63 @@ Features
    Display the load average over the past 1 minutes when above the threshold.
 
    See also: :attr:`LP_LOAD_THRESHOLD`, :attr:`LP_LOAD_CAP`,
+   :attr:`LP_MARK_LOAD`, :attr:`LP_ALWAYS_DISPLAY_VALUES`,
+   and :attr:`LP_COLORMAP`.
    :attr:`LP_MARK_LOAD`, :attr:`LP_PERCENTS_ALWAYS`, and :attr:`LP_COLORMAP`.
+
+.. attribute:: LP_ENABLE_MODULES
+   :type: bool
+   :value: 1
+
+   Display the currently loaded `Modules <https://modules.readthedocs.io/>`_.
+
+   See also:
+   * :attr:`LP_ENABLE_MODULES_VERSIONS`,
+   * :attr:`LP_ENABLE_MODULES_HASHCOLOR`,
+   * :attr:`LP_COLOR_MODULES`,
+   * :attr:`LP_MARK_MODULES_OPEN`,
+   * :attr:`LP_MARK_MODULES_SEP`,
+   * :attr:`LP_MARK_MODULES_CLOSE`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_MODULES_VERSIONS
+   :type: bool
+   :value: 1
+
+   Display the currently loaded modules' versions, after their names
+   (separated by a slash, as in the ``module list`` command).
+
+   If disabled, only the name of the module is displayed.
+
+   See :attr:`LP_ENABLE_MODULES`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_MODULES_HASHCOLOR
+   :type: bool
+   :value: 0
+
+   If enabled, each item in the modules section will be randomly colored,
+   according to its hash, instead of using :attr:`LP_COLOR_MODULES`.
+
+   See :attr:`LP_ENABLE_MODULES`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_MULTIPLEXER
+   :type: bool
+   :value: 1
+
+   Allows getting the name of the current multiplexer
+   (*screen* or *tmux*), if any.
+
+   If set to ``0``, also disables:
+
+   * :attr:`LP_COLOR_IN_MULTIPLEXER`,
+   * :attr:`LP_MARK_MULTIPLEXER_OPEN` and :attr:`LP_MARK_MULTIPLEXER_CLOSE`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_ENABLE_NODE_VENV
    :type: bool
@@ -497,6 +756,106 @@ Features
    .. _NVM: https://github.com/nvm-sh/nvm
 
    .. versionadded:: 2.1
+
+.. attribute:: LP_ENABLE_OS
+   :type: bool
+   :value: 0
+
+   Display information about the current Operating System.
+
+   Degree of details is controlled by:
+
+   - :attr:`LP_ENABLE_OS_ARCH`
+   - :attr:`LP_ENABLE_OS_FAMILY`
+   - :attr:`LP_ENABLE_OS_KERNEL`
+   - :attr:`LP_ENABLE_OS_DISTRIB`
+   - :attr:`LP_ENABLE_OS_VERSION`
+
+   .. note:: As of now, only Linux may have detailed information
+             about the distribution and version.
+
+   See also :attr:`LP_MARK_OS` and :attr:`LP_MARK_OS_SEP`
+   for configuring the appearance.
+
+   If no replacement string is provided with :attr:`LP_MARK_OS`,
+   each item will be randomly colored, according to its hash.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_OS_ARCH
+   :type: bool
+   :value: 0
+
+   Display the processor architecture of the current OS.
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_OS_DISTRIB
+   :type: bool
+   :value: 0
+
+   Display the current Linux distribution.
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_OS_FAMILY
+   :type: bool
+   :value: 0
+
+   Display the family of the current OS (UNIX, BSD, GNU, or Windows).
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_OS_KERNEL
+   :type: bool
+   :value: 1
+
+   Display the name of the kernel type for the current OS.
+
+   This may be "Linux", "FreeBSD", "SunOS", "Darwin", "Cygwin", "MSYS",
+   "MinGW", "OpenBSD", "DragonFly".
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_OS_VERSION
+   :type: bool
+   :value: 1
+
+   Display the version "codename" of the current Linux distribution.
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_PATH
+   :type: bool
+   :value: 1
+
+   Display the current working directory.
+
+   .. versionadded:: 2.2
+      Before this version, this feature was always enabled.
+
+.. attribute:: LP_ENABLE_PERL_VENV
+   :type: bool
+   :value: 1
+
+   Display the currently activated PERLBREW_ or PLENV_ virtual environment.
+
+   See also: :attr:`LP_COLOR_PERL_VENV`.
+
+   .. _PERLBREW: https://perlbrew.pl/
+   .. _PLENV: https://github.com/tokuhirom/plenv
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_ENABLE_PERM
    :type: bool
@@ -514,6 +873,33 @@ Features
    Display a :attr:`LP_MARK_PROXY` mark when an HTTP proxy is detected.
 
    See also: :attr:`LP_COLOR_PROXY`.
+
+.. attribute:: LP_ENABLE_RAM
+   :type: bool
+   :value: 1
+
+   Display a :attr:`LP_MARK_RAM` mark when the available amount of
+   Random Access Memory goes below a threshold.
+
+   Thresholds can be stated either:
+
+   * as a percentage with :attr:`LP_RAM_THRESHOLD_PERC`,
+   * or an absolute number *of kilobytes* with :attr:`LP_RAM_THRESHOLD`.
+
+   Display will occur if one of the thresholds is met.
+
+   If :attr:`LP_ALWAYS_DISPLAY_VALUES` is enabled, the prompt will show the
+   available space along with :attr:`LP_MARK_RAM`, if disabled, it will show
+   only the mark.
+
+   The precision of the displayed available space can be configured with
+   :attr:`LP_RAM_PRECISION`.
+
+   If :attr:`LP_DISPLAY_VALUES_AS_PERCENTS` is enabled, it will show the
+   percentage, if it is disabled, it will show the absolute value in a
+   human-readable form (i.e. with metric prefixed units).
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_ENABLE_RUBY_VENV
    :type: bool
@@ -568,11 +954,13 @@ Features
    :type: bool
    :value: 1
 
-   Show the value of ``$SHLVL``, which is the number of nested shells. For
-   example, if one runs ``bash`` inside their shell, it will open a new shell
-   inside their current shell, and this will display "2".
+   Show the value of ``$SHLVL``, which is the number of nested shells, if the
+   value meets the threshold. For example, if one runs ``bash`` inside their
+   shell, it will open a new shell inside their current shell, and this will
+   display "2".
 
-   See also: :attr:`LP_MARK_SHLVL` and :attr:`LP_COLOR_SHLVL`.
+   See also: :attr:`LP_SHLVL_THRESHOLD`, :attr:`LP_MARK_SHLVL`, and
+   :attr:`LP_COLOR_SHLVL`.
 
    .. versionadded:: 2.1
 
@@ -606,9 +994,10 @@ Features
    Will be disabled if ``sudo`` is not found.
 
    .. warning::
-      Each evocation of ``sudo`` by default writes to the syslog, and this will
-      run ``sudo`` once each prompt, unless you have NOPASSWD powers. This is
-      likely to make your sysadmin hate you.
+      Each evocation of ``sudo`` by default writes to the
+      :spelling:word:`syslog`, and this will run ``sudo`` once each prompt,
+      unless you have `NOPASSWD` powers. This is likely to make your sysadmin
+      hate you.
 
    See also: :attr:`LP_COLOR_MARK_SUDO`.
 
@@ -632,8 +1021,8 @@ Features
    Will be disabled if neither ``sensors`` nor ``acpi`` are found, or fails to
    read from the Linux sysfs system.
 
-   See also: :attr:`LP_TEMP_THRESHOLD`, :attr:`LP_MARK_TEMP`, and
-   :attr:`LP_COLORMAP`.
+   See also: :attr:`LP_TEMP_THRESHOLD`, :attr:`LP_MARK_TEMP`,
+   :attr:`LP_COLORMAP`, and :attr:`LP_TEMP_SYSFS_IGNORE_FILES`.
 
 .. attribute:: LP_ENABLE_TERRAFORM
    :type: bool
@@ -679,6 +1068,34 @@ Features
 
    .. versionadded:: 2.1
 
+.. attribute:: LP_ENABLE_TMUX_TITLE_PANES
+   :type: bool
+   :value: 1
+
+   Sets the title of the Tmux pane instead of the window.
+
+   :attr:`LP_ENABLE_TITLE` and :attr:`LP_ENABLE_SCREEN_TITLE` must be enabled to
+   have any effect.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_ENABLE_VCS_REMOTE
+   :type: bool
+   :value: 0
+
+   Enable the display of the remote repository in the VCS state section.
+
+   If enabled, will display :attr:`LP_MARK_VCS_REMOTE`, followed by the remote
+   repository name.
+
+   In the default theme, if the remote repository has commits not pulled in the
+   local branch, the mark will be showed in :attr:`LP_COLOR_COMMITS_BEHIND`. If
+   the local repository has commits not pushed to the remote branch, the remote
+   name is shown in :attr:`LP_COLOR_COMMITS`. If neither is the case, nothing
+   will be shown.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_ENABLE_VCS_ROOT
    :type: bool
    :value: 0
@@ -703,13 +1120,50 @@ Features
 
    Display an indicator if any wireless signal strength percentage is below
    :attr:`LP_WIFI_STRENGTH_THRESHOLD`. Also show the strength percentage if
-   :attr:`LP_PERCENTS_ALWAYS` is enabled.
+   :attr:`LP_ALWAYS_DISPLAY_VALUES` is enabled.
 
    Both Linux and MacOS are supported.
 
    See also: :attr:`LP_MARK_WIFI` and :attr:`LP_COLORMAP`.
 
    .. versionadded:: 2.1
+
+.. attribute:: LP_ENV_VARS
+   :type: array<string>
+   :value: ()
+
+   The set of environment variables that the user wants to watch.
+
+   Items should be a string with three space-separated elements
+   of the form `"<name> <set>[ <unset>]"`, containing:
+
+   - the name of the variable to watch,
+   - the string to display if the variable is set,
+   - (optionally) the string to display if the variable is not set.
+
+   The string used when the variable is set may contain the ``%s`` mark,
+   which is replaced by the actual content of the variable.
+
+   For example::
+
+    LP_ENV_VARS=(
+        # Display "V" if VERBOSE is set, nothing if it's unset.
+        "VERBOSE V"
+        # Display the name of the desktop session, if set, T if unset.
+        "DESKTOP_SESSION %s T"
+        # Display "ed:" followed the name of the default editor, nothing if unset.
+        "EDITOR ed:%s"
+    )
+
+   See also :attr:`LP_ENABLE_ENV_VARS`.
+
+   The resulting prompt section is configured by:
+
+   -  :attr:`LP_MARK_ENV_VARS_OPEN`
+   -  :attr:`LP_MARK_ENV_VARS_SEP`
+   -  :attr:`LP_MARK_ENV_VARS_CLOSE`
+   -  :attr:`LP_COLOR_ENV_VARS_SET`
+   -  :attr:`LP_COLOR_ENV_VARS_UNSET`
 
 .. attribute:: LP_HG_COMMAND
    :type: string
@@ -722,11 +1176,25 @@ Features
 
    .. versionadded:: 2.1
 
+.. attribute:: LP_HIDE_EMPTY_ERROR
+   :type: bool
+   :value: 1
+
+   Hide the error code returned by a command if the new prompt is displayed
+   after the user hits Ctrl-C or submits an empty command (i.e. empty string
+   or a comment).
+
+   See also: :attr:`LP_ENABLE_ERROR`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_HOSTNAME_ALWAYS
    :type: int
    :value: 0
 
-   Determine when the hostname should be displayed. Valid values are:
+   Determine when the hostname should be displayed.
+
+   Valid values are:
 
    * ``0`` - show the hostname, except when locally connected
    * ``1`` - always show the hostname
@@ -757,6 +1225,10 @@ Features
    :type: bool
    :value: 1
 
+   .. deprecated:: 2.2
+      Use :attr:`LP_ALWAYS_DISPLAY_VALUES`
+      and :attr:`LP_DISPLAY_VALUES_AS_PERCENTS` instead.
+
    Display the actual values of load, batteries, and wifi signal strength along
    with their corresponding marks. Disable to only print the colored marks.
 
@@ -776,12 +1248,23 @@ Features
 
    .. versionadded:: 2.1
 
+.. attribute:: LP_TEMP_SYSFS_IGNORE_FILES
+   :type: array<string>
+   :value: ()
+
+   Paths to files in the sysfs interface that should be ignored when reading
+   temperature sensors. A path can include globs.
+
+   See also :attr:`LP_ENABLE_TEMP`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_TIME_ANALOG
    :type: bool
    :value: 0
 
    Shows the time using an analog clock instead of numeric values. The analog
-   clock is "accurate" to the nearest half hour. You must have a unicode-capable
+   clock is "accurate" to the nearest half hour. You must have a Unicode capable
    terminal and a font with the "CLOCK" characters (U+1F550 - U+1F567).
 
    Will only have an effect if :attr:`LP_ENABLE_TIME` is enabled.
@@ -790,7 +1273,9 @@ Features
    :type: int
    :value: 1
 
-   Determine when the username should be displayed. Valid values are:
+   Determine when the username should be displayed.
+
+   Valid values are:
 
    * ``0`` - show the username, except when the user is the login user
    * ``1`` - always show the username
@@ -801,6 +1286,7 @@ Features
 
    .. versionchanged:: 2.0
       The ``-1`` option was added.
+
 
 Thresholds
 ----------
@@ -815,6 +1301,48 @@ Thresholds
    :attr:`LP_COLOR_CHARGING_ABOVE` or :attr:`LP_COLOR_DISCHARGING_ABOVE` color.
 
    :attr:`LP_ENABLE_BATT` must be enabled to have any effect.
+
+.. attribute:: LP_DISK_PRECISION
+   :type: int
+   :value: 2
+
+   Control the numbers of decimals when displaying the absolute available space
+   of the current hard drive. If set to 0, don't display decimals. If set to 1
+   or 2, display decimals.
+
+   See :attr:`LP_ENABLE_DISK`, :attr:`LP_ALWAYS_DISPLAY_VALUES`, and
+   :attr:`LP_DISPLAY_VALUES_AS_PERCENTS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_DISK_THRESHOLD
+   :type: int
+   :value: 100000
+
+   Display something if the available space on the hard drive hosting the
+   current directory goes below this absolute threshold *in kilobytes*. If the
+   file system is smaller than :attr:`LP_DISK_THRESHOLD`, this check is skipped.
+
+   The threshold for disk can also be set with :attr:`LP_DISK_THRESHOLD_PERC`,
+   the first one to be reached triggering the display.
+
+   See also :attr:`LP_ENABLE_DISK`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_DISK_THRESHOLD_PERC
+   :type: int
+   :value: 10
+
+   Display something if the available space on the hard drive hosting the
+   current directory goes below this percentage.
+
+   The threshold for disk can also be set with :attr:`LP_DISK_THRESHOLD`,
+   the first one to be reached triggering the display..
+
+   See also :attr:`LP_ENABLE_DISK`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_LOAD_CAP
    :type: float
@@ -842,7 +1370,48 @@ Thresholds
 
    .. versionchanged:: 2.0
       Accepts float values of actual load averages.
-      Integer values of centiload are still accepted, but deprecated.
+      Integer values of :spelling:word:`centiload` are still accepted, but
+      deprecated.
+
+.. attribute:: LP_RAM_PRECISION
+   :type: int
+   :value: 2
+
+   Control the numbers of decimals when displaying the absolute available space
+   of the current system RAM. If set to 0, don't display decimals. If set to 1
+   or 2, display decimals.
+
+   See :attr:`LP_ENABLE_RAM`, :attr:`LP_ALWAYS_DISPLAY_VALUES`, and
+   :attr:`LP_DISPLAY_VALUES_AS_PERCENTS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_RAM_THRESHOLD
+   :type: int
+   :value: 100000
+
+   Display something if the available RAM space goes below this absolute
+   threshold *in kilobytes*.
+
+   The threshold for RAM can also be set with :attr:`LP_RAM_THRESHOLD_PERC`,
+   the first one to be reached triggering the display.
+
+   See also :attr:`LP_ENABLE_RAM`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_RAM_THRESHOLD_PERC
+   :type: int
+   :value: 10
+
+   Display something if the available RAM space goes below this percentage.
+
+   The threshold for RAM can also be set with :attr:`LP_RAM_THRESHOLD`,
+   the first one to be reached triggering the display..
+
+   See also :attr:`LP_ENABLE_RAM`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_RUNTIME_THRESHOLD
    :type: int
@@ -863,6 +1432,17 @@ Thresholds
    :attr:`LP_ENABLE_RUNTIME_BELL` must be enabled to have any effect.
 
    .. versionadded:: 1.12
+
+.. attribute:: LP_SHLVL_THRESHOLD
+   :type: int
+   :value: 2
+
+   Number of nested shells before the shell level is shown.
+
+   See also: :attr:`LP_ENABLE_SHLVL`, :attr:`LP_MARK_SHLVL`, and
+   :attr:`LP_COLOR_SHLVL`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_TEMP_THRESHOLD
    :type: int
@@ -912,6 +1492,9 @@ Marks
 
    See also: :attr:`LP_MARK_BRACKET_OPEN`, :attr:`LP_MARK_MULTIPLEXER_CLOSE`.
 
+   .. versionchanged:: 2.2
+      Can be disabled by :attr:`LP_ENABLE_MULTIPLEXER`.
+
 .. attribute:: LP_MARK_BRACKET_OPEN
    :type: string
    :value: "["
@@ -920,6 +1503,9 @@ Marks
    enclosing user, host, and current working directory sections.
 
    See also: :attr:`LP_MARK_BRACKET_CLOSE`, :attr:`LP_MARK_MULTIPLEXER_OPEN`.
+
+   .. versionchanged:: 2.2
+      Can be disabled by :attr:`LP_ENABLE_MULTIPLEXER`.
 
 .. attribute:: LP_MARK_BZR
    :type: string
@@ -930,6 +1516,14 @@ Marks
 
    See also: :attr:`LP_ENABLE_BZR`.
 
+.. attribute:: LP_MARK_CMAKE
+   :type: string
+   :value: ":"
+
+   Separator used for fields of :attr:`LP_ENABLE_CMAKE`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_MARK_DEFAULT
    :type: string
    :value: "$" (Bash) or "%" (Zsh)
@@ -937,12 +1531,37 @@ Marks
    Mark used to indicate that the prompt is ready for user input, unless some
    other context overrides it, like a VCS repository.
 
+.. attribute:: LP_MARK_DEV_CLOSE
+   :type: string
+   :value: ">"
+
+   Closing of the "development tools" section.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_MARK_DEV_MID
+   :type: string
+   :value: "|"
+
+   Separator between elements of the "development tools" section.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_MARK_DEV_OPEN
+   :type: string
+   :value: "<"
+
+   Opening of the "development tools" section.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_MARK_DIRSTACK
    :type: string
    :value: "⚞"
 
-   Mark used to indicate the size of the directory stack. Here are some
-   alternative marks you might like: ⚟ = ≡ ≣
+   Mark used to indicate the size of the directory stack.
+
+   Here are some alternative marks you might like: ⚟ = ≡ ≣
 
    See also: :attr:`LP_ENABLE_DIRSTACK` and :attr:`LP_COLOR_DIRSTACK`.
 
@@ -954,6 +1573,67 @@ Marks
 
    Mark used instead of :attr:`LP_MARK_DEFAULT` to indicate that the current
    directory is disabled for VCS display through :attr:`LP_DISABLED_VCS_PATHS`.
+
+.. attribute:: LP_MARK_DISK
+   :type: string
+   :value: "🖴 "
+
+   Mark used to indicate that the available disk space is too low.
+   See :attr:`LP_ENABLE_DISK`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_MARK_ENV_VARS_OPEN
+   :type: string
+   :value: "("
+
+   Mark used to start the user-defined environment variables watch list.
+
+   See also:
+
+   - :attr:`LP_ENABLE_ENV_VARS`
+   - :attr:`LP_ENV_VARS`
+   - :attr:`LP_MARK_ENV_VARS_SEP`
+   - :attr:`LP_MARK_ENV_VARS_CLOSE`
+   - :attr:`LP_COLOR_ENV_VARS_SET`
+   - :attr:`LP_COLOR_ENV_VARS_UNSET`
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_MARK_ENV_VARS_SEP
+   :type: string
+   :value: " "
+
+   Mark used to separate items of the user-defined
+   environment variables watch list.
+
+   See also:
+
+   - :attr:`LP_ENABLE_ENV_VARS`
+   - :attr:`LP_ENV_VARS`
+   - :attr:`LP_MARK_ENV_VARS_OPEN`
+   - :attr:`LP_MARK_ENV_VARS_CLOSE`
+   - :attr:`LP_COLOR_ENV_VARS_SET`
+   - :attr:`LP_COLOR_ENV_VARS_UNSET`
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_MARK_ENV_VARS_CLOSE
+   :type: string
+   :value: ")"
+
+   Mark used to end the user-defined environment variables watch list.
+
+   See also:
+
+   - :attr:`LP_ENABLE_ENV_VARS`
+   - :attr:`LP_ENV_VARS`
+   - :attr:`LP_MARK_ENV_VARS_OPEN`
+   - :attr:`LP_MARK_ENV_VARS_SEP`
+   - :attr:`LP_COLOR_ENV_VARS_SET`
+   - :attr:`LP_COLOR_ENV_VARS_UNSET`
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_MARK_FOSSIL
    :type: string
@@ -982,6 +1662,16 @@ Marks
 
    See also: :attr:`LP_ENABLE_HG` and :attr:`LP_HG_COMMAND`.
 
+.. attribute:: LP_MARK_JOBS_SEPARATOR
+   :type: string
+   :value: "/"
+
+   Mark used to separate elements of :attr:`LP_JOBS`.
+
+   See also :attr:`LP_ENABLE_JOBS`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_MARK_KUBECONTEXT
    :type: string
    :value: "⎈"
@@ -993,10 +1683,10 @@ Marks
    :attr:`LP_ENABLE_VIRTUALENV`) and the Red Hat Software Collection
    (see :attr:`LP_ENABLE_SCLS`).
 
-   The display of Unicode characters varies among Terminal and Font settings,
-   so you might try alternative marks. Single symbol alternatives to the
-   default "⎈" (U+2388, Helm Symbol) are "☸" (U+2638, Wheel of Dharma)
-   or "κ" (U+03BA, Greek Small Letter Kappa).
+   The display of Unicode characters varies among Terminal and Font settings, so
+   you might try alternative marks. Single symbol alternatives to the default
+   `⎈` (U+2388, Helm Symbol) are `☸` (U+2638, Wheel of :spelling:word:`Dharma`)
+   or `κ` (U+03BA, Greek Small Letter Kappa).
 
    See also: :attr:`LP_ENABLE_KUBECONTEXT`.
 
@@ -1010,6 +1700,30 @@ Marks
 
    See also: :attr:`LP_ENABLE_LOAD`.
 
+.. attribute:: LP_MARK_MODULES_OPEN
+   :type: string
+   :value: ""
+
+   Mark used before displaying loaded modules.
+
+   See also: :attr:`LP_ENABLE_MODULES`.
+
+.. attribute:: LP_MARK_MODULES_CLOSE
+   :type: string
+   :value: ""
+
+   Mark used after displaying loaded modules.
+
+   See also: :attr:`LP_ENABLE_MODULES`.
+
+.. attribute:: LP_MARK_MODULES_SEP
+   :type: string
+   :value: ":"
+
+   Mark used between loaded modules.
+
+   See also: :attr:`LP_ENABLE_MODULES`.
+
 .. attribute:: LP_MARK_MULTIPLEXER_CLOSE
    :type: string
    :value: $LP_MARK_BRACKET_CLOSE
@@ -1021,6 +1735,9 @@ Marks
 
    .. versionadded:: 2.1
 
+   .. versionchanged:: 2.2
+      Can be disabled by :attr:`LP_ENABLE_MULTIPLEXER`.
+
 .. attribute:: LP_MARK_MULTIPLEXER_OPEN
    :type: string
    :value: $LP_MARK_BRACKET_OPEN
@@ -1031,6 +1748,71 @@ Marks
    See also: :attr:`LP_MARK_MULTIPLEXER_CLOSE`, :attr:`LP_MARK_BRACKET_OPEN`.
 
    .. versionadded:: 2.1
+
+   .. versionchanged:: 2.2
+      Can be disabled by :attr:`LP_ENABLE_MULTIPLEXER`.
+
+.. attribute:: LP_MARK_OS
+   :type: array<string>
+   :value: ()
+
+   A list of pair of strings to be replaced by another string
+   when displaying information about the OS.
+
+   Each pair in the list configures the match, then the replacement string.
+
+   For instance, if you set ``LP_MARK_OS=("Linux" "L")``
+   and ``LP_ENABLE_OS=1 ; LP_ENABLE_OS_FAMILY=1``,
+   then any occurrence of "Linux" will be replaced by an "L"
+   in the OS section.
+
+   It is possible to use presets colors in the replacement string
+   (see the :ref:`Colors` section below).
+   Note that if a replacement occurs,
+   the result will *not* be colored automatically.
+
+   For example, to shorten known names,
+   you can use the following configuration
+   (if your font supports those characters):
+
+   .. code-block:: shell
+
+       LP_MARK_OS=(
+           # Arch
+           "x86_64"    "${BLUE}x64${NO_COL}"
+           "i386"      "i3"
+           "i686"      "i6"
+           "aarch64"   "${GREEN}a64${NO_COL}"
+           # Families
+           "BSD"       "${RED}BSD${NO_COL}"
+           "Windows"   "🪟"
+           "Unix"      "U"
+           "GNU"       "🐮"
+           # Kernels
+           "FreeBSD"   "👹"
+           "DragonFly" "🦋"
+           "OpenBSD"   "🐡"
+           "Darwin"    "🍎"
+           "SunOS"     "${BOLD_YELLOW}☀${NO_COL}"
+           "Cygwin"    "🦢"
+           "MSYS"      "M"
+           "MinGW"     "GW"
+           "Linux"     "🐧"
+       )
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_MARK_OS_SEP
+   :type: string
+   :value: "/"
+
+   The character used to separate items of the OS section.
+
+   See :attr:`LP_ENABLE_OS`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_MARK_PERM
    :type: string
@@ -1051,13 +1833,23 @@ Marks
 
    See also: :attr:`LP_ENABLE_PROXY`.
 
+.. attribute:: LP_MARK_RAM
+   :type: string
+   :value: M
+
+   Mark used before displaying available Random Access Memory.
+   See :attr:`LP_ENABLE_RAM`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_MARK_SHLVL
    :type: string
    :value: "└"
 
    Mark used to indicate the shell is inside another shell.
 
-   See also: :attr:`LP_ENABLE_SHLVL` and :attr:`LP_COLOR_SHLVL`.
+   See also: :attr:`LP_ENABLE_SHLVL`, :attr:`LP_SHLVL_THRESHOLD`, and
+   :attr:`LP_COLOR_SHLVL`.
 
    .. versionadded:: 2.1
 
@@ -1102,6 +1894,16 @@ Marks
    Mark used to indicate untracked or extra files exist in the current
    repository.
 
+.. attribute:: LP_MARK_VCS_REMOTE
+   :type: string
+   :value: "⭚"
+
+   Mark used to indicate the VCS remote repository name and status.
+
+   See :attr:`LP_ENABLE_VCS_REMOTE`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_MARK_VCSH
    :type: string
    :value: "|"
@@ -1121,6 +1923,9 @@ Marks
    See also: :attr:`LP_ENABLE_WIFI_STRENGTH`.
 
    .. versionadded:: 2.1
+
+
+.. _Colors:
 
 Colors
 ------
@@ -1154,26 +1959,13 @@ Valid preset color variables are:
 
 .. attribute:: LP_COLORMAP
    :type: array<string>
+   :value: ( "" $GREEN $BOLD_GREEN $YELLOW $BOLD_YELLOW $RED $BOLD_RED
+                $WARN_RED $CRIT_RED $DANGER_RED )
 
    An array of colors that is used by the battery, load, temperature, and
    wireless signal strength features to indicate the severity level of their
    status. A normal or low status will use the first index, while the last index
    is the most severe.
-
-   The default array is::
-
-      (
-          ""
-          $GREEN
-          $BOLD_GREEN
-          $YELLOW
-          $BOLD_YELLOW
-          $RED
-          $BOLD_RED
-          $WARN_RED
-          $CRIT_RED
-          $DANGER_RED
-      )
 
    See also: :attr:`LP_ENABLE_BATT`, :attr:`LP_ENABLE_LOAD`,
    :attr:`LP_ENABLE_TEMP`, and :attr:`LP_ENABLE_WIFI_STRENGTH`.
@@ -1213,12 +2005,74 @@ Valid preset color variables are:
 
    See also: :attr:`LP_ENABLE_BATT`.
 
+.. attribute:: LP_COLOR_CMAKE_BUILD
+   :type: string
+   :value: $MAGENTA
+
+   Color used to display the build type in the CMake segment.
+
+   See :attr:`LP_ENABLE_CMAKE`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_CMAKE_C
+   :type: string
+   :value: $MAGENTA
+
+   Color used to display the C compiler in the CMake segment.
+
+   See :attr:`LP_ENABLE_CMAKE`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_CMAKE_CXX
+   :type: string
+   :value: $MAGENTA
+
+   Color used to display the C++ compiler in the CMake segment.
+
+   See :attr:`LP_ENABLE_CMAKE`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_CMAKE_DEBUG
+   :type: string
+   :value: $MAGENTA
+
+   Color for the *Debug* build type of the CMake section.
+
+   See also: :attr:`LP_COLOR_CMAKE_RWDI` and :attr:`LP_COLOR_CMAKE_RELEASE`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_CMAKE_RWDI
+   :type: string
+   :value: $BLUE
+
+   Color for the *RelWithDebInfo* build type of the CMake section.
+
+   See also: :attr:`LP_COLOR_CMAKE_DEBUG` and :attr:`LP_COLOR_CMAKE_RELEASE`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_CMAKE_RELEASE
+   :type: string
+   :value: $CYAN
+
+   Color for the *Release* build type of the CMake section.
+
+   See also: :attr:`LP_COLOR_CMAKE_DEBUG` and :attr:`LP_COLOR_CMAKE_RWDI`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_COLOR_COMMITS_BEHIND
    :type: string
    :value: $BOLD_RED
 
    Color used to indicate that the current repository has a remote tracking
    branch that has commits that the local branch does not.
+
+   May be used by :attr:`LP_ENABLE_VCS_REMOTE`.
 
 .. attribute:: LP_COLOR_COMMITS
    :type: string
@@ -1227,13 +2081,13 @@ Valid preset color variables are:
    Color used to indicate that the current repository has commits on the local
    branch that the remote tracking branch does not.
 
-   Also used to color :attr:`LP_MARK_STASH`.
+   Also used to color :attr:`LP_MARK_STASH` and :attr:`LP_MARK_VCS_REMOTE`.
 
 .. attribute:: LP_COLOR_CONTAINER
    :type: string
    :value: $BOLD_BLUE
 
-   Color used to indicate that the current shell is running in a container
+   Color used to indicate that the current shell is running in a container.
 
    .. versionadded:: 2.1
 
@@ -1272,6 +2126,30 @@ Valid preset color variables are:
 
    See also: :attr:`LP_ENABLE_BATT`.
 
+.. attribute:: LP_COLOR_DISK
+   :type: string
+   :value: $BOLD_RED
+
+   Color used for displaying information about the hard drive hosting the
+   current directory.
+
+   See also :attr:`LP_COLOR_DISK_UNITS`, :attr:`LP_ENABLE_DISK`,
+   :attr:`LP_ALWAYS_DISPLAY_VALUES`, and :attr:`LP_PERCENTS_ALWAYS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_DISK_UNITS
+   :type: string
+   :value: $RED
+
+   Color used for displaying the unit of the available space on the hard drive
+   hosting the current directory.
+
+   See also :attr:`LP_COLOR_DISK`, :attr:`LP_ENABLE_DISK`,
+   :attr:`LP_ALWAYS_DISPLAY_VALUES`, and :attr:`LP_PERCENTS_ALWAYS`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_COLOR_ERR
    :type: string
    :value: $PURPLE
@@ -1279,6 +2157,39 @@ Valid preset color variables are:
    Color used to indicate the last command exited with a non-zero return code.
 
    See also: :attr:`LP_ENABLE_ERROR`.
+
+.. attribute:: LP_COLOR_ENV_VARS_SET
+   :type: string
+   :value: $BOLD_BLUE
+
+   Color of the environment variables that are set,
+   in the user-defined watch list.
+
+   See also:
+   - :attr:`LP_ENABLE_ENV_VARS`
+   - :attr:`LP_ENV_VARS`
+   - :attr:`LP_COLOR_ENV_VARS_UNSET`
+   - :attr:`LP_MARK_ENV_VARS_OPEN`
+   - :attr:`LP_MARK_ENV_VARS_SEP`
+   - :attr:`LP_MARK_ENV_VARS_CLOSE`
+
+.. attribute:: LP_COLOR_ENV_VARS_UNSET
+   :type: string
+   :value: $BLUE
+
+   Color of the environment variables that are unset,
+   in the user-defined watch list.
+
+   See also:
+
+   - :attr:`LP_ENABLE_ENV_VARS`
+   - :attr:`LP_ENV_VARS`
+   - :attr:`LP_COLOR_ENV_VARS_SET`
+   - :attr:`LP_MARK_ENV_VARS_OPEN`
+   - :attr:`LP_MARK_ENV_VARS_SEP`
+   - :attr:`LP_MARK_ENV_VARS_CLOSE`
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_COLOR_HOST
    :type: string
@@ -1294,6 +2205,9 @@ Valid preset color variables are:
 
    Color used for :attr:`LP_MARK_MULTIPLEXER_OPEN` and
    :attr:`LP_MARK_MULTIPLEXER_CLOSE` if the terminal is in a multiplexer.
+
+   .. versionchanged:: 2.2
+      Can be disabled by :attr:`LP_ENABLE_MULTIPLEXER`.
 
 .. attribute:: LP_COLOR_JOB_D
    :type: string
@@ -1346,16 +2260,25 @@ Valid preset color variables are:
    :type: string
    :value: $LP_COLOR_MARK_ROOT
 
-   Color used for :attr:`LP_MARK_DEFAULT` when sudo is active, shown instead of
-   :attr:`LP_COLOR_MARK`.
+   Color used for :attr:`LP_MARK_DEFAULT` when ``sudo`` is active, shown instead
+   of :attr:`LP_COLOR_MARK`.
 
    See also: :attr:`LP_ENABLE_SUDO`.
+
+.. attribute:: LP_COLOR_MODULES
+   :type: string
+   :value: $BLUE
+
+   Color used for displaying currently loaded modules
+   (if :attr:`LP_ENABLE_MODULES_HASHCOLOR` is disabled).
+
+   See also: :attr:`LP_ENABLE_MODULES`.
 
 .. attribute:: LP_COLOR_NODE_VENV
    :type: string
    :value: $LP_COLOR_VIRTUALENV
 
-   Color used for displaying a Node.js virtual env.
+   Color used for displaying a Node.js virtual environment.
 
    See also: :attr:`LP_ENABLE_NODE_VENV`.
 
@@ -1369,6 +2292,60 @@ Valid preset color variables are:
    permissions to the current working directory.
 
    See also: :attr:`LP_ENABLE_PERM` and :attr:`LP_COLOR_WRITE`.
+
+.. attribute:: LP_COLOR_OS_ARCH
+   :type: string
+   :value: $MAGENTA
+
+   Color used for OS' architecture (e.g. "x86_64", "i686"…).
+
+   See also: :attr:`LP_ENABLE_OS` and :attr:`LP_ENABLE_OS_ARCH`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_OS_DISTRIB
+   :type: string
+   :value: $MAGENTA
+
+   Color used for OS' distribution (e.g. "Ubuntu", "Debian"…).
+
+   .. note:: Will probably only work on Linux-like systems.
+
+   See also: :attr:`LP_ENABLE_OS` and :attr:`LP_ENABLE_OS_DISTRIB`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_OS_FAMILY
+   :type: string
+   :value: $MAGENTA
+
+   Color used for OS' family (e.g. "BSD", "GNU"…).
+
+   See also: :attr:`LP_ENABLE_OS` and :attr:`LP_ENABLE_OS_FAMILY`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_OS_KERNEL
+   :type: string
+   :value: $MAGENTA
+
+   Color used for OS' kernel (e.g. "Linux", "MinGW"…).
+
+   See also: :attr:`LP_ENABLE_OS` and :attr:`LP_ENABLE_OS_KERNEL`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_OS_VERSION
+   :type: string
+   :value: $MAGENTA
+
+   Color used for OS' version codename (e.g. "focal", "buster"…).
+
+   .. note:: Will probably only work on Linux-like systems.
+
+   See also: :attr:`LP_ENABLE_OS` and :attr:`LP_ENABLE_OS_VERSION`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_COLOR_PATH
    :type: string
@@ -1424,6 +2401,16 @@ Valid preset color variables are:
 
    .. versionadded:: 2.0
 
+.. attribute:: LP_COLOR_PERL_VENV
+   :type: string
+   :value: $LP_COLOR_VIRTUALENV
+
+   Color used for displaying a Perl virtual environment.
+
+   See also: :attr:`LP_ENABLE_PERL_VENV`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_COLOR_PROXY
    :type: string
    :value: $BOLD_BLUE
@@ -1432,11 +2419,33 @@ Valid preset color variables are:
 
    See also: :attr:`LP_ENABLE_PROXY`.
 
+.. attribute:: LP_COLOR_RAM
+   :type: string
+   :value: $BOLD_RED
+
+   Color used for displaying information about the available RAM.
+
+   See also :attr:`LP_COLOR_RAM_UNITS`, :attr:`LP_ENABLE_RAM`,
+   :attr:`LP_ALWAYS_DISPLAY_VALUES`, and :attr:`LP_PERCENTS_ALWAYS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_COLOR_RAM_UNITS
+   :type: string
+   :value: $RED
+
+   Color used for displaying the unit of the available RAM.
+
+   See also :attr:`LP_COLOR_RAM`, :attr:`LP_ENABLE_RAM`,
+   :attr:`LP_ALWAYS_DISPLAY_VALUES`, and :attr:`LP_PERCENTS_ALWAYS`.
+
+   .. versionadded:: 2.2
+
 .. attribute:: LP_COLOR_RUBY_VENV
    :type: string
    :value: $LP_COLOR_VIRTUALENV
 
-   Color used for displaying a Ruby virtual env.
+   Color used for displaying a Ruby virtual environment.
 
    See also: :attr:`LP_ENABLE_RUBY_VENV`.
 
@@ -1456,7 +2465,8 @@ Valid preset color variables are:
 
    Color used for displaying the nested shell level.
 
-   See also: :attr:`LP_ENABLE_SHLVL` and :attr:`LP_MARK_SHLVL`.
+   See also: :attr:`LP_ENABLE_SHLVL`, :attr:`LP_SHLVL_THRESHOLD`, and
+   :attr:`LP_MARK_SHLVL`.
 
    .. versionadded:: 2.1
 
@@ -1536,7 +2546,7 @@ Valid preset color variables are:
    :type: string
    :value: $CYAN
 
-   Color used for displaying a Python virtual env or Red Hat Software
+   Color used for displaying a Python virtual environment or Red Hat Software
    Collection.
 
    See also: :attr:`LP_ENABLE_VIRTUALENV` and :attr:`LP_ENABLE_SCLS`.
@@ -1556,8 +2566,12 @@ Valid preset color variables are:
 
    Color used for indicating that a display is not connected.
 
+   See also :attr:`LP_ENABLE_DISPLAY`.
+
 .. attribute:: LP_COLOR_X11_ON
    :type: string
    :value: $GREEN
 
    Color used for indicating that a display is connected.
+
+   See also :attr:`LP_ENABLE_DISPLAY`.

@@ -2,10 +2,15 @@
 # Error on unset variables
 set -u
 
+if [ -n "${ZSH_VERSION-}" ]; then
+  SHUNIT_PARENT="$0"
+  setopt shwordsplit
+fi
+
 . ../liquidprompt --no-activate
 
 function test_strip_escape {
-  local ret
+  typeset ret
 
   # The escape sequences are different on Bash and Zsh
   __lp_strip_escapes "${_LP_OPEN_ESC}bad text${_LP_CLOSE_ESC}a normal string without ${_LP_OPEN_ESC}color${_LP_CLOSE_ESC}colors"
@@ -112,7 +117,7 @@ function test_get_last_command_line() {
     printf '%s\n' "$history_line"
   }
 
-  local command
+  typeset command
 
   history_line=' 100  command'
   __lp_get_last_command_line
@@ -148,7 +153,7 @@ function test_pwd_tilde {
 }
 
 function pathSetUp {
-  # We cannot use SHUNIT_TEMPDIR because we need to know the start of the path
+  # We cannot use SHUNIT_TMPDIR because we need to know the start of the path
   typeset long_path="/tmp/_lp/a/very/long/pathname"
   mkdir -p "${long_path}/" "${long_path/name/foo}/"
 }
@@ -186,11 +191,14 @@ function test_path_format_from_path_left() {
   typeset HOME="/home/user"
   typeset PWD="/"
 
+  LP_ENABLE_PATH=1
+
   _lp_find_vcs() {
     return 1
   }
 
   LP_ENABLE_SHORTEN_PATH=1
+  LP_ENABLE_HYPERLINKS=0
   typeset COLUMNS=100
   LP_PATH_LENGTH=100
   LP_PATH_KEEP=0
@@ -334,11 +342,14 @@ function test_path_format_from_dir_right {
   typeset HOME="/home/user"
   typeset PWD="/"
 
+  LP_ENABLE_PATH=1
+
   _lp_find_vcs() {
     return 1
   }
 
   LP_ENABLE_SHORTEN_PATH=1
+  LP_ENABLE_HYPERLINKS=0
   typeset COLUMNS=100
   LP_PATH_LENGTH=100
   LP_PATH_KEEP=0
@@ -432,7 +443,9 @@ function test_path_format_from_dir_middle {
     return 1
   }
 
+  LP_ENABLE_PATH=1
   LP_ENABLE_SHORTEN_PATH=1
+  LP_ENABLE_HYPERLINKS=0
   typeset COLUMNS=100
   LP_PATH_LENGTH=100
   LP_PATH_KEEP=0
@@ -536,7 +549,9 @@ function test_path_format_unique() {
     return 1
   }
 
+  LP_ENABLE_PATH=1
   LP_ENABLE_SHORTEN_PATH=1
+  LP_ENABLE_HYPERLINKS=0
   typeset COLUMNS=100
   LP_PATH_LENGTH=100
   LP_PATH_KEEP=0
@@ -628,7 +643,9 @@ function test_path_format_last_dir() {
     return 1
   }
 
+  LP_ENABLE_PATH=1
   LP_ENABLE_SHORTEN_PATH=1
+  LP_ENABLE_HYPERLINKS=0
   LP_PATH_VCS_ROOT=1
   LP_PATH_METHOD=truncate_to_last_dir
 
@@ -694,6 +711,149 @@ function test_path_format_last_dir() {
   assertEquals "full directory formatting with multichar separator" "{l}pathname" "$lp_path_format"
 }
 
+function test_no_path_format() {
+  typeset HOME="/home/user"
+  typeset PWD="/"
+
+  LP_ENABLE_PATH=0
+
+  _lp_path_format '{format}'
+  assertEquals "$?" "2"
+}
+
+function test_path_links() {
+  typeset HOME="/home/user"
+  typeset PWD="/"
+  typeset SSH_CONNECTION="1.2.3.4 111 5.6.7.8 222"
+
+  _lp_find_vcs() {
+    return 1
+  }
+
+  LP_ENABLE_PATH=1
+  LP_ENABLE_SHORTEN_PATH=0
+  LP_ENABLE_HYPERLINKS=0
+  LP_PATH_VCS_ROOT=1
+
+  typeset lp_path lp_path_format
+
+  _lp_path_format '{format}'
+  assertEquals "root directory" '/' "$lp_path"
+  assertContains "root directory formatting" "$lp_path_format" '{format}/'
+
+  LP_ENABLE_HYPERLINKS=1
+
+  typeset url="https://test.io/"
+  typeset label="liquid link"
+  typeset expected_link="$_LP_OPEN_ESC"$'\E]8;;'"${url}"$'\E'"${_LP_BACKSLASH}${_LP_CLOSE_ESC}${label}${_LP_OPEN_ESC}"$'\E]8;;\E'"${_LP_BACKSLASH}$_LP_CLOSE_ESC"
+  _lp_create_link "$url" "$label"
+  assertEquals "typical OSC-8 escape sequence" "$expected_link" "$lp_link"
+
+  url="https://test&eacute;.io/?var=1&dbg=2"
+  label="liquid\tlink"
+  expected_link="$_LP_OPEN_ESC"$'\E]8;;'"${url}"$'\E'"${_LP_BACKSLASH}${_LP_CLOSE_ESC}${label}${_LP_OPEN_ESC}"$'\E]8;;\E'"${_LP_BACKSLASH}$_LP_CLOSE_ESC"
+  _lp_create_link "$url" "$label"
+  assertEquals "typical OSC-8 escape sequence with complex text" "$expected_link" "$lp_link"
+
+  typeset pathword="home"
+  typeset PWD="/home/nojhan"
+  typeset USER="nojhan"
+
+  typeset SSH_CLIENT="ssh"
+  typeset expected_url="sftp://$USER@5.6.7.8:111/$PWD/"
+  expected_link="$_LP_OPEN_ESC"$'\E]8;;'"${expected_url}"$'\E'"${_LP_BACKSLASH}${_LP_CLOSE_ESC}home${_LP_OPEN_ESC}"$'\E]8;;\E'"${_LP_BACKSLASH}$_LP_CLOSE_ESC"
+  _lp_create_link_path "$pathword"
+  assertEquals "SSH: path element linked to SFTP" "$expected_link" "$lp_link_path"
+
+  unset SSH_CLIENT SSH2_CLIENT SSH_TTY
+  ps() {
+    printf "su"
+  }
+  typeset expected_url="file://$PWD/"
+  expected_link="$_LP_OPEN_ESC"$'\E]8;;'"${expected_url}"$'\E'"${_LP_BACKSLASH}${_LP_CLOSE_ESC}home${_LP_OPEN_ESC}"$'\E]8;;\E'"${_LP_BACKSLASH}$_LP_CLOSE_ESC"
+  _lp_create_link_path "$pathword"
+  assertEquals "su: path element linked to FILE" "$expected_link" "$lp_link_path"
+
+  typeset REMOTEHOST="spongebob"
+  _lp_create_link_path "$pathword"
+  assertEquals "telnet: path element not linked" "$pathword" "$lp_link_path"
+}
+
+function test_lp_fill {
+    typeset lp_fill
+
+    COLUMNS=80
+    _lp_fill "Left" "Right" " "
+    assertEquals "full width" 80 ${#lp_fill}
+
+    COLUMNS=3
+    _lp_fill "L" "R" "-"
+    assertEquals "single fill" "L-R" "$lp_fill"
+
+    _lp_fill "L" "R" ""
+    assertEquals "defaults to space" "L R" "$lp_fill"
+
+    COLUMNS=5
+    _lp_fill "L" "R" "~"
+    assertEquals "simple fill 5" "L~~~R" "$lp_fill"
+
+    COLUMNS=6
+    _lp_fill "L" "R" "+-"
+    assertEquals "multi-fill 6" "L+-+-R" "$lp_fill"
+
+    _lp_fill "L" "R" "123" 1
+    assertEquals "multi-fill 6 split" "L1231R" "$lp_fill"
+
+    _lp_fill "L${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" "R" "123" 0
+    assertEquals "multi-fill 6 with escape and no split" "L${_LP_OPEN_ESC}${_LP_CLOSE_ESC}123 R" "$lp_fill"
+
+    _lp_fill "L${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" "${_LP_OPEN_ESC}${_LP_CLOSE_ESC}R" "123" 0
+    assertEquals "multi-fill 6 with double escapes and no split" "L${_LP_OPEN_ESC}${_LP_CLOSE_ESC}123 ${_LP_OPEN_ESC}${_LP_CLOSE_ESC}R" "$lp_fill"
+
+    _lp_fill "L" "R" "${_LP_OPEN_ESC}${_LP_CLOSE_ESC}123" 1
+    assertEquals "multi-fill 6 with wrong escape and split" "L1231R" "$lp_fill"
+
+    _lp_fill "L${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" "R" "123" 1
+    assertEquals "multi-fill 6 with escape and split" "L${_LP_OPEN_ESC}${_LP_CLOSE_ESC}1231R" "$lp_fill"
+
+    _lp_fill "L" "R" "${_LP_OPEN_ESC}${_LP_CLOSE_ESC}123${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" 1
+    assertEquals "multi-fill 6 with double escapes and split" "L1231R" "$lp_fill"
+
+    COLUMNS=11
+    _lp_fill "Left" "Right" "="
+    assertEquals "regular fill 11" "Left==Right" "$lp_fill"
+
+    _lp_fill "Le" "Ri" "+-"
+    assertEquals "multi-fill 11 split default" "Le+-+-+-+Ri" "$lp_fill"
+
+    _lp_fill "Le" "Ri" "+-" 0
+    assertEquals "multi-fill 11 no split" "Le+-+-+- Ri" "$lp_fill"
+
+    _lp_fill "Le" "Ri" "+-" 1
+    assertEquals "multi-fill 11 explicit split" "Le+-+-+-+Ri" "$lp_fill"
+
+    _lp_fill "Le" "Ri" "123" 1
+    assertEquals "multi-fill 11 with split" "Le1231231Ri" "$lp_fill"
+
+    _lp_fill "Le${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" "Ri" "123" 0
+    assertEquals "multi-fill 11 with escape and no split" "Le${_LP_OPEN_ESC}${_LP_CLOSE_ESC}123123 Ri" "$lp_fill"
+
+    _lp_fill "Le${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" "Ri" "123${_LP_OPEN_ESC}${_LP_CLOSE_ESC}" 1
+    assertEquals "multi-fill 11 with double escape and split" "Le${_LP_OPEN_ESC}${_LP_CLOSE_ESC}1231231Ri" "$lp_fill"
+
+    # The following tests require a UTF-8 locale to be set.
+    # The Windows runners have issues with these Unicode characters.
+    if [[ ! ( ${LC_CTYPE-} == *UTF-8 || ${LANG-} == *UTF-8 || ${LC_ALL-} == *UTF-8 ) \
+          || ${RUNNER_OS-} == "Windows" ]]; then
+        # Skip all the following tests.
+        startSkipping
+    fi
+
+    COLUMNS=32
+    _lp_fill "Left part·" "·right part" "⣀⠔⠉⠢" 1
+    assertEquals "beautiful fill" "Left part·⣀⠔⠉⠢⣀⠔⠉⠢⣀⠔⠉·right part" "$lp_fill"
+}
+
 function test_is_function {
   function my_function { :; }
 
@@ -710,9 +870,132 @@ function test_is_function {
   unalias not_my_function
 }
 
-if [ -n "${ZSH_VERSION-}" ]; then
-  SHUNIT_PARENT="$0"
-  setopt shwordsplit
-fi
+function test_hash_color {
+    PS1="$ "
+    lp_activate --no-config # For having _lp_foreground
+    _lp_hash_color "Debug"
+    assertContains "$lp_hash_color" "Debug"
+    # FIXME How to test color?
+}
+
+function test_join {
+    _lp_join "_" "A" "B " " " " C" " D " "EE"
+    assertEquals "A_B _ _ C_ D _EE" "$lp_join"
+
+    _lp_join "-" "A"
+    assertEquals "A" "$lp_join"
+
+    _lp_join "+" ""
+    assertEquals "" "$lp_join"
+
+    typeset -a arr
+    arr=(1 2 3)
+    _lp_join "/" "${arr[@]}"
+    assertEquals "1/2/3" "$lp_join"
+}
+
+function test_grep_fields {
+    filename=$(mktemp)
+
+    printf 'key1:value1\nkey2:value2\n' > "$filename"
+    _lp_grep_fields "$filename" ":" "key1" "key2"
+    assertEquals 2 ${#lp_grep_fields[@]}
+    assertEquals "value1" ${lp_grep_fields[_LP_FIRST_INDEX+0]}
+    assertEquals "value2" ${lp_grep_fields[_LP_FIRST_INDEX+1]}
+
+    # Two-char delimiter, reverse orders of keys.
+    printf 'key1:=value1\nkey2:=value2\n' > "$filename"
+    _lp_grep_fields "$filename" ":=" "key2" "key1"
+    assertEquals 2 ${#lp_grep_fields[@]}
+    assertEquals "value2" ${lp_grep_fields[_LP_FIRST_INDEX+0]}
+    assertEquals "value1" ${lp_grep_fields[_LP_FIRST_INDEX+1]}
+
+    # No end of line.
+    printf '[section]\nkey1=value1' > "$filename"
+    _lp_grep_fields "$filename" "=" "key1"
+    assertEquals 1 ${#lp_grep_fields[@]}
+    assertEquals "value1" ${lp_grep_fields[_LP_FIRST_INDEX+0]}
+
+    # Bad keys with spaces.
+    printf ' key1 :NOPE\nkey1:value1\nNOPE:NOPE\n key1:NOPE\nkey1 :NOPE' > "$filename"
+    _lp_grep_fields "$filename" ":" "key1"
+    assertEquals 1 ${#lp_grep_fields[@]}
+    assertEquals "value1" ${lp_grep_fields[_LP_FIRST_INDEX+0]}
+
+    # Delimiter in key name/value.
+    printf 'key1=value1\nkey2=value=key2=?\nkey3==val\n' > "$filename"
+    _lp_grep_fields "$filename" "=" "key1" "key2" "key3"
+    assertEquals 3 ${#lp_grep_fields[@]}
+    assertEquals "value1" ${lp_grep_fields[_LP_FIRST_INDEX+0]}
+    assertEquals "value=key2=?" ${lp_grep_fields[_LP_FIRST_INDEX+1]}
+    assertEquals "=val" ${lp_grep_fields[_LP_FIRST_INDEX+2]}
+
+    # Empty file.
+    printf '\n' > "$filename"
+    _lp_grep_fields "$filename" ":=" "nokey"
+    assertTrue "found a non existing key" '[[ -z "${lp_grep_fields[_LP_FIRST_INDEX+0]+x}" ]]'
+
+    # Really empty file.
+    printf '' > "$filename"
+    _lp_grep_fields "$filename" ":=" "nokey"
+    assertTrue "found a non existing key" '[[ -z "${lp_grep_fields[_LP_FIRST_INDEX+0]+x}" ]]'
+
+    rm -f "$filename"
+}
+
+function test_version {
+    _LP_VERSION=(1 2 3 beta 4)
+
+    _lp_version_greatereq 1 2 3 beta 4
+    assertTrue "equal version" "$?"
+
+    _lp_version_greatereq 1 2 3 beta 5
+    assertFalse "lesser version number" "$?"
+    _lp_version_greatereq 1 2 3 rc 1
+    assertFalse "lesser version string" "$?"
+    _lp_version_greatereq 1 2 4 beta 4
+    assertFalse "lesser version patch" "$?"
+    _lp_version_greatereq 1 3 3 beta 4
+    assertFalse "lesser version minor" "$?"
+    _lp_version_greatereq 2 2 3 beta 4
+    assertFalse "lesser version major" "$?"
+
+    _lp_version_greatereq 1 2 3 beta 3
+    assertTrue "greater version number" "$?"
+    _lp_version_greatereq 1 2 3 alpha 4
+    assertTrue "greater version string" "$?"
+    _lp_version_greatereq 1 2 2 beta 4
+    assertTrue "greater version patch" "$?"
+    _lp_version_greatereq 1 1 3 beta 4
+    assertTrue "greater version minor" "$?"
+    _lp_version_greatereq 0 2 3 beta 4
+    assertTrue "greater version major" "$?"
+
+    _lp_version_string # Defaults to _LP_VERSION
+    assertEquals "1.2.3-beta.4" "$lp_version"
+
+    _lp_version_string 5 4 3 rc 2
+    assertEquals "5.4.3-rc.2" "$lp_version"
+
+    _lp_version_string 5 4 3 rc
+    assertEquals "5.4.3-rc" "$lp_version"
+
+    _lp_version_string 5 4 3
+    assertEquals "5.4.3" "$lp_version"
+
+    _lp_version_string 5 4
+    assertEquals "5.4" "$lp_version"
+}
+
+function test_substitute {
+    typeset sub
+    sub=(
+        "When"  "NOK"
+        "What?" "NOPE"
+        "What"  "OK"
+    )
+    _lp_substitute "What" "${sub[@]}"
+    assertEquals "OK" "$lp_substitute"
+}
 
 . ./shunit2

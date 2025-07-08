@@ -24,12 +24,20 @@ for shell in "${shells[@]}"; do
 done
 
 typeset -i fail=0
+typeset -a errors
 
 for test_file in ./test_*.sh; do
   for shell in "${testing_shells[@]}"; do
     printf "\nRunning shell '%s' with test '%s'\n" "$shell" "$test_file"
-    "$shell" "$test_file" || fail+=1
+    "$shell" "$test_file" || {
+      fail+=1
+      errors+=("Failed running test '${test_file}' with shell '${shell}'")
+    }
   done
 done
 
+printf '%s\n' "${errors[@]}"
+
 exit "$fail"
+
+# vim: ft=sh et sts=2 sw=2 tw=120

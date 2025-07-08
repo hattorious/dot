@@ -2,6 +2,11 @@
 # Error on unset variables
 set -u
 
+if [ -n "${ZSH_VERSION-}" ]; then
+  SHUNIT_PARENT="$0"
+  setopt shwordsplit ksh_arrays
+fi
+
 . ../liquidprompt --no-activate
 
 typeset -a ssh_values remotehost_values ps_outputs values
@@ -98,7 +103,7 @@ values+=(lcl)
 
 
 function test_connection {
-  local SSH_CLIENT REMOTEHOST SSH2_CLIENT="" SSH_TTY=""
+  typeset SSH_CLIENT REMOTEHOST SSH2_CLIENT="" SSH_TTY=""
 
   ps() {
     printf '%s\n' "$__ps_output"
@@ -113,10 +118,5 @@ function test_connection {
     assertEquals "Connection output at index ${index}" "${values[$index]}" "$lp_connection"
   done
 }
-
-if [ -n "${ZSH_VERSION-}" ]; then
-  SHUNIT_PARENT="$0"
-  setopt shwordsplit ksh_arrays
-fi
 
 . ./shunit2

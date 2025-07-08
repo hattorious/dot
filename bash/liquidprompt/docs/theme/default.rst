@@ -9,7 +9,7 @@ Preview
 =======
 
 If there is nothing special about the current context, the appearance of
-Liquidprompt is similar to that of a default prompt:
+Liquid Prompt is similar to that of a default prompt:
 
 .. image:: default-short.png
    :alt: [user:~] $
@@ -20,11 +20,12 @@ Git repository on a server:
 .. image:: default-med.png
    :alt: 1& [user@server:~/liquidprompt] main ±
 
-When Liquidprompt is displaying nearly everything (a rare event!), it may look
+When Liquid Prompt is displaying nearly everything (a rare event!), it may look
 like this:
 
 .. image:: default-long.png
-   :alt: 🕤 ⌁24% ⌂1.68 θ90° 3d/2&/1z [user@server:~/ … /liquidprompt/docs/theme ⚞3] [pyenv] main(+10/-5,+3/-1)+* 20s 125 ±
+   :alt: 🕤 ⌁24% ⌂1.68 θ90° 3d/2&/1z [user@server:~/ … /liquidprompt/docs/theme
+       ⚞3] [pyenv] main(+10/-5,+3/-1)+* 20s 125 ±
 
 See :ref:`Templates <templates>` for what each section will look like.
 
@@ -57,7 +58,7 @@ to a variable, and can be arranged in any order in a template. If you want to
 change the theme enough to move things around, but not enough to make your own
 theme, templates will let you change the order of the default theme's pieces.
 
-As the default theme of Liquidprompt was the only theme until version 2.0,
+As the default theme of Liquid Prompt was the only theme until version 2.0,
 templates were sometimes referred to as "themes" in version 1.X.
 
 For a template file to be loaded, its filepath must be set in
@@ -66,9 +67,9 @@ For a template file to be loaded, its filepath must be set in
 A template file does nothing more than set :attr:`LP_PS1` to a value. The
 following sections are available to be used.
 
-An example template file is available: liquid.ps1_.
+An example template file is available: minimal.ps1_.
 
-.. _liquid.ps1: https://github.com/nojhan/liquidprompt/blob/master/liquid.ps1
+.. _minimal.ps1: https://github.com/liquidprompt/liquidprompt/blob/master/templates/minimal/minimal.ps1
 
 Template Sections
 -----------------
@@ -76,9 +77,12 @@ Template Sections
 All of the available template sections are listed below. Their order is the
 default order if the user does not configure a different template.
 
+.. image:: template.svg
+   :alt: Sections of the prompt.
+
 .. note::
    Omitting a template section from your template will **not** disable that
-   feature. While it will not be displayed in the prompt, Liquidprompt does not
+   feature. While it will not be displayed in the prompt, Liquid Prompt does not
    know that, and will still generate that template section. If you want to
    speed up your prompt by disabling a section, you must disable it with its
    respective ``LP_ENABLE_*`` option.
@@ -179,65 +183,36 @@ default order if the user does not configure a different template.
    If running in a terminal multiplexer, will be colored. See
    :attr:`LP_COLOR_IN_MULTIPLEXER`.
 
-.. attribute:: LP_SHLVL
-
-   The number of nested shells, prefixed with :attr:`LP_MARK_SHLVL`, all colored
-   with :attr:`LP_COLOR_SHLVL`. Can be disabled by attr:`LP_ENABLE_SHLVL`.
-
-   .. versionadded:: 2.1
-
-.. attribute:: LP_SCLS
-
-   The current Red Hat Software Collections environment. See
-   :attr:`LP_ENABLE_SCLS`.
-
-.. attribute:: LP_AWS_PROFILE
-
-   The current active AWS Profile. See
-   :attr:`LP_ENABLE_AWS_PROFILE`.
-
-   .. versionadded:: 2.1
-
-.. attribute:: LP_CONTAINER
-
-   The container status for the current shell. See :attr:`LP_ENABLE_CONTAINER`.
-
-   .. versionadded:: 2.1
-
-.. attribute:: LP_VENV
-
-   The current Python (or Conda) virtual environment. See
-   :attr:`LP_ENABLE_VIRTUALENV`.
-
-.. attribute:: LP_NODE_VENV
-
-   The current Node.js virtual environment. See :attr:`LP_ENABLE_NODE_VENV`.
-
-   .. versionadded:: 2.1
-
-.. attribute:: LP_RUBY_VENV
-
-   The current Ruby virtual environment. See :attr:`LP_ENABLE_RUBY_VENV`.
-
-   .. versionadded:: 2.1
-
-.. attribute:: LP_TFSPACE
-
-   The current Terraform workspace. See :attr:`LP_ENABLE_TERRAFORM`.
-
-   .. versionadded:: 2.1
-
-.. attribute:: LP_KUBECONTEXT
-
-   The current Kubernetes context. See
-   :attr:`LP_ENABLE_KUBECONTEXT`.
-
-   .. versionadded:: 2.1
-
 .. attribute:: LP_PROXY
 
    A ↥ (:attr:`LP_MARK_PROXY`) if an HTTP proxy is in use. See
    :attr:`LP_ENABLE_PROXY`.
+
+.. attribute:: LP_ENVVARS
+
+   Some user-defined environment variable's states.
+   Watched variables should be defined in the :attr:`LP_ENV_VARS` array.
+
+   Set variables are displayed in bold blue, unset variables in blue.
+   See also :attr:`LP_ENABLE_ENV_VARS`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_SHLVL
+
+   The number of nested shells, prefixed with :attr:`LP_MARK_SHLVL`, all colored
+   with :attr:`LP_COLOR_SHLVL`. Can be disabled by :attr:`LP_ENABLE_SHLVL`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_DEV_ENV
+
+   Sections related to development environments (see section `dev_env`_ below).
+
+   See also :attr:`LP_MARK_DEV_OPEN`, :attr:`LP_MARK_DEV_MID`,
+   and :attr:`LP_MARK_DEV_CLOSE`.
+
+   .. versionadded:: 2.2
 
 .. attribute:: LP_VCS
 
@@ -263,6 +238,13 @@ default order if the user does not configure a different template.
 
    The error code of the last command, if it is non-zero. See
    :attr:`LP_ENABLE_ERROR`.
+
+.. attribute:: LP_ERR_MEANING
+
+   A guess on the meaning of the last error. See
+   :attr:`LP_ENABLE_ERROR_MEANING` and :attr:`LP_ERR`.
+
+   .. versionadded:: 2.2
 
 :attr:`LP_MARK_PREFIX`
 
@@ -293,3 +275,85 @@ default order if the user does not configure a different template.
 
    Not actually a part of the default theme, it is used in the default template
    as the final section. See :attr:`LP_PS1_POSTFIX` for details.
+
+
+.. _dev_env:
+
+Development environment sections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Version 2.2 of Liquid Prompt introduced a new way to display all sections
+related to development environments.
+All the data below are now items in the :attr:`LP_DEV_ENV` list,
+joined by :attr:`LP_MARK_DEV_MID` and surrounded by
+:attr:`LP_MARK_DEV_OPEN` and :attr:`LP_MARK_DEV_CLOSE`.
+
+If you want to change the ordering or have different marks
+for different items, you can derive your own
+theme template and use the following sections.
+
+.. attribute:: LP_SCLS
+
+   The current Red Hat Software Collections environment. See
+   :attr:`LP_ENABLE_SCLS`.
+
+.. attribute:: LP_AWS_PROFILE
+
+   The current active AWS Profile. See
+   :attr:`LP_ENABLE_AWS_PROFILE`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_CONTAINER
+
+   The container status for the current shell. See :attr:`LP_ENABLE_CONTAINER`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_VENV
+
+   The current Python (or Conda) virtual environment. See
+   :attr:`LP_ENABLE_VIRTUALENV`.
+
+.. attribute:: LP_NODE_VENV
+
+   The current Node.js virtual environment. See :attr:`LP_ENABLE_NODE_VENV`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_PERL_VENV
+
+   The current Perl virtual environment. See :attr:`LP_ENABLE_PERL_VENV`.
+
+   .. versionadded:: 2.2
+
+.. attribute:: LP_RUBY_VENV
+
+   The current Ruby virtual environment. See :attr:`LP_ENABLE_RUBY_VENV`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_TFSPACE
+
+   The current Terraform workspace. See :attr:`LP_ENABLE_TERRAFORM`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_KUBECONTEXT
+
+   The current Kubernetes context. See
+   :attr:`LP_ENABLE_KUBECONTEXT`.
+
+   .. versionadded:: 2.1
+
+.. attribute:: LP_CMAKE
+
+   Variables from CMake cache configured in this directory:
+
+   - the base name of the compiler (without the path),
+   - the configured generator (without spaces, some of them shortened),
+   - the build type.
+
+   See :attr:`LP_ENABLE_CMAKE`.
+
+   .. versionadded:: 2.2
