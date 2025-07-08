@@ -41,6 +41,7 @@ function setup_liquidprompt() {
   LP_RUNTIME_THRESHOLD=1
   LP_ENABLE_ERROR=1
   LP_ENABLE_TITLE=1
+  LP_ENABLE_SCREEN_TITLE=1
   lp_activate --no-config
   lp_theme default
 }
@@ -78,10 +79,12 @@ function test_no_bash_preexec_with_LP_RUNTIME {
 function test_bash_preexec_with_LP_ERR {
   (
     setup
+    LP_ENABLE_ERROR_MEANING=1
 
     false # should get "1" in prompt
     $PROMPT_COMMAND
     assertContains $lp_error_color 1
+    assertContains $lp_error_meaning_color "(error)"
   )
 }
 
@@ -89,10 +92,12 @@ function test_bash_preexec_with_LP_ERR {
 function test_no_bash_preexec_with_LP_ERR {
   (
     setup_liquidprompt
+    LP_ENABLE_ERROR_MEANING=1
 
     false # should get "1" in prompt
     $PROMPT_COMMAND
     assertContains $lp_error_color 1
+    assertContains $lp_error_meaning_color "(error)"
   )
 }
 

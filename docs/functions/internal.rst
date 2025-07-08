@@ -4,10 +4,10 @@ Internal Functions
 .. contents::
    :local:
 
-These functions are designed to be used only by Liquidprompt internals and data
+These functions are designed to be used only by Liquid Prompt internals and data
 functions. These functions should not be used by users or themes, as they are
 not guaranteed to be stable between versions. There are documented here for
-information for those developing Liquidprompt.
+information for those developing Liquid Prompt.
 
 Config
 ------
@@ -219,8 +219,8 @@ Theme
 
 .. function:: __lp_theme_list() -> var:lp_theme_list
 
-   Returns an array of Liquidprompt themes currently loaded in memory. Looks for
-   functions matching ``_lp_*_theme_prompt``.
+   Returns an array of Liquid Prompt themes currently loaded in memory. Looks
+   for functions matching ``_lp_*_theme_prompt``.
 
    .. versionadded:: 2.0
 
@@ -278,7 +278,7 @@ Temperature
 
 .. function:: __lp_temp_sensors() -> var:lp_temperature
 
-   A temperature backend using lm-sensors provided ``sensors``.
+   A temperature backend using `lm-sensors` provided ``sensors``.
 
    .. versionchanged:: 2.0
       Renamed from ``_lp_temp_sensors``.
@@ -286,7 +286,7 @@ Temperature
 
 .. function:: __lp_temp_sysfs() -> var:lp_temperature
 
-   A temperature backend reading directly from the Linux sysfs filesystem.
+   A temperature backend reading directly from the Linux sysfs file system.
 
    .. versionadded:: 2.1
 

@@ -2,6 +2,11 @@
 # Error on unset variables
 set -u
 
+if [ -n "${ZSH_VERSION-}" ]; then
+  SHUNIT_PARENT="$0"
+  setopt shwordsplit
+fi
+
 function test_test {
   assertTrue "[[ form of test" '[[ 1 -eq 1 ]]'
 
@@ -12,6 +17,11 @@ function test_test {
   assertFalse "[[ -z" '[[ -z foo ]]'
   assertFalse "[[ -z quoted" '[[ -z "foo" ]]'
   assertTrue "[[ -z empty quoted" '[[ -z "" ]]'
+
+  assertTrue "[[ nonempty" '[[ foo ]]'
+  assertTrue "[[ nonempty 1" '[[ 1 ]]'
+  assertTrue "[[ nonempty 0" '[[ 0 ]]'
+  assertFalse "[[ empty quoted" '[[ "" ]]'
 }
 
 function test_redirection {
@@ -426,6 +436,7 @@ function test_integer {
 
   int+=1
   assertEquals "Int increment" 1 $int
+  assertTrue "Int true" "(( int ))"
 
   int+=5
   assertEquals "Int increment" 6 $int
@@ -492,10 +503,5 @@ function test_dynamic_function_call {
 
   unset -f my_bar my_qux
 }
-
-if [ -n "${ZSH_VERSION-}" ]; then
-  SHUNIT_PARENT="$0"
-  setopt shwordsplit
-fi
 
 . ./shunit2

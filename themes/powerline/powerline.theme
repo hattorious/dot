@@ -1,4 +1,6 @@
 
+# shellcheck shell=bash
+
 _lp_powerline_theme_activate() {
     # Load default markers if not already defined
     POWERLINE_HARD_DIVIDER=${POWERLINE_HARD_DIVIDER:-""}    # U+E0B0
@@ -149,6 +151,7 @@ _lp_powerline_full_theme_activate() {
     POWERLINE_KUBECONTEXT_MARKER=${POWERLINE_KUBECONTEXT_MARKER:-$LP_MARK_KUBECONTEXT}
     POWERLINE_NODE_ENV_MARKER=${POWERLINE_NODE_ENV_MARKER:-"node: "}
     POWERLINE_PROXY_MARKER=${POWERLINE_PROXY_MARKER:-"proxy: "}
+    POWERLINE_PERL_ENV_MARKER=${POWERLINE_PERL_ENV_MARKER:-"perl: "}
     POWERLINE_RUBY_ENV_MARKER=${POWERLINE_RUBY_ENV_MARKER:-"ruby: "}
     POWERLINE_SOFTWARE_COLLECTION_MARKER=${POWERLINE_SOFTWARE_COLLECTION_MARKER:-"(sc) "}
     POWERLINE_TERRAFORM_ENV_MARKER=${POWERLINE_TERRAFORM_ENV_MARKER:-"(tf) "}
@@ -297,6 +300,11 @@ _lp_powerline_full_theme_prompt() {
         __powerline_section "${POWERLINE_NODE_ENV_MARKER}${lp_node_env}" "${POWERLINE_NODE_ENV_COLOR[@]}"
     fi
 
+    local lp_perl_env
+    if _lp_perl_env; then
+        __powerline_section "${POWERLINE_PERL_ENV_MARKER}${lp_perl_env}" "${POWERLINE_PERL_ENV_COLOR[@]}"
+    fi
+
     local lp_ruby_env
     if _lp_ruby_env; then
         __powerline_section "${POWERLINE_RUBY_ENV_MARKER}${lp_ruby_env}" "${POWERLINE_RUBY_ENV_COLOR[@]}"
@@ -435,3 +443,4 @@ __powerline_vcs_section() {
     fi
 }
 
+# vim: ft=sh et sts=4 sw=4 tw=120
