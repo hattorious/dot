@@ -4,5 +4,5 @@ https://github.com/cowboy/dotfiles/tree/master/source
 [ ] Work through skwp's dotfiles
 https://github.com/skwp/dotfiles
 
-[ ] Cherrypick from bash sensible
-https://github.com/mrzool/bash-sensible
+[ ] Update your gitconfig
+https://github.com/bronzehedwick/dotfiles/blob/main/git/.gitconfig

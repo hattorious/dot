@@ -5,36 +5,42 @@
 
 - clean:
     - "~"
+    - "~/.claude/*"
     - "~/.config"
 
 - link:
-    ~/.dotfiles: ''
-    ~/.bashrc: bash/runcom.bash
-    ~/.bashrc.post: bash/runcom.post.bash
+    ~/.bash_completion: bash/complete.bash
     ~/.bash_profile: bash/profile.bash
     ~/.bash_prompt: bash/prompt.bash
-    ~/.bash_completion: bash/complete.bash
-    ~/.zshrc: zsh/runcom.zsh
-    ~/.zimrc: zsh/zim/zimrc
-    ~/.gitconfig: git/gitconfig
-    ~/.gitignore_global: git/ignore_global
-    ~/.gitcommittemplate: git/commit_template.txt
-    ~/.tmux.conf: tmux/tmux.conf
-    ~/.vimrc: vim/runcom.vim
-    ~/.vim_runtime: vim/vim_runtime/
-    ~/.ctags.d: ctags/
-    ~/.ssh: ssh/
-    ~/.gnupg/gpg.conf: gpg/gpg.conf
-    ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
+    ~/.bashrc: bash/runcom.bash
+    ~/.bashrc.post: bash/runcom.post.bash
+    ~/.claude:
+      glob: true
+      path: claude/**
+      force: true
     ~/.config/starship.toml: config/starship/starship.toml
     ~/.config/yamllint/config:
       path: config/yamllint/config.yaml
       create: true
-    ~/.terraformrc: terraform/runcom
+    ~/.config/zellij: zellij
+    ~/.ctags.d: ctags/
+    ~/.dotfiles: ''
+    ~/.gitcommittemplate: git/commit_template.txt
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore_global: git/ignore_global
+    # ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
+    # ~/.gnupg/gpg.conf: gpg/gpg.conf
+    ~/.ssh: ssh/
     ~/.terraform.d/plugin-cache:
       path: terraform/plugin-cache/
       create: true
-    ~/.config/zellij: zellij
+    ~/.terraformrc: terraform/runcom
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmuxp: tmuxp
+    ~/.vim_runtime: vim/vim_runtime/
+    ~/.vimrc: vim/runcom.vim
+    ~/.zshrc: zsh/runcom.zsh
+    ~/.zimrc: zsh/zim/zimrc
 
 - create:
     - ~/.zsh/cache
