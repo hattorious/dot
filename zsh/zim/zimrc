@@ -1,0 +1,67 @@
+#
+# Modules
+#
+
+# Adds aliases for Homebrew. This should be first.
+zmodule homebrew
+
+# Sets sane Zsh built-in environment options.
+zmodule environment
+# Applies correct bindkeys for input events.
+zmodule input
+# Utility aliases and functions. Adds colour to ls, grep and less.
+zmodule utility
+# Configures fzf for faster fetching of files and directories names.
+zmodule fzf
+# Provides nice git aliases and functions.
+zmodule git
+# All kubectl aliases in one function.
+zmodule k
+
+# Community Modules
+zmodule joke/zim-github-cli
+zmodule joke/zim-k9s
+zmodule joke/zim-kubectl
+zmodule joke/zim-yq
+zmodule kiesman99/zim-zoxide
+zmodule muchobien/zim-fnm
+
+# local modules
+if is_macos && [[ -f ~/.orbstack/shell/init.zsh ]]; then
+    zmodule ~/.orbstack/shell --name orbstack
+fi
+
+#
+# Prompt
+#
+if (( ${+commands[starship]} )) && [[ -f ~/.config/starship.toml ]]; then
+    # use starship if available and configured
+    zmodule joke/zim-starship
+elif [[ -f ~/.config/liquidpromptrc ]]; then
+    zmodule liquidprompt/liquidprompt --source liquidprompt.plugin.zsh
+else
+    # use pure if no other prompt is available
+    zmodule sindresorhus/pure --source async.zsh --source pure.zsh
+fi
+
+#
+# Completion
+#
+
+# Additional completion definitions for Zsh.
+zmodule zsh-users/zsh-completions --fpath src
+# Enables and configures smart and extensive tab completion.
+# completion must be sourced after all modules that add completion definitions.
+zmodule completion
+zstyle ':zim:completion' dumpfile "${DOTFILES}/tmp/zsh/zsh_dumpfile"
+zstyle ':completion::complete:*' cache-path "${DOTFILES}/tmp/zsh/zcompcache"
+
+#
+# Modules that must be initialized last
+#
+
+# Fish-like syntax highlighting for Zsh.
+# zsh-users/zsh-syntax-highlighting must be sourced after completion
+zmodule zsh-users/zsh-syntax-highlighting
+# Fish-like autosuggestions for Zsh.
+zmodule zsh-users/zsh-autosuggestions

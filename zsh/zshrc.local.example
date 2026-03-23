@@ -1,0 +1,28 @@
+# Example .zshrc.local file
+# This file allows you to add machine-specific zsh customizations
+# that won't be overwritten by the dotfiles installation.
+#
+# Copy this file to ~/.zshrc.local and customize as needed.
+
+# Example: Add custom aliases
+# alias myalias='some command'
+
+# Example: Set custom environment variables
+# export CUSTOM_VAR="value"
+
+# Example: Add custom functions
+# myfunction() {
+#     echo "This is a custom function"
+# }
+
+# Example: Source additional configuration files
+# source ~/.custom-config.zsh
+
+# Example: Set custom prompt or theme overrides
+# prompt custom
+
+# Example: Add custom completion
+# compdef _mycommand mycommand
+
+# Example: Set custom key bindings
+# bindkey '^X^F' my-custom-widget

@@ -3,10 +3,9 @@
     link:
       relink: true
 
-- clean: [
-  '~',
-  '~/.config/',
-]
+- clean:
+    - "~"
+    - "~/.config"
 
 - link:
     ~/.dotfiles: ''
@@ -15,6 +14,8 @@
     ~/.bash_profile: bash/profile.bash
     ~/.bash_prompt: bash/prompt.bash
     ~/.bash_completion: bash/complete.bash
+    ~/.zshrc: zsh/runcom.zsh
+    ~/.zimrc: zsh/zim/zimrc
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
     ~/.gitcommittemplate: git/commit_template.txt
@@ -25,7 +26,7 @@
     ~/.ssh: ssh/
     ~/.gnupg/gpg.conf: gpg/gpg.conf
     ~/.gnupg/gpg-agent.conf: gpg/gpg-agent.conf
-    ~/.config/liquidpromptrc: config/liquidprompt/liquidpromptrc
+    ~/.config/starship.toml: config/starship/starship.toml
     ~/.config/yamllint/config:
       path: config/yamllint/config.yaml
       create: true
@@ -33,6 +34,10 @@
     ~/.terraform.d/plugin-cache:
       path: terraform/plugin-cache/
       create: true
+    ~/.config/zellij: zellij
+
+- create:
+    - ~/.zsh/cache
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
