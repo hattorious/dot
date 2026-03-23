@@ -184,7 +184,7 @@ LP_DISABLED_VCS_PATHS=()
 # COLOR #
 #########
 
-# Color used for the separator (‘/’) between path segments. 
+# Color used for the separator (‘/’) between path segments.
 # If set to the empty string, the separator will take the format of the path segment before it.
 LP_COLOR_PATH_SEPARATOR=''
 

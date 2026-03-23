@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # only load on OSX
-is_osx || return 1
+is_macos || return 1
 
 # point ssh-agent at GPG
 # disabling ssh-agent in Catalina is prohibited by System Integrity Protection (SIP)

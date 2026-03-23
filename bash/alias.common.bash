@@ -4,6 +4,8 @@ alias vi='vim'
 alias cd..='cd ..'
 alias c='clear'
 
+alias ag='ag --path-to-ignore ~/.ignore --hidden'
+
 
 # An overly obvious reference for most commonly requested bash timestamps
 function ref_dates() {

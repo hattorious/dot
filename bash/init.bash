@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-#IFS=$'\n\t'
 
 # Let's get started.
+echo "init.bash: $BASH_VERSION"
 export DOTFILES=~/.dotfiles
 
 function is_interactive_shell() {
@@ -10,7 +10,7 @@ function is_interactive_shell() {
 }
 
 # OS detection
-function is_osx() {
+function is_macos() {
     [[ "$OSTYPE" =~ ^darwin ]] || return 1
 }
 
@@ -27,7 +27,7 @@ function read_os() {
   else return 1
   fi
 
-  # now source the file in a subshell to prevent polluting the shell variables of the 
+  # now source the file in a subshell to prevent polluting the shell variables of the
   # current shell, and bubble up the variable we're interested in
   echo "$(
     . $osrelease;
@@ -40,24 +40,13 @@ function is_ubuntu() {
   [[ "$(read_os ID)" == "ubuntu" ]] || return 1
 }
 
-function is_freebsd() {
-    [[ "$OSTYPE" =~ ^freebsd ]] || return 1
-}
 function get_os() {
-    for os in osx ubuntu freebsd; do
+    for os in macos ubuntu; do
         is_$os; [[ $? == "${1:-0}" ]] && echo $os
     done
 }
 
 ## macOS Arch
-function is_macos_apple_si() {
-  is_osx && [[ "$(sysctl -n machdep.cpu.brand_string)" =~ ^Apple ]] || return 1
-}
-function is_macos_intel() {
-  is_osx && [[ "$(sysctl -n machdep.cpu.brand_string)" =~ ^Intel ]] || return 1
-}
-function get_macos_arch() {
-    for arch in apple_si intel; do
-      is_macos_$arch; [[ $? == "${1:-0}" ]] && echo $arch
-    done
+function is_macos_apple_silicon() {
+  is_macos && [[ "$(sysctl -n machdep.cpu.brand_string)" =~ ^Apple ]] || return 1
 }

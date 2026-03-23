@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # only load on osx
-is_osx || return 1
+is_macos || return 1
 
 
 alias cleanup='sudo periodic weekly'
