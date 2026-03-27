@@ -26,6 +26,10 @@
     ~/.config/yamllint/config:
       path: config/yamllint/config.yaml
       create: true
+    ~/.config/zed:
+      glob: true
+      path: zed/**
+      create: true
     ~/.config/zellij: zellij
     ~/.ctags.d: ctags/
     ~/.dotfiles: ''
