@@ -17,7 +17,7 @@ call plug#begin('~/.vim_runtime/plugins/plugged')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'altercation/vim-colors-solarized' " solarized color scheme
+Plug 'ericbn/vim-solarized' " solarized color scheme
 Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim
 Plug 'bagrat/vim-buffet' " IDE-like Vim tabline
 Plug 'junegunn/goyo.vim' | Plug 'amix/vim-zenroom2' " distraction-free writing
@@ -78,7 +78,9 @@ let g:plug_window = 'new'
 " http://ethanschoonover.com/solarized
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 try
-    colorscheme solarized
+  set background=dark
+  colorscheme solarized
+  set termguicolors
 catch
 endtry
 hi! link txtBold Identifier

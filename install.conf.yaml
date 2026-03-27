@@ -18,6 +18,10 @@
       glob: true
       path: claude/**
       force: true
+    ~/.config/ghostty:
+      glob: true
+      path: ghostty/**
+      create: true
     ~/.config/starship.toml: config/starship/starship.toml
     ~/.config/yamllint/config:
       path: config/yamllint/config.yaml
