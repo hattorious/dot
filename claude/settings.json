@@ -7,7 +7,10 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "allow": [],
+    "allow": [
+      "mcp__basic-memory__*",
+      "mcp__private-journal__*"
+    ],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
@@ -113,13 +116,20 @@
     "worldview-synthesis@2389-research-marketplace": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "review-squad@2389-research-marketplace": true,
-    "simmer@2389-research-marketplace": true
+    "simmer@2389-research-marketplace": true,
+    "superpowers@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "2389-research-marketplace": {
       "source": {
         "source": "github",
         "repo": "2389-research/claude-plugins"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
       }
     }
   },
