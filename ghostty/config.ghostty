@@ -26,7 +26,10 @@ copy-on-select = clipboard
 macos-auto-secure-input = false
 
 # Hot keys
-# Toggle the "quick" terminal globally from the top
-keybind = global:cmd+escape=toggle_quick_terminal
+# Toggle the "quick" terminal globally from anywhere
+keybind = global:ctrl+escape=toggle_quick_terminal
 
 language = en
+
+# Launch tmux on startup — every window attaches to (or creates) the "main" session
+initial-command = dot/ghostty/scripts/tmux-startup.sh
