@@ -25,8 +25,23 @@
     "metrics": false
   },
   "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true
+  },
+  "relative_line_numbers": "enabled",
+  "vertical_scroll_margin": 7,
+  "cursor_blink": false,
+  "remove_trailing_whitespace_on_save": true,
+  "format_on_save": "on",
+  "buffer_line_height": "comfortable",
   "terminal": {
-    "font_size": 20.0
+    "font_family": "Iosevka Nerd Font Mono",
+    "font_size": 20.0,
+    "shell": {
+      "program": "/bin/zsh"
+    }
   },
   "base_keymap": "VSCode",
   "buffer_font_fallbacks": [
@@ -43,6 +58,66 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Ayu Mirage",
+    "dark": "Solarized Dark",
   },
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": {
+      "enabled": true,
+      "delay_ms": 500
+    }
+  },
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true
+  },
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "scrollbar": {
+    "show": "auto",
+    "git_diff": true,
+    "search_results": true,
+    "selected_symbol": true,
+    "diagnostics": "all"
+  },
+  "project_panel": {
+    "dock": "left",
+    "git_status": true
+  },
+  "languages": {
+    "Go": {
+      "tab_size": 4,
+      "hard_tabs": true,
+      "code_actions_on_format": {
+        "source.organizeImports": true
+      }
+    },
+    "Make": {
+      "hard_tabs": true
+    },
+    "Markdown": {
+      "tab_size": 2,
+      "soft_wrap": "preferred_line_length"
+    },
+    "JavaScript": {
+      "tab_size": 2
+    },
+    "TypeScript": {
+      "tab_size": 2
+    },
+    "YAML": {
+      "tab_size": 2
+    },
+    "Python": {
+      "tab_size": 4
+    }
+  }
 }
