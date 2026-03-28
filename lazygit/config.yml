@@ -27,23 +27,56 @@ gui:
       - '#eb6f92' # love
     defaultFgColor:
       - '#e0def4' # text
-
   mouseEvents: false
   sidePanelWidth: 0.25
   expandFocusedSidePanel: true
   showFileTree: true
   nerdFontsVersion: "3"
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --syntax-theme=rose-pine
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --syntax-theme=rose-pine
   commit:
     signOff: false
   merging:
     manualCommit: false
-
 keybinding:
   universal:
     quit: q
     quit-alt1: <c-c>
+  files:
+    # c opens vim editor for commit (fugitive: cc), C for inline box
+    commitChangesWithEditor: 'c'
+    commitChanges: 'C'
+    # Free s/S/- for fugitive-style bindings
+    stashAllChanges: '<c-s>' # was s  — fugitive uses s to stage
+    viewStashOptions: '<c-S>' # was S
+    collapseAll: '_' # was - — fugitive uses - to toggle stage
+    expandAll: '+' # was =
+# vim-fugitive style bindings via customCommands
+customCommands:
+  # s — stage file (fugitive: s)
+  - key: 's'
+    context: 'files'
+    command: 'git add "{{.SelectedFile.Name}}"'
+    description: 'Stage file'
+  # u — unstage file (fugitive: u)
+  - key: 'u'
+    context: 'files'
+    command: 'git restore --staged "{{.SelectedFile.Name}}"'
+    description: 'Unstage file'
+  # - — toggle staged (fugitive: -)
+  - key: '-'
+    context: 'files'
+    command: >-
+      git diff --cached --name-only -- "{{.SelectedFile.Name}}" | grep -q . && git restore --staged "{{.SelectedFile.Name}}" || git add "{{.SelectedFile.Name}}"
+    description: 'Toggle staged'
+  # X — discard all changes to file (fugitive: X)
+  - key: 'X'
+    context: 'files'
+    command: 'git checkout -- "{{.SelectedFile.Name}}"'
+    description: 'Discard all changes to file'
+    prompts:
+      - type: confirm
+        title: 'Discard changes?'
+        body: 'Discard all changes to {{.SelectedFile.Name}}?'
