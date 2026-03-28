@@ -1,0 +1,49 @@
+# ABOUTME: lazygit configuration with Rosé Pine Moon theme.
+# ABOUTME: Wire up delta for diffs and keyboard-centric defaults.
+
+gui:
+  theme:
+    activeBorderColor:
+      - '#3e8fb0' # pine
+      - bold
+    inactiveBorderColor:
+      - '#393552' # overlay
+    searchingActiveBorderColor:
+      - '#f6c177' # gold
+      - bold
+    optionsTextColor:
+      - '#908caa' # subtle
+    selectedLineBgColor:
+      - '#393552' # overlay
+    cherryPickedCommitFgColor:
+      - '#9ccfd8' # foam
+    cherryPickedCommitBgColor:
+      - '#3e8fb0' # pine
+    markedBaseCommitFgColor:
+      - '#f6c177' # gold
+    markedBaseCommitBgColor:
+      - '#393552' # overlay
+    unstagedChangesColor:
+      - '#eb6f92' # love
+    defaultFgColor:
+      - '#e0def4' # text
+
+  mouseEvents: false
+  sidePanelWidth: 0.25
+  expandFocusedSidePanel: true
+  showFileTree: true
+  nerdFontsVersion: "3"
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --syntax-theme=rose-pine
+  commit:
+    signOff: false
+  merging:
+    manualCommit: false
+
+keybinding:
+  universal:
+    quit: q
+    quit-alt1: <c-c>

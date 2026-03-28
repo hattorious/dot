@@ -53,6 +53,8 @@ brew "ghz"
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# A simple terminal UI for git commands
+brew "lazygit"
 # Quickly rewrite git repository history
 brew "git-filter-repo"
 # GNU Privacy Guard (OpenPGP)

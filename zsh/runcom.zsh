@@ -12,6 +12,12 @@ if [[ -f ${ZDOTDIR:-${HOME}}/.dotfiles/zsh/functions/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.dotfiles/zsh/functions/init.zsh
 fi
 
+#### XDG
+# Use ~/.config for all XDG-aware tools instead of ~/Library on macOS
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
 #### TERMINAL
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
