@@ -18,6 +18,9 @@
       glob: true
       path: claude/**
       force: true
+    ~/.config/bat/themes:
+      path: bat/themes/
+      create: true
     ~/.config/ghostty:
       glob: true
       path: ghostty/**

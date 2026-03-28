@@ -16,7 +16,7 @@
 
 [delta]
 	navigate = true
-	syntax-theme = base16
+	syntax-theme = rose-pine
 
 [interactive]
 	diffFilter = delta --color-only
