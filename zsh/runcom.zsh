@@ -1,11 +1,13 @@
+#!/usr/bin/env zsh
+# ABOUTME: Main zsh configuration file. Sources modular configs for each platform.
+# ABOUTME: Extend via zsh/alias.common.zsh, zsh/runcom.macos.zsh, etc.
+
 # OPENSPEC:START
 # OpenSpec shell completions configuration
 fpath=("/Users/rhattori/.zsh/completions" $fpath)
 autoload -Uz compinit
 compinit
 # OPENSPEC:END
-
-#!/usr/bin/env zsh
 
 # Source utility functions toolkit
 if [[ -f ${ZDOTDIR:-${HOME}}/.dotfiles/zsh/functions/init.zsh ]]; then
@@ -85,17 +87,4 @@ fi
 #### LOCAL SETTINGS
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local
-fi
-
-# pnpm
-export PNPM_HOME="/Users/rhattori/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# Added by Spectra
-if [[ -z ${path[(r)$HOME/.local/bin]} ]]; then
-  path=("$HOME/.local/bin" $path)
 fi
