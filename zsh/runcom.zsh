@@ -3,10 +3,8 @@
 # ABOUTME: Extend via zsh/alias.common.zsh, zsh/runcom.macos.zsh, etc.
 
 # OPENSPEC:START
-# OpenSpec shell completions configuration
+# OpenSpec shell completions — fpath must be set before zim calls compinit
 fpath=("/Users/rhattori/.zsh/completions" $fpath)
-autoload -Uz compinit
-compinit
 # OPENSPEC:END
 
 # Source utility functions toolkit
