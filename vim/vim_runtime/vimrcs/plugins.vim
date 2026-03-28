@@ -17,9 +17,9 @@ call plug#begin('~/.vim_runtime/plugins/plugged')
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'ericbn/vim-solarized' " solarized color scheme
+Plug 'rose-pine/vim', { 'as': 'rosepine' } " Rosé Pine color scheme
 Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim
-Plug 'bagrat/vim-buffet' " IDE-like Vim tabline
+Plug 'mengelbrecht/lightline-bufferline' " Buffer tabline for lightline
 Plug 'junegunn/goyo.vim' | Plug 'amix/vim-zenroom2' " distraction-free writing
 Plug 'editorconfig/editorconfig-vim' " EditorConfig plugin for Vim
 Plug 'airblade/vim-gitgutter' " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
@@ -54,7 +54,7 @@ Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive.vim
 Plug 'whiteinge/diffconflicts' " A better Vimdiff Git mergetool
 Plug 'hashivim/vim-terraform', {'for': 'terraform' } " terraform integration
 Plug 'alx741/vinfo' " Vim info documentation reader, allows to read info pages when inside a Vim session or from the shell prompt (instead of Info)
-Plug 'mhinz/vim-grepper' " 👾 Helps you win at grep.
+Plug 'mhinz/vim-grepper' " Helps you win at grep.
 
 
 " This devicons is always last
@@ -73,14 +73,13 @@ let g:plug_window = 'new'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Solarized
-" precision colorscheme for the vim text editor
-" http://ethanschoonover.com/solarized
+" => Rosé Pine
+" https://rosepinetheme.com
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:rosepine_variant = 'moon'
 try
-  set background=dark
-  colorscheme solarized
   set termguicolors
+  colorscheme rosepine
 catch
 endtry
 hi! link txtBold Identifier
@@ -103,12 +102,11 @@ hi! link jClass Title
 " Javascript language support
 hi! link javascriptJGlobalMethod Statement
 
-" Make the braces and other noisy things slightly less noisy
-hi! jsParens guifg=#005F78 cterm=NONE term=NONE ctermfg=NONE ctermbg=NONE
+" Mute JS braces/noise using Rosé Pine Moon overlay
+hi! jsParens guifg=#393552 cterm=NONE term=NONE ctermfg=NONE ctermbg=NONE
 hi! link jsFuncParens jsParens
 hi! link jsFuncBraces jsParens
 hi! link jsBraces jsParens
-hi! link jsParens jsParens
 hi! link jsNoise jsParens
 
 hi! link NERDTreeFile Constant
@@ -118,27 +116,12 @@ hi! link sassMixinName Function
 hi! link sassDefinition Function
 hi! link sassProperty Type
 hi! link htmlTagName Type
+hi! link htmlLink Include
 
 hi! PreProc gui=bold
-
-" Solarized separators are a little too distracting.
-" This moves separators, comments, and normal
-" text into the same color family as the background.
-" Using the http://drpeterjones.com/colorcalc/,
-" they are now just differently saturated and
-" valued riffs on the background color, making
-" everything play together just a little more nicely.
-hi! VertSplit guifg=#003745 cterm=NONE term=NONE ctermfg=NONE ctermbg=NONE
-hi! LineNR guifg=#004C60 gui=bold guibg=#002B36 ctermfg=146
-hi! link NonText VertSplit
-hi! Normal guifg=#77A5B1
-hi! Constant guifg=#00BCE0
-hi! Comment guifg=#52737B
-hi! link htmlLink Include
-hi! CursorLine cterm=NONE gui=NONE
-hi! Visual ctermbg=233
 hi! Type gui=bold
-hi! EasyMotionTarget ctermfg=100 guifg=#4CE660 gui=bold
+hi! CursorLine cterm=NONE gui=NONE
+hi! EasyMotionTarget guifg=#9ccfd8 gui=bold
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -147,7 +130,7 @@ hi! EasyMotionTarget ctermfg=100 guifg=#4CE660 gui=bold
 " https://github.com/itchyny/lightline.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'rosepine_patched',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
@@ -162,10 +145,15 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-
-let g:lightline.enable = {
-      \ 'tabline': 0
+let g:lightline.tabline = {
+      \ 'left': [ [ 'buffers' ] ],
+      \ 'right': [ [ 'close' ] ]
       \ }
+let g:lightline.component_expand = { 'buffers': 'lightline#bufferline#buffers' }
+let g:lightline.component_type   = { 'buffers': 'tabsel' }
+let g:lightline.enable = { 'tabline': 1 }
+
+set showtabline=2
 
 " Display a lock symbol if the current buffer is read-only
 function! MyReadonly()
@@ -192,7 +180,7 @@ function! MyFilename()
        \ ('' != expand('%') ? expand('%') : '[NoName]')
 endfunction
 
-" Display the devicon before the fiyle type if available
+" Display the filetype
 function! MyFiletype()
   if winwidth(0) > 70
     let _ = (exists('*WebDevIconsGetFileTypeSymbol') ? WebDevIconsGetFileTypeSymbol() . ' ' : '')
@@ -201,24 +189,19 @@ function! MyFiletype()
   return ''
 endfunction
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Buffet
-" IDE-like Vim tabline
-" https://github.com/bagrat/vim-buffet
+" => lightline-bufferline
+" Buffer tabline extension for lightline
+" https://github.com/mengelbrecht/lightline-bufferline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use powerline separators in between buffers and tabs in the tabline
-let g:buffet_powerline_separators = 1
-
-let g:buffet_modified_icon = " " " \uf44d
-
-let g:buffet_new_buffer_name = "󰜡" " \uf0721
-
-let g:buffet_tab_icon = "󰓩" " \uf04e9
-let g:buffet_left_trunc_icon = "" " \uf0a8
-let g:buffet_right_trunc_icon = "" " \uf0a9
+let g:lightline#bufferline#show_number  = 0
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#unnamed      = '[No Name]'
 
 noremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Goyo
@@ -356,23 +339,23 @@ let g:black_virtualenv="~/.vim_runtime/tmp/black_venv"
 " A vim plugin to display the indention levels with thin vertical lines
 " https://github.com/Yggdroot/indentLine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_char = '' " \ue621
+let g:indentLine_char = ''
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Grepper
-" 👾 Helps you win at grep.
+" Helps you win at grep.
 " https://github.com/mhinz/vim-grepper
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <leader>g :Grepper<cr>
 nnoremap <leader>gg :Grepper -tool git<cr>
-nnoremap <leader>ga :Grepper -tool ag<cr>
-nnoremap <leader>gs :Grepper -tool ag -side<cr>
+nnoremap <leader>ga :Grepper -tool rg<cr>
+nnoremap <leader>gs :Grepper -tool rg -side<cr>
 nnoremap <leader>vg :Grepper -tool git -cword -noprompt<cr>
-nnoremap <leader>va :Grepper -tool ag -cword -noprompt<cr>
+nnoremap <leader>va :Grepper -tool rg -cword -noprompt<cr>
 
 let g:grepper = {}
-let g:grepper.tools = ['git', 'ag', 'grep']
+let g:grepper.tools = ['git', 'rg', 'grep']
 let g:grepper.open = 1
 let g:grepper.switch = 1
 let g:grepper.quickfix = 1

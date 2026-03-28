@@ -16,7 +16,7 @@
 
 [delta]
 	navigate = true
-	syntax-theme = Solarized (dark)
+	syntax-theme = base16
 
 [interactive]
 	diffFilter = delta --color-only

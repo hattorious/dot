@@ -57,8 +57,8 @@
   "buffer_font_size": 22.0,
   "theme": {
     "mode": "dark",
-    "light": "One Light",
-    "dark": "Solarized Dark",
+    "light": "Rosé Pine",
+    "dark": "Rosé Pine Moon",
   },
   "git": {
     "git_gutter": "tracked_files",
