@@ -30,9 +30,8 @@
       glob: true
       path: zed/**
       create: true
-    ~/.config/zellij: zellij
     ~/.ctags.d: ctags/
-    ~/.dotfiles: ''
+    ~/.dotfiles: ""
     ~/.gitcommittemplate: git/commit_template.txt
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/ignore_global
