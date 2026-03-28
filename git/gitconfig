@@ -8,13 +8,15 @@
 	excludesfile = ~/.gitignore_global
 	whitespace = trailing-space,space-before-tab
 	pager = delta
+
+[pager]
 	log = delta
 	reflog = delta
 	show = delta
 
 [delta]
 	navigate = true
-	;syntax-theme = OneHalfLight
+	syntax-theme = Solarized (dark)
 
 [interactive]
 	diffFilter = delta --color-only
@@ -23,9 +25,7 @@
 	co = checkout
 	cm = commit
 	st = status
-	br = branch
 	cl = clone
-	cp = cherry-pick
 	hist = log --graph --oneline --no-merges
 	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
 	fl = log -u
@@ -51,13 +51,12 @@
 	tree = log --graph --pretty=oneline --abbrev-commit --decorate --color
 	cp = cherry-pick -x
 	b = branch -v
+	br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 	r = remote -v
 	t = tag -l
 	unstage = reset HEAD
 	uncommit = reset --soft HEAD^
 	copr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short --abbrev-commit --decorate --color
-	br = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 [diff]
 	renames = copies
