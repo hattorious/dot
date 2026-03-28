@@ -64,10 +64,14 @@
 [merge]
 	summary = true
 	stat = true
-	conflictstyle = diff3
+	tool = diffconflicts
 
 [mergetool]
 	keepBackup = false
+
+[mergetool "diffconflicts"]
+	cmd = vim -c DiffConflicts "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+	trustExitCode = true
 
 [init]
 	defaultBranch = main
