@@ -128,3 +128,9 @@ fi
 if [[ -f ~/.bash_aliases.local ]]; then
     . ~/.bash_aliases.local
 fi
+
+# Added by Spectra
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac
