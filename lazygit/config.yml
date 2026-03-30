@@ -2,36 +2,36 @@
 # ABOUTME: Wire up delta for diffs and keyboard-centric defaults.
 
 gui:
+  nerdFontsVersion: "3"
   theme:
     activeBorderColor:
-      - '#3e8fb0' # pine
+      - "#3e8fb0" # pine
       - bold
     inactiveBorderColor:
-      - '#393552' # overlay
+      - "#393552" # overlay
     searchingActiveBorderColor:
-      - '#f6c177' # gold
+      - "#f6c177" # gold
       - bold
     optionsTextColor:
-      - '#908caa' # subtle
+      - "#908caa" # subtle
     selectedLineBgColor:
-      - '#393552' # overlay
+      - "#393552" # overlay
     cherryPickedCommitFgColor:
-      - '#9ccfd8' # foam
+      - "#9ccfd8" # foam
     cherryPickedCommitBgColor:
-      - '#3e8fb0' # pine
+      - "#3e8fb0" # pine
     markedBaseCommitFgColor:
-      - '#f6c177' # gold
+      - "#f6c177" # gold
     markedBaseCommitBgColor:
-      - '#393552' # overlay
+      - "#393552" # overlay
     unstagedChangesColor:
-      - '#eb6f92' # love
+      - "#eb6f92" # love
     defaultFgColor:
-      - '#e0def4' # text
+      - "#e0def4" # text
   mouseEvents: false
   sidePanelWidth: 0.25
   expandFocusedSidePanel: true
   showFileTree: true
-  nerdFontsVersion: "3"
 git:
   pagers:
     - colorArg: always
@@ -44,39 +44,42 @@ keybinding:
   universal:
     quit: q
     quit-alt1: <c-c>
+    goInto: ';'
   files:
     # c opens vim editor for commit (fugitive: cc), C for inline box
-    commitChangesWithEditor: 'c'
-    commitChanges: 'C'
+    commitChangesWithEditor: "c"
+    commitChanges: "C"
     # Free s/S/- for fugitive-style bindings
-    stashAllChanges: '<c-s>' # was s  — fugitive uses s to stage
-    viewStashOptions: '<c-S>' # was S
-    collapseAll: '_' # was - — fugitive uses - to toggle stage
-    expandAll: '+' # was =
+    stashAllChanges: "<c-s>" # was s  — fugitive uses s to stage
+    viewStashOptions: "<c-S>" # was S
+    collapseAll: "_" # was - — fugitive uses - to toggle stage
+    expandAll: "+" # was =
+  main: {}
+
 # vim-fugitive style bindings via customCommands
 customCommands:
   # s — stage file (fugitive: s)
-  - key: 's'
-    context: 'files'
+  - key: "s"
+    context: "files"
     command: 'git add "{{.SelectedFile.Name}}"'
-    description: 'Stage file'
+    description: "Stage file"
   # u — unstage file (fugitive: u)
-  - key: 'u'
-    context: 'files'
+  - key: "u"
+    context: "files"
     command: 'git restore --staged "{{.SelectedFile.Name}}"'
-    description: 'Unstage file'
+    description: "Unstage file"
   # - — toggle staged (fugitive: -)
-  - key: '-'
-    context: 'files'
+  - key: "-"
+    context: "files"
     command: >-
       git diff --cached --name-only -- "{{.SelectedFile.Name}}" | grep -q . && git restore --staged "{{.SelectedFile.Name}}" || git add "{{.SelectedFile.Name}}"
-    description: 'Toggle staged'
+    description: "Toggle staged"
   # X — discard all changes to file (fugitive: X)
-  - key: 'X'
-    context: 'files'
+  - key: "X"
+    context: "files"
     command: 'git checkout -- "{{.SelectedFile.Name}}"'
-    description: 'Discard all changes to file'
+    description: "Discard all changes to file"
     prompts:
       - type: confirm
-        title: 'Discard changes?'
-        body: 'Discard all changes to {{.SelectedFile.Name}}?'
+        title: "Discard changes?"
+        body: "Discard all changes to {{.SelectedFile.Name}}?"
