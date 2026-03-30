@@ -103,6 +103,31 @@ lazygit use `~/.config/lazygit/` instead of `~/Library/Application Support/`.
 zim's `completion` module calls `compinit`. Do not call `compinit` manually
 before `source ${ZIM_HOME}/init.zsh`. Setting `fpath` before zim is fine.
 
+### lazygit keybinding system
+
+**Context overrides don't work for universal keys.** Keys like `<space>` are
+bound in `universal` and take precedence — you cannot override them per-context
+(e.g. files). Setting `goInto: '<space>'` in `files` does nothing because
+`universal.select: <space>` wins.
+
+**Workflow for adding keybindings**: fetch the full defaults doc first, audit
+what's taken in `universal` and the target context, then propose one change.
+Reference: `lazygit/defaults-reference.md`
+
+**Known conflicts to avoid**:
+- `<space>` → `universal.select` (can't override per-context)
+- `<enter>` → context-sensitive, do not remap
+- `h` / `l` → panel navigation
+- `f` in files → fetch
+- `<tab>` → `universal.togglePanel`
+
+**Confirmed free keys** (files context, verified 2026-03):
+- `;` — in use as `goInto` (toggle directory open/close)
+- `'` — free
+
+**Agent instruction**: Before any lazygit keybinding work, read
+`lazygit/defaults-reference.md` rather than fetching the upstream docs.
+
 ### vim lightline tab color
 The active buffer tab uses a custom lightline colorscheme
 (`rosepine_patched`) defined in `autoload/lightline/colorscheme/`. Editing
