@@ -7,10 +7,7 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
-    "allow": [
-      "mcp__basic-memory__*",
-      "mcp__private-journal__*"
-    ],
+    "allow": ["mcp__basic-memory__*", "mcp__private-journal__*"],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
@@ -138,5 +135,6 @@
   "mcpServers": {},
   "feedbackSurveyState": {
     "lastShownTime": 1754360713440
-  }
+  },
+  "autoUpdatesChannel": "stable"
 }
