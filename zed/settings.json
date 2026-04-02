@@ -7,9 +7,6 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "edit_predictions": {
-    "provider": "copilot"
-  },
   "autosave": {
     "after_delay": {
       "milliseconds": 1000
