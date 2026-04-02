@@ -1,13 +1,105 @@
 {
+  "alwaysThinkingEnabled": true,
+  "autoUpdatesChannel": "stable",
   "cleanupPeriodDays": 999,
-  "env": {
-    "DISABLE_TELEMETRY": "1",
-    "DISABLE_ERROR_REPORTING": "1",
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  "enabledPlugins": {
+    "agent-browser@agent-browser": true,
+    "ask-questions-if-underspecified@trailofbits": true,
+    "audit-context-building@trailofbits": true,
+    "beads@beads-marketplace": false,
+    "better-dev@2389-research-marketplace": true,
+    "binary-re@2389-research-marketplace": true,
+    "botboard-biz@2389-research-marketplace": true,
+    "building-multiagent-systems@2389-research-marketplace": true,
+    "commit-commands@claude-code-plugins": true,
+    "css-development@2389-research-marketplace": true,
+    "differential-review@trailofbits": true,
+    "documentation-audit@2389-research-marketplace": true,
+    "elements-of-style@superpowers-marketplace": true,
+    "episodic-memory@superpowers-marketplace": false,
+    "firebase-development@2389-research-marketplace": true,
+    "fresh-eyes-review@2389-research-marketplace": true,
+    "frontend-design@claude-code-plugins": true,
+    "git-cleanup@trailofbits": true,
+    "gtm-partner@2389-research-marketplace": true,
+    "insecure-defaults@trailofbits": true,
+    "journal@2389-research-marketplace": true,
+    "landing-page-design@2389-research-marketplace": true,
+    "last30days@skills-curated": true,
+    "mcp-agent-social@2389-research-marketplace": false,
+    "modern-python@trailofbits": true,
+    "office-admin@harper.dev": false,
+    "osgrep@osgrep": true,
+    "pr-review-toolkit@claude-code-plugins": true,
+    "prbuddy@2389-research-marketplace": true,
+    "private-journal-mcp@2389-research-marketplace": true,
+    "product-launcher@2389-research-marketplace": true,
+    "qbp@2389-research-marketplace": true,
+    "remote-system-maintenance@2389-research-marketplace": true,
+    "review-squad@2389-research-marketplace": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "scenario-testing@2389-research-marketplace": true,
+    "security-awareness@skills-curated": true,
+    "security-guidance@claude-code-plugins": true,
+    "simmer@2389-research-marketplace": true,
+    "socialmedia@2389-research-marketplace": true,
+    "spec-to-code-compliance@trailofbits": true,
+    "superpowers-chrome@superpowers-marketplace": true,
+    "superpowers-dev@superpowers-marketplace": true,
+    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
+    "superpowers-lab@superpowers-marketplace": true,
+    "superpowers@claude-plugins-official": true,
+    "superpowers@superpowers-marketplace": true,
+    "sysadmin@2389-research-marketplace": true,
+    "test-kitchen@2389-research-marketplace": true,
+    "variant-analysis@trailofbits": true,
+    "workflow-skill-design@trailofbits": true,
+    "worldview-synthesis@2389-research-marketplace": true,
+    "x-research@skills-curated": true,
+    "xtool@2389-research-marketplace": true
   },
+  "env": {
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "DISABLE_ERROR_REPORTING": "1",
+    "DISABLE_TELEMETRY": "1"
+  },
+  "extraKnownMarketplaces": {
+    "2389-research-marketplace": {
+      "source": {
+        "repo": "2389-research/claude-plugins",
+        "source": "github"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "repo": "obra/superpowers-marketplace",
+        "source": "github"
+      }
+    }
+  },
+  "feedbackSurveyState": {
+    "lastShownTime": 1754360713440
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "command": "osascript -e 'display notification \"Claude needs your attention\" with title \"Claude Code\"'",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {},
   "permissions": {
-    "allow": ["mcp__basic-memory__*", "mcp__private-journal__*"],
+    "allow": [
+      "mcp__basic-memory__*",
+      "mcp__private-journal__*"
+    ],
     "deny": [
       "Bash(rm -rf *)",
       "Bash(rm -fr *)",
@@ -42,99 +134,10 @@
       "Read(~/Library/Application Support/**/solflare*/**)"
     ]
   },
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "osascript -e 'display notification \"Claude needs your attention\" with title \"Claude Code\"'"
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/scripts/statusline.sh",
-    "padding": 0
-  },
-  "enabledPlugins": {
-    "binary-re@2389-research-marketplace": true,
-    "better-dev@2389-research-marketplace": true,
-    "botboard-biz@2389-research-marketplace": true,
-    "building-multiagent-systems@2389-research-marketplace": true,
-    "commit-commands@claude-code-plugins": true,
-    "css-development@2389-research-marketplace": true,
-    "documentation-audit@2389-research-marketplace": true,
-    "elements-of-style@superpowers-marketplace": true,
-    "episodic-memory@superpowers-marketplace": false,
-    "beads@beads-marketplace": false,
-    "firebase-development@2389-research-marketplace": true,
-    "fresh-eyes-review@2389-research-marketplace": true,
-    "frontend-design@claude-code-plugins": true,
-    "journal@2389-research-marketplace": true,
-    "landing-page-design@2389-research-marketplace": true,
-    "mcp-agent-social@2389-research-marketplace": false,
-    "office-admin@harper.dev": false,
-    "osgrep@osgrep": true,
-    "pr-review-toolkit@claude-code-plugins": true,
-    "private-journal-mcp@2389-research-marketplace": false,
-    "remote-system-maintenance@2389-research-marketplace": true,
-    "scenario-testing@2389-research-marketplace": true,
-    "security-guidance@claude-code-plugins": true,
-    "socialmedia@2389-research-marketplace": true,
-    "superpowers@superpowers-marketplace": true,
-    "superpowers-chrome@superpowers-marketplace": true,
-    "superpowers-dev@superpowers-marketplace": true,
-    "superpowers-developing-for-claude-code@superpowers-marketplace": true,
-    "superpowers-lab@superpowers-marketplace": true,
-    "sysadmin@2389-research-marketplace": true,
-    "test-kitchen@2389-research-marketplace": true,
-    "xtool@2389-research-marketplace": true,
-    "agent-browser@agent-browser": true,
-    "last30days@skills-curated": true,
-    "security-awareness@skills-curated": true,
-    "x-research@skills-curated": true,
-    "ask-questions-if-underspecified@trailofbits": true,
-    "audit-context-building@trailofbits": true,
-    "differential-review@trailofbits": true,
-    "git-cleanup@trailofbits": true,
-    "insecure-defaults@trailofbits": true,
-    "modern-python@trailofbits": true,
-    "spec-to-code-compliance@trailofbits": true,
-    "variant-analysis@trailofbits": true,
-    "workflow-skill-design@trailofbits": true,
-    "gtm-partner@2389-research-marketplace": true,
-    "prbuddy@2389-research-marketplace": true,
-    "product-launcher@2389-research-marketplace": true,
-    "qbp@2389-research-marketplace": true,
-    "worldview-synthesis@2389-research-marketplace": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "review-squad@2389-research-marketplace": true,
-    "simmer@2389-research-marketplace": true,
-    "superpowers@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "2389-research-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "2389-research/claude-plugins"
-      }
-    },
-    "superpowers-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers-marketplace"
-      }
-    }
-  },
-  "alwaysThinkingEnabled": true,
   "skipDangerousModePermissionPrompt": true,
-  "mcpServers": {},
-  "feedbackSurveyState": {
-    "lastShownTime": 1754360713440
-  },
-  "autoUpdatesChannel": "stable"
+  "statusLine": {
+    "command": "bash ~/.claude/scripts/statusline.sh",
+    "padding": 0,
+    "type": "command"
+  }
 }
