@@ -3,9 +3,9 @@
 
 alias lg='lazygit'
 
-# ag → rg migration reminder
+# ag → sg migration reminder
 function ag {
-  echo "⚠ 'ag' is retired — use 'rg' (ripgrep) instead." >&2
-  echo "  Your command: rg $*" >&2
-  rg "$@"
+  echo "⚠ 'ag' is retired — use 'sg' (ast-grep) instead." >&2
+  echo "  Your command: sg $*" >&2
+  sg "$@"
 }
