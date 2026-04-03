@@ -55,3 +55,7 @@ tags
 # kustomize directories #
 #########################
 kustom
+
+# clod private thoughts #
+#########################
+.private-journal
