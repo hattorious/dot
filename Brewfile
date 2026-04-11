@@ -41,12 +41,12 @@ brew "dotenv-linter"
 brew "evans"
 # Collection of GNU find, xargs, and locate
 brew "findutils"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # Fast and simple Node.js version manager
 brew "fnm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# Simple, fast and user-friendly alternative to find
-brew "fd"
 # GitHub command-line tool
 brew "gh"
 # Simple gRPC benchmarking and load testing tool

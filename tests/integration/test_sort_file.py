@@ -76,3 +76,12 @@ def test_exits_on_write_error(tmp_path):
         assert exc_info.value.code == 1
     finally:
         tmp_path.chmod(0o755)  # restore permissions so tmp_path cleanup works
+
+
+def test_sort_is_idempotent(tmp_path):
+    f = tmp_path / "test.json"
+    f.write_text('{"b": 1, "a": 2}\n', encoding="utf-8")
+    sort_file(str(f))
+    first = f.read_text(encoding="utf-8")
+    sort_file(str(f))
+    assert f.read_text(encoding="utf-8") == first

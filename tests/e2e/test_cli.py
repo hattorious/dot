@@ -2,6 +2,9 @@
 # ABOUTME: Verifies the uv run entry point, multi-file handling, and error exit codes.
 import json
 import subprocess
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).parent.parent.parent
 
 
 def run_cli(*paths: str) -> subprocess.CompletedProcess:
@@ -9,6 +12,7 @@ def run_cli(*paths: str) -> subprocess.CompletedProcess:
         ["uv", "run", "scripts/sort_json.py", *paths],
         capture_output=True,
         text=True,
+        cwd=REPO_ROOT,
     )
 
 

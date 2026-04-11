@@ -50,17 +50,25 @@ def sort_file(path: str) -> None:
     if has_trailing_newline:
         result += "\n"
 
+    tmp_path_str = None
     try:
         dir_name = os.path.dirname(os.path.abspath(path))
         with tempfile.NamedTemporaryFile(
             "w", encoding="utf-8", dir=dir_name, delete=False
         ) as tmp:
             tmp.write(result)
-            tmp_path = tmp.name
-        os.replace(tmp_path, path)
+            tmp_path_str = tmp.name
+        os.replace(tmp_path_str, path)
+        tmp_path_str = None  # replace succeeded; nothing to clean up
     except OSError as e:
         print(f"Error writing {path}: {e}", file=sys.stderr)
         sys.exit(1)
+    finally:
+        if tmp_path_str is not None:
+            try:
+                os.unlink(tmp_path_str)
+            except OSError:
+                pass
 
 
 if __name__ == "__main__":
