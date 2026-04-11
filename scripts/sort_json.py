@@ -18,7 +18,11 @@ def sort_recursive(obj):
 
 
 def detect_indent(content: str) -> int:
-    raise NotImplementedError
+    for line in content.splitlines():
+        stripped = line.lstrip(" ")
+        if stripped and line != stripped:
+            return len(line) - len(stripped)
+    return 2
 
 
 def sort_file(path: str) -> None:
