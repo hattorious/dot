@@ -26,3 +26,10 @@ def test_ignores_blank_lines():
 def test_detects_indent_from_first_indented_line():
     content = '{\n  "a": {\n    "b": 1\n  }\n}'
     assert detect_indent(content) == 2
+
+
+def test_tab_indented_files_normalize_to_two_spaces():
+    # Tab-indented JSON is normalized to 2-space on output (by design).
+    # lstrip(" ") skips tab lines, falling through to the default of 2.
+    content = '{\n\t"key": "value"\n}'
+    assert detect_indent(content) == 2
