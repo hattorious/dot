@@ -1,46 +1,15 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
+    "cursor": {
+      "type": "registry"
+    }
+  },
   "autosave": {
     "after_delay": {
       "milliseconds": 1000
-    }
-  },
-  "agent_servers": {
-    "cursor": {
-      "type": "registry"
-    },
-    "claude-acp": {
-      "type": "registry"
-    }
-  },
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "vim_mode": true,
-  "vim": {
-    "use_system_clipboard": "always",
-    "use_smartcase_find": true,
-    "toggle_relative_line_numbers": true
-  },
-  "relative_line_numbers": "enabled",
-  "vertical_scroll_margin": 7,
-  "cursor_blink": false,
-  "remove_trailing_whitespace_on_save": true,
-  "format_on_save": "on",
-  "buffer_line_height": "comfortable",
-  "terminal": {
-    "font_family": "Iosevka Nerd Font Mono",
-    "font_size": 20.0,
-    "shell": {
-      "program": "/bin/zsh"
     }
   },
   "base_keymap": "VSCode",
@@ -51,73 +20,99 @@
     "monospace"
   ],
   "buffer_font_family": "Iosevka Nerd Font Mono",
-  "ensure_final_newline_on_save": true,
-  "icon_theme": "Zed (Default)",
-  "ui_font_size": 16,
   "buffer_font_size": 22.0,
-  "theme": {
-    "mode": "dark",
-    "light": "Rosé Pine",
-    "dark": "Rosé Pine Moon",
+  "buffer_line_height": "comfortable",
+  "cursor_blink": false,
+  "edit_predictions": {
+    "provider": "copilot"
   },
+  "ensure_final_newline_on_save": true,
+  "format_on_save": "on",
   "git": {
     "git_gutter": "tracked_files",
     "inline_blame": {
-      "enabled": true,
-      "delay_ms": 500
+      "delay_ms": 500,
+      "enabled": true
     }
   },
-  "inlay_hints": {
-    "enabled": true,
-    "show_type_hints": true,
-    "show_parameter_hints": true,
-    "show_other_hints": true
-  },
+  "icon_theme": "Zed (Default)",
   "indent_guides": {
     "enabled": true,
     "line_width": 1
   },
-  "tabs": {
-    "file_icons": true,
-    "git_status": true
-  },
-  "scrollbar": {
-    "show": "auto",
-    "git_diff": true,
-    "search_results": true,
-    "selected_symbol": true,
-    "diagnostics": "all"
-  },
-  "project_panel": {
-    "dock": "left",
-    "git_status": true
+  "inlay_hints": {
+    "enabled": true,
+    "show_other_hints": true,
+    "show_parameter_hints": true,
+    "show_type_hints": true
   },
   "languages": {
     "Go": {
-      "tab_size": 4,
-      "hard_tabs": true,
       "code_actions_on_format": {
         "source.organizeImports": true
-      }
+      },
+      "hard_tabs": true,
+      "tab_size": 4
+    },
+    "JavaScript": {
+      "tab_size": 2
     },
     "Make": {
       "hard_tabs": true
     },
     "Markdown": {
-      "tab_size": 2,
-      "soft_wrap": "preferred_line_length"
-    },
-    "JavaScript": {
+      "soft_wrap": "preferred_line_length",
       "tab_size": 2
+    },
+    "Python": {
+      "tab_size": 4
     },
     "TypeScript": {
       "tab_size": 2
     },
     "YAML": {
       "tab_size": 2
-    },
-    "Python": {
-      "tab_size": 4
     }
-  }
+  },
+  "project_panel": {
+    "dock": "left",
+    "git_status": true
+  },
+  "relative_line_numbers": "enabled",
+  "remove_trailing_whitespace_on_save": true,
+  "scrollbar": {
+    "diagnostics": "all",
+    "git_diff": true,
+    "search_results": true,
+    "selected_symbol": true,
+    "show": "auto"
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "terminal": {
+    "font_family": "Iosevka Nerd Font Mono",
+    "font_size": 20.0,
+    "shell": {
+      "program": "/bin/zsh"
+    }
+  },
+  "theme": {
+    "dark": "Rosé Pine Moon",
+    "light": "Rosé Pine",
+    "mode": "dark"
+  },
+  "ui_font_size": 16,
+  "vertical_scroll_margin": 7,
+  "vim": {
+    "toggle_relative_line_numbers": true,
+    "use_smartcase_find": true,
+    "use_system_clipboard": "always"
+  },
+  "vim_mode": true
 }

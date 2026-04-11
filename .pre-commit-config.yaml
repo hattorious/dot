@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: sort-json
+        name: Sort JSON keys
+        language: system
+        entry: uv run scripts/sort_json.py
+        types: [json]
+        exclude: |
+          (?x)^(
+            vim/vim_runtime/plugins/|
+            tmp/|
+            dotbot/
+          )
