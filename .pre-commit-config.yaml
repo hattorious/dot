@@ -1,6 +1,16 @@
 repos:
   - repo: local
     hooks:
+      - id: ruff-lint
+        name: Lint Python (ruff)
+        language: system
+        entry: uv run ruff check --fix
+        types: [python]
+      - id: ruff-format
+        name: Format Python (ruff)
+        language: system
+        entry: uv run ruff format
+        types: [python]
       - id: sort-json
         name: Sort JSON keys
         language: system

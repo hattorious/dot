@@ -1,6 +1,7 @@
 # ABOUTME: Integration tests for sort_file — tests file I/O, JSONC parsing, and error handling.
 # ABOUTME: Uses tmp_path fixture to avoid touching real files.
 import json
+
 import pytest
 from sort_json import sort_file
 

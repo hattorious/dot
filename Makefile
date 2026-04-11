@@ -27,6 +27,26 @@ brewfile:
 
 .PHONY: brewfile
 
+## Run the test suite
+test:
+	uv run pytest -v
+
+.PHONY: test
+
+## Lint and format Python code
+lint:
+	uv run ruff check scripts/ tests/
+	uv run ruff format --check scripts/ tests/
+
+.PHONY: lint
+
+## Auto-fix lint and format Python code
+fmt:
+	uv run ruff check --fix scripts/ tests/
+	uv run ruff format scripts/ tests/
+
+.PHONY: fmt
+
 ## Sort all JSON file keys recursively to reduce git diff noise
 sort-json:
 	fd --extension json \

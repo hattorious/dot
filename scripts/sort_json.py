@@ -4,11 +4,12 @@
 # dependencies = ["commentjson"]
 # ///
 
-import sys
 import json
-import commentjson
 import os
+import sys
 import tempfile
+
+import commentjson
 
 
 def sort_recursive(obj):
@@ -53,9 +54,7 @@ def sort_file(path: str) -> None:
     tmp_path_str = None
     try:
         dir_name = os.path.dirname(os.path.abspath(path))
-        with tempfile.NamedTemporaryFile(
-            "w", encoding="utf-8", dir=dir_name, delete=False
-        ) as tmp:
+        with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=dir_name, delete=False) as tmp:
             tmp.write(result)
             tmp_path_str = tmp.name
         os.replace(tmp_path_str, path)
