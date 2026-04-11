@@ -1,8 +1,10 @@
 # ABOUTME: Pure functions for MCP server config management (no dotbot dependency).
 # ABOUTME: Used by the dotbot mcp plugin and directly by unit and integration tests.
+import glob
 import json
 import os
 import plistlib
+import subprocess
 
 LABEL_PREFIX = "me.hattori.dotbot.mcp"
 SOCKET_DIR = "/tmp"
@@ -122,3 +124,23 @@ def update_tool_configs(enabled: dict, base_dir: str) -> None:
         with open(config_path, "w") as f:
             json.dump(existing, f, indent=2)
             f.write("\n")
+
+
+def cleanup_stale_plists(enabled: dict, launch_agents_dir: str = LAUNCH_AGENTS_DIR) -> list[str]:
+    """Remove launchd plists for servers no longer in enabled.
+
+    Calls `launchctl unload` before deleting each plist.
+    Returns the list of removed server names.
+    """
+    pattern = os.path.join(launch_agents_dir, f"{LABEL_PREFIX}.*.plist")
+    prefix = f"{LABEL_PREFIX}."
+    suffix = ".plist"
+    removed = []
+    for plist_path in glob.glob(pattern):
+        filename = os.path.basename(plist_path)
+        name = filename[len(prefix) : -len(suffix)]
+        if name not in enabled:
+            subprocess.run(["launchctl", "unload", plist_path], capture_output=True)
+            os.remove(plist_path)
+            removed.append(name)
+    return removed
