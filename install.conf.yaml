@@ -60,3 +60,56 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+
+- mcp:
+    env: mcp/.env
+    local: mcp/mcp.local.yaml
+    servers:
+      shortcut:
+        command: npx
+        args: ["-y", "@shortcut/mcp@latest"]
+        env:
+          SHORTCUT_API_TOKEN: SHORTCUT_API_TOKEN
+        tools: [claude-desktop, cursor]
+
+      terraform:
+        command: docker
+        args: ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:0.4.0"]
+        tools: [claude-desktop, cursor]
+
+      github:
+        command: docker
+        args: ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"]
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: GITHUB_PERSONAL_ACCESS_TOKEN
+        tools: [claude-desktop]
+
+      google-cloud-toolbox:
+        command: /opt/homebrew/bin/toolbox
+        args: ["--prebuilt", "bigquery,cloud-sql-postgres-admin,dataplex", "--stdio"]
+        env:
+          BIGQUERY_PROJECT: BIGQUERY_PROJECT
+          DATAPLEX_PROJECT: DATAPLEX_PROJECT
+        tools: [claude-desktop]
+
+      private-journal:
+        command: npx
+        args: ["github:obra/private-journal-mcp"]
+        tools: [claude-desktop]
+
+      basic-memory:
+        command: uvx
+        args: ["basic-memory", "mcp"]
+        tools: [claude-desktop]
+
+      circleci:
+        command: npx
+        args: ["-y", "@circleci/mcp-server-circleci"]
+        env:
+          CIRCLECI_TOKEN: CIRCLECI_TOKEN
+        tools: [cursor]
+
+      prefect:
+        command: uvx
+        args: ["--from", "prefect-mcp", "prefect-mcp-server"]
+        tools: [cursor]
