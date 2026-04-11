@@ -1,10 +1,7 @@
 # ABOUTME: Pure functions for MCP server config management (no dotbot dependency).
 # ABOUTME: Used by the dotbot mcp plugin and directly by unit and integration tests.
-import glob  # noqa: F401
-import json  # noqa: F401
-import os  # noqa: F401
-import plistlib  # noqa: F401
-import subprocess  # noqa: F401
+import os
+import plistlib
 
 LABEL_PREFIX = "me.hattori.dotbot.mcp"
 SOCKET_DIR = "/tmp"
@@ -52,6 +49,7 @@ def generate_plist(name: str, server: dict, env_values: dict) -> bytes:
 
     args = [server["command"]] + server.get("args", [])
 
+    # Keys absent from env_values are intentionally omitted (secret not configured on this machine).
     env_vars = {}
     for env_key, env_source in server.get("env", {}).items():
         if env_source in env_values:
