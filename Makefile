@@ -19,3 +19,12 @@ brewfile:
 	brew bundle dump --all --force --describe
 
 .PHONY: brewfile
+
+sort-json:
+	fd --extension json \
+	    --exclude "vim/vim_runtime/plugins" \
+	    --exclude "tmp" \
+	    --exclude "dotbot" \
+	    --exec-batch uv run scripts/sort_json.py
+
+.PHONY: sort-json

@@ -45,6 +45,8 @@ brew "findutils"
 brew "fnm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # GitHub command-line tool
 brew "gh"
 # Simple gRPC benchmarking and load testing tool
