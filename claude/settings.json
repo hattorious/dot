@@ -207,7 +207,14 @@
       }
     ]
   },
-  "mcpServers": {},
+  "mcpServers": {
+    "basic-memory": {
+      "args": [
+        "/tmp/me.hattori.dotbot.mcp.basic-memory.sock"
+      ],
+      "command": "/Users/rhattori/dot/mcp/bridge.sh"
+    }
+  },
   "permissions": {
     "allow": [
       "mcp__basic-memory__*",

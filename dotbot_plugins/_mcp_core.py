@@ -142,6 +142,7 @@ def generate_wrapper_script(name: str, server: dict) -> str:
     return (
         "#!/usr/bin/env bash\n"
         f"# ABOUTME: Wrapper for MCP server '{name}' — sets process name for macOS Login Items.\n"
+        'export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"\n'
         f"exec {quoted}\n"
     )
 

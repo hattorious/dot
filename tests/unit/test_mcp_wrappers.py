@@ -27,6 +27,11 @@ def test_generate_wrapper_script_exec_line():
     assert "exec uvx basic-memory mcp" in script
 
 
+def test_generate_wrapper_script_exports_path():
+    script = generate_wrapper_script("basic-memory", SERVER)
+    assert 'export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"' in script
+
+
 def test_generate_wrapper_script_quotes_args():
     script = generate_wrapper_script("shortcut", SERVER_WITH_SPACES)
     assert "exec npx -y @shortcut/mcp@latest" in script
