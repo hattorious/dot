@@ -2,6 +2,10 @@
 # ABOUTME: Reads server definitions from install.conf.yaml and mcp/mcp.local.yaml.
 import os
 import subprocess
+import sys
+
+# Ensure this directory is on sys.path so _mcp_core can be imported.
+sys.path.insert(0, os.path.dirname(__file__))
 
 import yaml
 from _mcp_core import (
