@@ -6,6 +6,10 @@ import os  # noqa: F401
 import plistlib  # noqa: F401
 import subprocess  # noqa: F401
 
+LABEL_PREFIX = "me.hattori.dotbot.mcp"
+SOCKET_DIR = "/tmp"
+LAUNCH_AGENTS_DIR = os.path.expanduser("~/Library/LaunchAgents")
+
 
 def parse_env(path: str) -> dict[str, str]:
     """Read a .env file and return key-value pairs. Missing file returns empty dict."""
@@ -39,3 +43,32 @@ def merge_local(base_servers: dict, local_servers: dict) -> dict:
             merged.update(local_override)
         result[name] = merged
     return result
+
+
+def generate_plist(name: str, server: dict, env_values: dict) -> bytes:
+    """Generate launchd plist XML bytes for an MCP server."""
+    label = f"{LABEL_PREFIX}.{name}"
+    sock_path = f"{SOCKET_DIR}/{label}.sock"
+
+    args = [server["command"]] + server.get("args", [])
+
+    env_vars = {}
+    for env_key, env_source in server.get("env", {}).items():
+        if env_source in env_values:
+            env_vars[env_key] = env_values[env_source]
+
+    plist: dict = {
+        "Label": label,
+        "ProgramArguments": args,
+        "Sockets": {
+            "MCP": {
+                "SockPathName": sock_path,
+                "SockType": "stream",
+            }
+        },
+        "inetdCompatibility": {"Wait": False},
+    }
+    if env_vars:
+        plist["EnvironmentVariables"] = env_vars
+
+    return plistlib.dumps(plist, fmt=plistlib.FMT_XML)
