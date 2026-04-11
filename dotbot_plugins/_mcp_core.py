@@ -101,6 +101,7 @@ def update_tool_configs(enabled: dict, base_dir: str) -> None:
     """
     tool_servers: dict[str, dict] = {}
     for name, server in enabled.items():
+        # Servers with no 'tools' key are intentionally registered nowhere.
         for tool in server.get("tools", []):
             tool_servers.setdefault(tool, {})[name] = server
 
@@ -108,7 +109,7 @@ def update_tool_configs(enabled: dict, base_dir: str) -> None:
         config_path = TOOL_CONFIG_PATHS.get(tool)
         if not config_path:
             continue
-        mcp_key = TOOL_MCP_KEY[tool]
+        mcp_key = TOOL_MCP_KEY.get(tool, "mcpServers")
 
         existing: dict = {}
         if os.path.exists(config_path):

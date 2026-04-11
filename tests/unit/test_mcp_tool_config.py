@@ -1,4 +1,3 @@
-# tests/unit/test_mcp_tool_config.py
 # ABOUTME: Unit tests for generate_tool_entry and update_tool_configs.
 # ABOUTME: Verifies bridge.sh path, socket path, key replacement, and preservation of other config.
 import json
