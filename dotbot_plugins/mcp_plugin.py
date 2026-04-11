@@ -12,10 +12,12 @@ from _mcp_core import (
     LABEL_PREFIX,
     LAUNCH_AGENTS_DIR,
     cleanup_stale_plists,
+    cleanup_stale_wrappers,
     generate_plist,
     merge_local,
     parse_env,
     update_tool_configs,
+    write_wrapper_scripts,
 )
 
 import dotbot
@@ -48,9 +50,13 @@ class McpPlugin(dotbot.Plugin):
         env_path = os.path.join(base_dir, data.get("env", "mcp/.env"))
         env_values = parse_env(env_path)
 
+        wrapper_paths = write_wrapper_scripts(enabled, base_dir)
+
         os.makedirs(LAUNCH_AGENTS_DIR, exist_ok=True)
         for name, server in enabled.items():
-            plist_bytes = generate_plist(name, server, env_values)
+            # Use the wrapper script as the command so macOS Login Items shows the server name.
+            wrapper_server = dict(server, command=wrapper_paths[name], args=[])
+            plist_bytes = generate_plist(name, wrapper_server, env_values)
             plist_path = os.path.join(LAUNCH_AGENTS_DIR, f"{LABEL_PREFIX}.{name}.plist")
 
             # Unload is best-effort — the plist may not be loaded yet on first install.
@@ -64,6 +70,7 @@ class McpPlugin(dotbot.Plugin):
                 self._log.warning(f"MCP: failed to load {name}: {result.stderr.strip()}")
 
         cleanup_stale_plists(enabled)
+        cleanup_stale_wrappers(enabled, base_dir)
         update_tool_configs(enabled, base_dir)
 
         return True

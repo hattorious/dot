@@ -4,6 +4,7 @@ import glob
 import json
 import os
 import plistlib
+import shlex
 import subprocess
 
 LABEL_PREFIX = "me.hattori.dotbot.mcp"
@@ -129,6 +130,55 @@ def update_tool_configs(enabled: dict, base_dir: str) -> None:
         with open(config_path, "w") as f:
             json.dump(existing, f, indent=2)
             f.write("\n")
+
+
+def generate_wrapper_script(name: str, server: dict) -> str:
+    """Return bash wrapper script content for an MCP server.
+
+    The wrapper exec's into the real command so macOS Login Items shows the server name.
+    """
+    parts = [server["command"]] + server.get("args", [])
+    quoted = " ".join(shlex.quote(p) for p in parts)
+    return (
+        "#!/usr/bin/env bash\n"
+        f"# ABOUTME: Wrapper for MCP server '{name}' — sets process name for macOS Login Items.\n"
+        f"exec {quoted}\n"
+    )
+
+
+def write_wrapper_scripts(enabled: dict, base_dir: str) -> dict[str, str]:
+    """Write wrapper scripts to mcp/agents/ under base_dir.
+
+    Creates the directory if needed. Sets each script executable.
+    Returns a mapping of server name to absolute script path.
+    """
+    agents_dir = os.path.join(base_dir, "mcp", "agents")
+    os.makedirs(agents_dir, exist_ok=True)
+    paths: dict[str, str] = {}
+    for name, server in enabled.items():
+        script_path = os.path.join(agents_dir, name)
+        content = generate_wrapper_script(name, server)
+        with open(script_path, "w") as f:
+            f.write(content)
+        os.chmod(script_path, 0o755)
+        paths[name] = script_path
+    return paths
+
+
+def cleanup_stale_wrappers(enabled: dict, base_dir: str) -> list[str]:
+    """Remove wrapper scripts in mcp/agents/ whose name is not in enabled.
+
+    Returns the list of removed server names.
+    """
+    agents_dir = os.path.join(base_dir, "mcp", "agents")
+    if not os.path.isdir(agents_dir):
+        return []
+    removed = []
+    for entry in os.listdir(agents_dir):
+        if entry not in enabled:
+            os.remove(os.path.join(agents_dir, entry))
+            removed.append(entry)
+    return removed
 
 
 def cleanup_stale_plists(enabled: dict, launch_agents_dir: str = LAUNCH_AGENTS_DIR) -> list[str]:

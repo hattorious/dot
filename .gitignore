@@ -252,3 +252,4 @@ vim/vim_runtime/sources*
 vim/vim_runtime/autoload/plug.vim.old
 mcp/.env
 mcp/mcp.local.yaml
+mcp/agents/
