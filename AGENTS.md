@@ -6,6 +6,23 @@ Personal dotfiles for Ross Hattori (Doctor Mario). Managed with
 [dotbot](https://github.com/anishathalye/dotbot) via `install.conf.yaml`.
 macOS primary, remote Ubuntu via SSH.
 
+## Development
+
+```bash
+make init      # install brew deps, sync Python deps, install git hooks
+make test      # run the test suite
+make lint      # check for lint/format issues
+make fmt       # auto-fix lint and format
+make sort-json # normalize all JSON file keys in the repo
+make help      # list all available targets
+```
+
+**Prerequisites:** Homebrew. Everything else is installed by `make init`.
+
+**Tests** live in `tests/` (unit, integration, e2e). Written in pytest, run against `scripts/sort_json.py`.
+
+**Pre-commit hooks** run automatically on `git commit`: ruff lint, ruff format, JSON key sort.
+
 ## Key Tools & Ownership
 
 | Tool | Role | Config path |
