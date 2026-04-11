@@ -7,6 +7,8 @@
 import sys
 import json
 import commentjson
+import os
+import tempfile
 
 
 def sort_recursive(obj):
@@ -48,8 +50,17 @@ def sort_file(path: str) -> None:
     if has_trailing_newline:
         result += "\n"
 
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(result)
+    try:
+        dir_name = os.path.dirname(os.path.abspath(path))
+        with tempfile.NamedTemporaryFile(
+            "w", encoding="utf-8", dir=dir_name, delete=False
+        ) as tmp:
+            tmp.write(result)
+            tmp_path = tmp.name
+        os.replace(tmp_path, path)
+    except OSError as e:
+        print(f"Error writing {path}: {e}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

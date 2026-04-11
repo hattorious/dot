@@ -64,3 +64,15 @@ def test_exits_on_missing_file():
     with pytest.raises(SystemExit) as exc_info:
         sort_file("/nonexistent/path/file.json")
     assert exc_info.value.code == 1
+
+
+def test_exits_on_write_error(tmp_path):
+    f = tmp_path / "readonly.json"
+    f.write_text('{"b": 1, "a": 2}\n', encoding="utf-8")
+    tmp_path.chmod(0o555)  # read-only directory prevents writes
+    try:
+        with pytest.raises(SystemExit) as exc_info:
+            sort_file(str(f))
+        assert exc_info.value.code == 1
+    finally:
+        tmp_path.chmod(0o755)  # restore permissions so tmp_path cleanup works
