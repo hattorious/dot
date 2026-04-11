@@ -155,7 +155,7 @@ the colorscheme file itself.
 
 ## Dotbot Symlinks
 
-Run `./install` or `make install` to apply. Key mappings:
+Run `./install` to apply. Key mappings:
 - `~/.zshrc` → `zsh/runcom.zsh`
 - `~/.tmux.conf` → `tmux/tmux.conf`
 - `~/.gitconfig` → `git/gitconfig`

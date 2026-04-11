@@ -3,7 +3,12 @@
     "allow": [
       "Skill(humanizer)",
       "Bash(pre-commit run:*)",
-      "Bash(make sort-json:*)"
+      "Bash(make sort-json:*)",
+      "Bash(make init:*)",
+      "Bash(make help:*)",
+      "Bash(make fmt:*)",
+      "Bash(make lint:*)",
+      "Bash(make test:*)"
     ]
   }
 }

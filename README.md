@@ -1,9 +1,26 @@
 # Dotfiles
 
-Clone then run `install` to set up. It's idempotent, re-run it anytime.
+## Install
 
-Uses [Dotbot](https://github.com/anishathalye/dotbot) to manage symlinks — see `install.conf.yaml` for the full mapping.
+```bash
+./install    # set up symlinks (idempotent, re-run anytime)
+```
+
+Uses [Dotbot](https://github.com/anishathalye/dotbot). See `install.conf.yaml` for the full symlink map.
+
+## Dev setup
+
+Needs Homebrew. Everything else installs via:
+
+```bash
+make init    # brew deps, Python deps, git hooks
+make test    # run the test suite
+make lint    # check for issues
+make fmt     # auto-fix
+```
+
+See [AGENTS.md](AGENTS.md) for tool ownership, config paths, theme values, and known gotchas.
 
 ## Machine-specific config
 
-Drop anything that shouldn't be in the repo into `~/.zshrc.local`. It's sourced at the end of `.zshrc` and won't be touched by the installer. Good for work-specific env vars, aliases, etc.
+Anything that shouldn't live in the repo goes in `~/.zshrc.local`. It's sourced at the end of `.zshrc` and ignored by the installer.
