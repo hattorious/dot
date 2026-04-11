@@ -26,7 +26,30 @@ def detect_indent(content: str) -> int:
 
 
 def sort_file(path: str) -> None:
-    raise NotImplementedError
+    try:
+        with open(path, encoding="utf-8") as f:
+            content = f.read()
+    except OSError as e:
+        print(f"Error reading {path}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    indent = detect_indent(content)
+    has_trailing_newline = content.endswith("\n")
+
+    try:
+        data = commentjson.loads(content)
+    except Exception as e:
+        print(f"Error parsing {path}: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    sorted_data = sort_recursive(data)
+    result = json.dumps(sorted_data, indent=indent, ensure_ascii=False)
+
+    if has_trailing_newline:
+        result += "\n"
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(result)
 
 
 if __name__ == "__main__":
