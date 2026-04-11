@@ -21,3 +21,21 @@ def parse_env(path: str) -> dict[str, str]:
     except FileNotFoundError:
         pass
     return result
+
+
+def merge_local(base_servers: dict, local_servers: dict) -> dict:
+    """Merge local server overrides into base server definitions.
+
+    Only servers present in local_servers are enabled. For each enabled server,
+    local keys replace base keys entirely (no deep merge within a key).
+    Servers in local_servers not found in base_servers are silently skipped.
+    """
+    result = {}
+    for name, local_override in local_servers.items():
+        if name not in base_servers:
+            continue
+        merged = dict(base_servers[name])
+        if local_override:
+            merged.update(local_override)
+        result[name] = merged
+    return result
