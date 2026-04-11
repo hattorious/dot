@@ -1,6 +1,5 @@
 # ABOUTME: Unit tests for the sort_recursive function in sort_json.py.
 # ABOUTME: Covers dicts, nested dicts, arrays, and primitive values.
-import pytest
 from sort_json import sort_recursive
 
 
