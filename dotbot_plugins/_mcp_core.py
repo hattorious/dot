@@ -1,11 +1,24 @@
 # ABOUTME: Pure functions for MCP server config management (no dotbot dependency).
 # ABOUTME: Used by the dotbot mcp plugin and directly by unit and integration tests.
+import json
 import os
 import plistlib
 
 LABEL_PREFIX = "me.hattori.dotbot.mcp"
 SOCKET_DIR = "/tmp"
 LAUNCH_AGENTS_DIR = os.path.expanduser("~/Library/LaunchAgents")
+
+TOOL_CONFIG_PATHS: dict[str, str] = {
+    "claude-desktop": os.path.expanduser(
+        "~/Library/Application Support/Claude/claude_desktop_config.json"
+    ),
+    "cursor": os.path.expanduser("~/.cursor/mcp.json"),
+}
+
+TOOL_MCP_KEY: dict[str, str] = {
+    "claude-desktop": "mcpServers",
+    "cursor": "mcpServers",
+}
 
 
 def parse_env(path: str) -> dict[str, str]:
@@ -70,3 +83,41 @@ def generate_plist(name: str, server: dict, env_values: dict) -> bytes:
         plist["EnvironmentVariables"] = env_vars
 
     return plistlib.dumps(plist, fmt=plistlib.FMT_XML)
+
+
+def generate_tool_entry(name: str, base_dir: str) -> dict:
+    """Generate the mcpServers entry for a single server (command + socket path)."""
+    label = f"{LABEL_PREFIX}.{name}"
+    sock_path = f"{SOCKET_DIR}/{label}.sock"
+    bridge = os.path.join(base_dir, "mcp", "bridge.sh")
+    return {"command": bridge, "args": [sock_path]}
+
+
+def update_tool_configs(enabled: dict, base_dir: str) -> None:
+    """Write mcpServers entries into each tool's config file.
+
+    Reads the existing config, replaces only the MCP-managed key, writes back.
+    Other keys in the tool config are untouched.
+    """
+    tool_servers: dict[str, dict] = {}
+    for name, server in enabled.items():
+        for tool in server.get("tools", []):
+            tool_servers.setdefault(tool, {})[name] = server
+
+    for tool, servers in tool_servers.items():
+        config_path = TOOL_CONFIG_PATHS.get(tool)
+        if not config_path:
+            continue
+        mcp_key = TOOL_MCP_KEY[tool]
+
+        existing: dict = {}
+        if os.path.exists(config_path):
+            with open(config_path) as f:
+                existing = json.load(f)
+
+        existing[mcp_key] = {name: generate_tool_entry(name, base_dir) for name in servers}
+
+        os.makedirs(os.path.dirname(config_path), exist_ok=True)
+        with open(config_path, "w") as f:
+            json.dump(existing, f, indent=2)
+            f.write("\n")
