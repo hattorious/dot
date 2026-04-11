@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Skill(humanizer)"
+      "Skill(humanizer)",
+      "Bash(pre-commit run:*)",
+      "Bash(make sort-json:*)"
     ]
   }
 }
