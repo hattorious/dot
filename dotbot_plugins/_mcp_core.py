@@ -15,11 +15,15 @@ TOOL_CONFIG_PATHS: dict[str, str] = {
         "~/Library/Application Support/Claude/claude_desktop_config.json"
     ),
     "cursor": os.path.expanduser("~/.cursor/mcp.json"),
+    "claude-code": os.path.expanduser("~/.claude/settings.json"),
+    "gemini": os.path.expanduser("~/.gemini/settings.json"),
 }
 
 TOOL_MCP_KEY: dict[str, str] = {
     "claude-desktop": "mcpServers",
     "cursor": "mcpServers",
+    "claude-code": "mcpServers",
+    "gemini": "mcpServers",
 }
 
 

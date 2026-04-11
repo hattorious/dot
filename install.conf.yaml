@@ -70,19 +70,19 @@
         args: ["-y", "@shortcut/mcp@latest"]
         env:
           SHORTCUT_API_TOKEN: SHORTCUT_API_TOKEN
-        tools: [claude-desktop, cursor]
+        tools: [claude-desktop, claude-code, cursor, gemini]
 
       terraform:
         command: docker
         args: ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:0.4.0"]
-        tools: [claude-desktop, cursor]
+        tools: [claude-desktop, claude-code, cursor, gemini]
 
       github:
         command: docker
         args: ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"]
         env:
           GITHUB_PERSONAL_ACCESS_TOKEN: GITHUB_PERSONAL_ACCESS_TOKEN
-        tools: [claude-desktop]
+        tools: [claude-desktop, claude-code, gemini]
 
       google-cloud-toolbox:
         command: /opt/homebrew/bin/toolbox
@@ -90,26 +90,26 @@
         env:
           BIGQUERY_PROJECT: BIGQUERY_PROJECT
           DATAPLEX_PROJECT: DATAPLEX_PROJECT
-        tools: [claude-desktop]
+        tools: [claude-desktop, claude-code, gemini]
 
       private-journal:
         command: npx
         args: ["github:obra/private-journal-mcp"]
-        tools: [claude-desktop]
+        tools: [claude-desktop, claude-code]
 
       basic-memory:
         command: uvx
         args: ["basic-memory", "mcp"]
-        tools: [claude-desktop]
+        tools: [claude-desktop, claude-code]
 
       circleci:
         command: npx
         args: ["-y", "@circleci/mcp-server-circleci"]
         env:
           CIRCLECI_TOKEN: CIRCLECI_TOKEN
-        tools: [cursor]
+        tools: [cursor, claude-code]
 
       prefect:
         command: uvx
         args: ["--from", "prefect-mcp", "prefect-mcp-server"]
-        tools: [cursor]
+        tools: [cursor, claude-code]
