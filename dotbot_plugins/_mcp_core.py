@@ -33,7 +33,7 @@ def parse_env(path: str) -> dict[str, str]:
                 if not line or line.startswith("#"):
                     continue
                 key, _, value = line.partition("=")
-                result[key.strip()] = value
+                result[key.strip()] = value.strip()
     except FileNotFoundError:
         pass
     return result
@@ -98,7 +98,8 @@ def generate_tool_entry(name: str, base_dir: str) -> dict:
 def update_tool_configs(enabled: dict, base_dir: str) -> None:
     """Write mcpServers entries into each tool's config file.
 
-    Reads the existing config, replaces only the MCP-managed key, writes back.
+    Reads the existing config, replaces the entire MCP servers key
+    (removing any manually added entries), writes back.
     Other keys in the tool config are untouched.
     """
     tool_servers: dict[str, dict] = {}

@@ -35,3 +35,9 @@ def test_value_with_equals_sign_preserved(tmp_path):
     env = tmp_path / ".env"
     env.write_text("TOKEN=abc=def\n")
     assert parse_env(str(env)) == {"TOKEN": "abc=def"}
+
+
+def test_strips_whitespace_from_values(tmp_path):
+    env = tmp_path / ".env"
+    env.write_text("TOKEN=abc  \n")
+    assert parse_env(str(env)) == {"TOKEN": "abc"}
