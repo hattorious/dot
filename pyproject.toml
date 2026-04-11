@@ -6,7 +6,7 @@ requires-python = ">=3.11"
 [dependency-groups]
 dev = [
     "pytest>=8",
-    "commentjson",
+    "commentjson>=0.9",
 ]
 
 [tool.pytest.ini_options]
