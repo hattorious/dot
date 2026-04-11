@@ -31,7 +31,7 @@ class McpPlugin(dotbot.Plugin):
 
         local_path = os.path.join(base_dir, data.get("local", "mcp/mcp.local.yaml"))
         if not os.path.exists(local_path):
-            self._log.warning(f"MCP: {local_path} not found — skipping MCP setup")
+            self._log.warning(f"MCP: {local_path} not found, skipping MCP setup")
             return True
 
         with open(local_path) as f:
@@ -49,6 +49,7 @@ class McpPlugin(dotbot.Plugin):
             plist_bytes = generate_plist(name, server, env_values)
             plist_path = os.path.join(LAUNCH_AGENTS_DIR, f"{LABEL_PREFIX}.{name}.plist")
 
+            # Unload is best-effort — the plist may not be loaded yet on first install.
             subprocess.run(["launchctl", "unload", plist_path], capture_output=True)
             with open(plist_path, "wb") as f:
                 f.write(plist_bytes)
