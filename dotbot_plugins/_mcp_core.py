@@ -137,13 +137,15 @@ def generate_wrapper_script(name: str, server: dict) -> str:
 
     The wrapper exec's into the real command so macOS Login Items shows the server name.
     """
+    label = f"{LABEL_PREFIX}.{name}"
+    log_path = f"/tmp/{label}.stderr.log"
     parts = [server["command"]] + server.get("args", [])
     quoted = " ".join(shlex.quote(p) for p in parts)
     return (
         "#!/usr/bin/env bash\n"
         f"# ABOUTME: Wrapper for MCP server '{name}' — sets process name for macOS Login Items.\n"
         'export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"\n'
-        f"exec {quoted}\n"
+        f"exec {quoted} 2>>{shlex.quote(log_path)}\n"
     )
 
 

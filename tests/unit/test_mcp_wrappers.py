@@ -32,6 +32,12 @@ def test_generate_wrapper_script_exports_path():
     assert 'export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"' in script
 
 
+def test_generate_wrapper_script_redirects_stderr():
+    script = generate_wrapper_script("basic-memory", SERVER)
+    assert "2>>" in script
+    assert "me.hattori.dotbot.mcp.basic-memory.stderr.log" in script
+
+
 def test_generate_wrapper_script_quotes_args():
     script = generate_wrapper_script("shortcut", SERVER_WITH_SPACES)
     assert "exec npx -y @shortcut/mcp@latest" in script
