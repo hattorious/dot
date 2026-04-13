@@ -16,6 +16,11 @@ def test_generate_tool_entry_args_is_socket_path(tmp_path):
     assert entry["args"] == [f"{SOCKET_DIR}/{LABEL_PREFIX}.shortcut.sock"]
 
 
+def test_generate_tool_entry_type_is_stdio(tmp_path):
+    entry = generate_tool_entry("shortcut", str(tmp_path))
+    assert entry["type"] == "stdio"
+
+
 def test_update_tool_configs_writes_mcp_servers_key(tmp_path, monkeypatch):
     config_path = tmp_path / "claude_desktop_config.json"
     monkeypatch.setitem(mcp_core.TOOL_CONFIG_PATHS, "claude-desktop", str(config_path))

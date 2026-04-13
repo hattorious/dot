@@ -16,7 +16,7 @@ TOOL_CONFIG_PATHS: dict[str, str] = {
         "~/Library/Application Support/Claude/claude_desktop_config.json"
     ),
     "cursor": os.path.expanduser("~/.cursor/mcp.json"),
-    "claude-code": os.path.expanduser("~/.claude/settings.json"),
+    "claude-code": os.path.expanduser("~/.claude.json"),
     "gemini": os.path.expanduser("~/.gemini/settings.json"),
 }
 
@@ -97,7 +97,7 @@ def generate_tool_entry(name: str, base_dir: str) -> dict:
     label = f"{LABEL_PREFIX}.{name}"
     sock_path = f"{SOCKET_DIR}/{label}.sock"
     bridge = os.path.join(base_dir, "mcp", "bridge.sh")
-    return {"command": bridge, "args": [sock_path]}
+    return {"type": "stdio", "command": bridge, "args": [sock_path]}
 
 
 def update_tool_configs(enabled: dict, base_dir: str) -> None:
