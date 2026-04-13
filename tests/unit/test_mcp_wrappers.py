@@ -51,14 +51,14 @@ def test_generate_wrapper_script_contains_server_name():
 def test_write_wrapper_scripts_creates_files(tmp_path):
     enabled = {"basic-memory": SERVER}
     paths = write_wrapper_scripts(enabled, str(tmp_path))
-    assert (tmp_path / "mcp" / "agents" / "basic-memory").exists()
-    assert paths["basic-memory"] == str(tmp_path / "mcp" / "agents" / "basic-memory")
+    assert (tmp_path / "mcp" / "agents" / "mcp-basic-memory").exists()
+    assert paths["basic-memory"] == str(tmp_path / "mcp" / "agents" / "mcp-basic-memory")
 
 
 def test_write_wrapper_scripts_sets_executable(tmp_path):
     enabled = {"basic-memory": SERVER}
     write_wrapper_scripts(enabled, str(tmp_path))
-    script_path = tmp_path / "mcp" / "agents" / "basic-memory"
+    script_path = tmp_path / "mcp" / "agents" / "mcp-basic-memory"
     assert os.access(str(script_path), os.X_OK)
 
 
@@ -76,12 +76,12 @@ def test_cleanup_stale_wrappers_removes_stale(tmp_path):
 def test_cleanup_stale_wrappers_keeps_enabled(tmp_path):
     agents_dir = tmp_path / "mcp" / "agents"
     agents_dir.mkdir(parents=True)
-    (agents_dir / "basic-memory").write_text("#!/usr/bin/env bash\n")
+    (agents_dir / "mcp-basic-memory").write_text("#!/usr/bin/env bash\n")
 
     removed = cleanup_stale_wrappers({"basic-memory": SERVER}, str(tmp_path))
 
-    assert "basic-memory" not in removed
-    assert (agents_dir / "basic-memory").exists()
+    assert "mcp-basic-memory" not in removed
+    assert (agents_dir / "mcp-basic-memory").exists()
 
 
 def test_cleanup_stale_wrappers_no_agents_dir(tmp_path):

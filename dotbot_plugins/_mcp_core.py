@@ -159,7 +159,7 @@ def write_wrapper_scripts(enabled: dict, base_dir: str) -> dict[str, str]:
     os.makedirs(agents_dir, exist_ok=True)
     paths: dict[str, str] = {}
     for name, server in enabled.items():
-        script_path = os.path.join(agents_dir, name)
+        script_path = os.path.join(agents_dir, f"mcp-{name}")
         content = generate_wrapper_script(name, server)
         with open(script_path, "w") as f:
             f.write(content)
@@ -177,8 +177,9 @@ def cleanup_stale_wrappers(enabled: dict, base_dir: str) -> list[str]:
     if not os.path.isdir(agents_dir):
         return []
     removed = []
+    expected = {f"mcp-{name}" for name in enabled}
     for entry in os.listdir(agents_dir):
-        if entry not in enabled:
+        if entry not in expected:
             os.remove(os.path.join(agents_dir, entry))
             removed.append(entry)
     return removed
