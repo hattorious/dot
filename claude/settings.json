@@ -86,16 +86,18 @@
       {
         "hooks": [
           {
-            "command": "osascript -e 'display notification \"Claude needs your attention\" with title \"Claude Code\"'",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ],
-        "matcher": ""
-      },
+        "matcher": "*"
+      }
+    ],
+    "PermissionDenied": [
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ],
@@ -106,7 +108,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "timeout": 86400,
             "type": "command"
           }
@@ -114,11 +116,42 @@
         "matcher": "*"
       }
     ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
+            "type": "command"
+          }
+        ],
+        "matcher": "auto"
+      },
+      {
+        "hooks": [
+          {
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
+            "type": "command"
+          }
+        ],
+        "matcher": "manual"
+      }
+    ],
     "PostToolUse": [
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
+            "type": "command"
+          }
+        ],
+        "matcher": "*"
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "hooks": [
+          {
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ],
@@ -129,7 +162,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ],
@@ -138,7 +171,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ],
@@ -149,7 +182,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ],
@@ -160,7 +193,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ]
@@ -170,7 +203,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ]
@@ -180,7 +213,27 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ]
@@ -190,7 +243,7 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ]
@@ -200,14 +253,13 @@
       {
         "hooks": [
           {
-            "command": "python3 ~/.claude/hooks/claude-island-state.py",
+            "command": "python3 '/Users/rhattori/.claude/hooks/claude-island-state.py'",
             "type": "command"
           }
         ]
       }
     ]
   },
-  "mcpServers": {},
   "permissions": {
     "allow": [
       "mcp__basic-memory__*",
