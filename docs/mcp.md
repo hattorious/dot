@@ -41,7 +41,7 @@ Unix socket held by launchd (inetd-style activation); MCP clients connect throug
 | `shortcut` | `npx @shortcut/mcp@latest` | `SHORTCUT_API_TOKEN` |
 | `terraform` | `docker run hashicorp/terraform-mcp-server` | — |
 | `github` | `docker run ghcr.io/github/github-mcp-server` | `GITHUB_PERSONAL_ACCESS_TOKEN` |
-| `google-cloud-toolbox` | `/opt/homebrew/bin/toolbox --stdio` | `BIGQUERY_PROJECT`, `DATAPLEX_PROJECT` |
+| `google-cloud-toolbox` | `/opt/homebrew/bin/toolbox --prebuilt bigquery,cloud-sql-postgres-admin,dataplex --stdio` | `BIGQUERY_PROJECT`, `DATAPLEX_PROJECT` |
 | `private-journal` | `npx github:2389-research/journal-mcp` | — |
 | `circleci` | `npx @circleci/mcp-server-circleci` | `CIRCLECI_TOKEN` |
 | `prefect` | `uvx --from prefect-mcp prefect-mcp-server` | — |

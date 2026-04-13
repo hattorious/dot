@@ -180,6 +180,8 @@ for setup, server list, debugging, and how to add new servers.
 
 ## lazygit Keybindings (fugitive-style)
 
+Keys marked with a `†` are custom-defined in `lazygit/config.yml`. Others are lazygit defaults remapped to match fugitive conventions.
+
 | Key | Action | fugitive equiv |
 |-----|--------|----------------|
 | `s` | stage file | `s` |

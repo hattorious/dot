@@ -23,7 +23,7 @@ Both are idempotent.
 
 `make init` runs three things:
 1. `brew bundle --file=.toolkit/Brewfile` — installs fd, uv, pre-commit
-2. `uv sync --dev` — installs Python deps (commentjson, pytest, ruff) into `.venv`
+2. `uv sync --dev` — installs Python deps (commentjson, dotbot, pytest, pyyaml, ruff) into `.venv`
 3. `pre-commit install --install-hooks` — wires up the git hooks
 
 The separation keeps dev tools out of the main `Brewfile`, which tracks tools you actually use day-to-day.
