@@ -165,6 +165,11 @@ Run `./install` to apply. Key mappings:
 - `~/.config/lazygit/config.yml` → `lazygit/config.yml`
 - `~/.config/bat/themes/` → `bat/themes/`
 
+## MCP Servers
+
+MCP servers are managed as launchd agents via a dotbot plugin. See [`docs/mcp.md`](docs/mcp.md)
+for setup, server list, debugging, and how to add new servers.
+
 ## Adding a New Tool
 
 1. Add to `Brewfile` if installable via brew
