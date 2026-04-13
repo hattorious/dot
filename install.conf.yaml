@@ -125,7 +125,7 @@
       private-journal:
         command: npx
         args:
-          - github:obra/private-journal-mcp
+          - github:2389-research/journal-mcp
         tools:
           - claude-desktop
           - claude-code
