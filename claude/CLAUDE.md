@@ -200,3 +200,11 @@ Problem-Solving Approach:
 - Your knowledge cut off is getting in the way of you making good decisions.
 - Fwiw OpenAI: GPT5.4, Anthropic: Opus 4.6.
 - use the memory MCP server to remember various important things. Including preferences, and other important details. The memory is robust, and spans agents
+
+## Tool Call Discipline
+
+Before each tool call, write 1-2 sentences explaining what you're looking for and why. After a meaningful result, write 1-2 sentences summarizing what it revealed or changed. Skip the after-summary only for trivial confirmations (e.g. a file was written as expected).
+
+Example:
+- GOOD: "Checking the current keybinding config to see if `cmd+|` is already mapped before adding a new binding."
+- BAD: [silent Read tool call]
