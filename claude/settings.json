@@ -11,6 +11,7 @@
     "binary-re@2389-research-marketplace": true,
     "botboard-biz@2389-research-marketplace": true,
     "building-multiagent-systems@2389-research-marketplace": true,
+    "caveman@caveman": true,
     "commit-commands@claude-code-plugins": true,
     "css-development@2389-research-marketplace": true,
     "differential-review@trailofbits": true,
@@ -68,6 +69,12 @@
     "2389-research-marketplace": {
       "source": {
         "repo": "2389-research/claude-plugins",
+        "source": "github"
+      }
+    },
+    "caveman": {
+      "source": {
+        "repo": "JuliusBrussee/caveman",
         "source": "github"
       }
     },
