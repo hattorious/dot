@@ -63,7 +63,13 @@ claude/skills/session-reflection-analysis/
 
 ## Testing
 
-Manual verification:
+### Script behavior (manual)
 1. Run skill from two terminal sessions simultaneously — confirm output paths differ
 2. Run from a project with no `.jsonl` files — confirm clean error message
 3. Run without `jq` installed — confirm clear install instructions in error output
+
+### Skill compliance (subagent scenario)
+Run the skill with a subagent and verify Claude passes a non-hardcoded, unique path to the analysis agent — not `/tmp/session-summary.jsonl`. The subagent prompt should explicitly include the output path; if it contains a hardcoded filename the test fails.
+
+Baseline (RED): invoke the current skill and observe that it hardcodes `/tmp/session-summary.jsonl` in the subagent prompt.
+After update (GREEN): invoke the updated skill and confirm the subagent receives a timestamp+PID-unique path.
