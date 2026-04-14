@@ -19,8 +19,7 @@ PROJECT_DIR="$HOME/.claude/projects/-${CURRENT_PATH}"
 if [ ! -d "$PROJECT_DIR" ]; then
     echo "ERROR: No Claude session folder found for $(pwd)" >&2
     echo "  Expected: $PROJECT_DIR" >&2
-    echo "  Available projects:" >&2
-    ls "$HOME/.claude/projects/" >&2
+    echo "  Available projects: $(ls "$HOME/.claude/projects/" 2>/dev/null || echo "(none)")" >&2
     exit 1
 fi
 
@@ -35,7 +34,7 @@ TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 OUTPUT="/tmp/claude-session-summary-${TIMESTAMP}-$$.jsonl"
 
 # Summarize: extract user requests, tool names, assistant text (truncated)
-cat "$PROJECT_DIR"/*.jsonl 2>/dev/null | jq -c '
+jq -c '
 select(.type == "user" or .type == "assistant") |
 {
   type,
@@ -55,9 +54,9 @@ select(.type == "user" or .type == "assistant") |
     else null
     end
   )
-}' > "$OUTPUT" 2>/dev/null
+}' "$PROJECT_DIR"/*.jsonl > "$OUTPUT"
 
-echo "Summary: $(wc -l < "$OUTPUT") messages, $(wc -c < "$OUTPUT" | tr -d ' ') bytes" >&2
+echo "Summary: $(wc -l < "$OUTPUT" | tr -d ' ') messages, $(wc -c < "$OUTPUT" | tr -d ' ') bytes" >&2
 
 # Print output path to stdout for caller to capture
 echo "$OUTPUT"
