@@ -40,19 +40,17 @@ REPORT_PATH="${SUMMARY_PATH/session-summary/session-reflection}"
 REPORT_PATH="${REPORT_PATH/.jsonl/.md}"
 ```
 
-Use the Agent tool to spawn an analysis subagent with `$SUMMARY_PATH` and `$REPORT_PATH` substituted into the prompt. The rest of the analysis prompt (inefficiency patterns, findings format, etc.) remains unchanged.
-
 **Important:** Both paths are ephemeral — they live in `/tmp` and are never committed to git.
 
-## Step 3: Launch Subagent for Analysis
-
-Use the Task tool to spawn an analysis subagent:
+Use the Agent tool to spawn an analysis subagent. Substitute the actual resolved values of `$SUMMARY_PATH` and `$REPORT_PATH` into the prompt string before dispatching:
 
 ```
-Task tool parameters:
+Agent tool parameters:
 - subagent_type: "Explore"
 - prompt: |
-    Analyze the session summary at $SUMMARY_PATH for inefficiency patterns.
+    Analyze the session summary at <actual SUMMARY_PATH value> for inefficiency patterns.
+    Write your findings to <actual REPORT_PATH value>.
+    (Replace the angle-bracket placeholders with the real paths before dispatching.)
 
     Read the file and look for these patterns:
 
@@ -80,7 +78,7 @@ Task tool parameters:
     Be specific with examples from the actual session data.
 ```
 
-## Step 4: Create Reflection Document
+## Step 3: Create Reflection Document
 
 The subagent should generate a document with this structure:
 
@@ -124,7 +122,7 @@ The subagent should generate a document with this structure:
 [Cross-cutting concerns, dependencies, warnings]
 ```
 
-## Step 5: Present Findings
+## Step 4: Present Findings
 
 After analysis completes:
 
